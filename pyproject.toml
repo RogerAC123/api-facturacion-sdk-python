@@ -1,12 +1,13 @@
 [project]
 name = "intifact_sdk"
 version = "1.0.0"
-description = "API de Facturación Electrónica SUNAT"
+description = "SDK Python para la API de Facturacion Electronica SUNAT de Intifact (Peru)"
 authors = [
-  {name = "OpenAPI Generator Community",email = "team@openapitools.org"},
+  {name = "Roger", email = "huallanca.roger@gmail.com"},
 ]
+license = "MIT"
 readme = "README.md"
-keywords = ["OpenAPI", "OpenAPI-Generator", "API de Facturación Electrónica SUNAT"]
+keywords = ["sunat", "facturacion", "peru", "intifact", "factura-electronica", "boleta"]
 requires-python = ">=3.10"
 
 dependencies = [
@@ -17,7 +18,8 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
+Homepage = "https://intifact.com"
+Repository = "https://github.com/RogerAC123/api-facturacion-sdk-python"
 
 [tool.poetry]
 requires-poetry = ">=2.0"
