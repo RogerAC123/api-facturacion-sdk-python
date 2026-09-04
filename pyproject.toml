@@ -1,5 +1,5 @@
 [project]
-name = "intifact_sdk"
+name = "intifact"
 version = "1.0.0"
 description = "SDK Python para la API de Facturacion Electronica SUNAT de Intifact (Peru)"
 authors = [

@@ -13,7 +13,7 @@ Python 3.10+
 ## Instalación
 
 ```bash
-pip install intifact-sdk
+pip install intifact
 ```
 
 ## Autenticación
