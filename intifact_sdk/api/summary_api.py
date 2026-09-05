@@ -17,12 +17,12 @@ from typing_extensions import Annotated
 
 from pydantic import Field, field_validator
 from typing_extensions import Annotated
-from intifact_sdk.models.api_v1_boleta_cancel_post_request import ApiV1BoletaCancelPostRequest
-from intifact_sdk.models.api_v1_invoice_cancel_post_request import ApiV1InvoiceCancelPostRequest
-from intifact_sdk.models.api_v1_summary_send_post202_response import ApiV1SummarySendPost202Response
-from intifact_sdk.models.api_v1_summary_send_post_request import ApiV1SummarySendPostRequest
-from intifact_sdk.models.api_v1_ticket_ticket_status_get200_response import ApiV1TicketTicketStatusGet200Response
-from intifact_sdk.models.api_v1_voided_send_post_request import ApiV1VoidedSendPostRequest
+from intifact_sdk.models.cancel_boleta_request import CancelBoletaRequest
+from intifact_sdk.models.cancel_invoice_request import CancelInvoiceRequest
+from intifact_sdk.models.get_ticket_status200_response import GetTicketStatus200Response
+from intifact_sdk.models.send_summary202_response import SendSummary202Response
+from intifact_sdk.models.send_summary_request import SendSummaryRequest
+from intifact_sdk.models.send_voided_request import SendVoidedRequest
 
 from intifact_sdk.api_client import ApiClient, RequestSerialized
 from intifact_sdk.api_response import ApiResponse
@@ -43,9 +43,9 @@ class SummaryApi:
 
 
     @validate_call
-    def api_v1_boleta_cancel_post(
+    def cancel_boleta(
         self,
-        api_v1_boleta_cancel_post_request: ApiV1BoletaCancelPostRequest,
+        cancel_boleta_request: CancelBoletaRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -58,12 +58,12 @@ class SummaryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1SummarySendPost202Response:
+    ) -> SendSummary202Response:
         """Anular boleta via resumen diario (estado=3)
 
 
-        :param api_v1_boleta_cancel_post_request: (required)
-        :type api_v1_boleta_cancel_post_request: ApiV1BoletaCancelPostRequest
+        :param cancel_boleta_request: (required)
+        :type cancel_boleta_request: CancelBoletaRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -86,8 +86,8 @@ class SummaryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_boleta_cancel_post_serialize(
-            api_v1_boleta_cancel_post_request=api_v1_boleta_cancel_post_request,
+        _param = self._cancel_boleta_serialize(
+            cancel_boleta_request=cancel_boleta_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -95,8 +95,11 @@ class SummaryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1SummarySendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "SendSummary202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -110,9 +113,9 @@ class SummaryApi:
 
 
     @validate_call
-    def api_v1_boleta_cancel_post_with_http_info(
+    def cancel_boleta_with_http_info(
         self,
-        api_v1_boleta_cancel_post_request: ApiV1BoletaCancelPostRequest,
+        cancel_boleta_request: CancelBoletaRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -125,12 +128,12 @@ class SummaryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1SummarySendPost202Response]:
+    ) -> ApiResponse[SendSummary202Response]:
         """Anular boleta via resumen diario (estado=3)
 
 
-        :param api_v1_boleta_cancel_post_request: (required)
-        :type api_v1_boleta_cancel_post_request: ApiV1BoletaCancelPostRequest
+        :param cancel_boleta_request: (required)
+        :type cancel_boleta_request: CancelBoletaRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -153,8 +156,8 @@ class SummaryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_boleta_cancel_post_serialize(
-            api_v1_boleta_cancel_post_request=api_v1_boleta_cancel_post_request,
+        _param = self._cancel_boleta_serialize(
+            cancel_boleta_request=cancel_boleta_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -162,8 +165,11 @@ class SummaryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1SummarySendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "SendSummary202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -177,9 +183,9 @@ class SummaryApi:
 
 
     @validate_call
-    def api_v1_boleta_cancel_post_without_preload_content(
+    def cancel_boleta_without_preload_content(
         self,
-        api_v1_boleta_cancel_post_request: ApiV1BoletaCancelPostRequest,
+        cancel_boleta_request: CancelBoletaRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -196,8 +202,8 @@ class SummaryApi:
         """Anular boleta via resumen diario (estado=3)
 
 
-        :param api_v1_boleta_cancel_post_request: (required)
-        :type api_v1_boleta_cancel_post_request: ApiV1BoletaCancelPostRequest
+        :param cancel_boleta_request: (required)
+        :type cancel_boleta_request: CancelBoletaRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -220,8 +226,8 @@ class SummaryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_boleta_cancel_post_serialize(
-            api_v1_boleta_cancel_post_request=api_v1_boleta_cancel_post_request,
+        _param = self._cancel_boleta_serialize(
+            cancel_boleta_request=cancel_boleta_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -229,8 +235,11 @@ class SummaryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1SummarySendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "SendSummary202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -239,9 +248,9 @@ class SummaryApi:
         return response_data.response
 
 
-    def _api_v1_boleta_cancel_post_serialize(
+    def _cancel_boleta_serialize(
         self,
-        api_v1_boleta_cancel_post_request,
+        cancel_boleta_request,
         _request_auth,
         _content_type,
         _headers,
@@ -267,8 +276,8 @@ class SummaryApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_boleta_cancel_post_request is not None:
-            _body_params = api_v1_boleta_cancel_post_request
+        if cancel_boleta_request is not None:
+            _body_params = cancel_boleta_request
 
 
         # set the HTTP header `Accept`
@@ -295,6 +304,7 @@ class SummaryApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -316,9 +326,9 @@ class SummaryApi:
 
 
     @validate_call
-    def api_v1_invoice_cancel_post(
+    def cancel_invoice(
         self,
-        api_v1_invoice_cancel_post_request: ApiV1InvoiceCancelPostRequest,
+        cancel_invoice_request: CancelInvoiceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -331,12 +341,12 @@ class SummaryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1SummarySendPost202Response:
+    ) -> SendSummary202Response:
         """Anular factura via comunicación de baja
 
 
-        :param api_v1_invoice_cancel_post_request: (required)
-        :type api_v1_invoice_cancel_post_request: ApiV1InvoiceCancelPostRequest
+        :param cancel_invoice_request: (required)
+        :type cancel_invoice_request: CancelInvoiceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -359,8 +369,8 @@ class SummaryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_cancel_post_serialize(
-            api_v1_invoice_cancel_post_request=api_v1_invoice_cancel_post_request,
+        _param = self._cancel_invoice_serialize(
+            cancel_invoice_request=cancel_invoice_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -368,8 +378,11 @@ class SummaryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1SummarySendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "SendSummary202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -383,9 +396,9 @@ class SummaryApi:
 
 
     @validate_call
-    def api_v1_invoice_cancel_post_with_http_info(
+    def cancel_invoice_with_http_info(
         self,
-        api_v1_invoice_cancel_post_request: ApiV1InvoiceCancelPostRequest,
+        cancel_invoice_request: CancelInvoiceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -398,12 +411,12 @@ class SummaryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1SummarySendPost202Response]:
+    ) -> ApiResponse[SendSummary202Response]:
         """Anular factura via comunicación de baja
 
 
-        :param api_v1_invoice_cancel_post_request: (required)
-        :type api_v1_invoice_cancel_post_request: ApiV1InvoiceCancelPostRequest
+        :param cancel_invoice_request: (required)
+        :type cancel_invoice_request: CancelInvoiceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -426,8 +439,8 @@ class SummaryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_cancel_post_serialize(
-            api_v1_invoice_cancel_post_request=api_v1_invoice_cancel_post_request,
+        _param = self._cancel_invoice_serialize(
+            cancel_invoice_request=cancel_invoice_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -435,8 +448,11 @@ class SummaryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1SummarySendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "SendSummary202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -450,9 +466,9 @@ class SummaryApi:
 
 
     @validate_call
-    def api_v1_invoice_cancel_post_without_preload_content(
+    def cancel_invoice_without_preload_content(
         self,
-        api_v1_invoice_cancel_post_request: ApiV1InvoiceCancelPostRequest,
+        cancel_invoice_request: CancelInvoiceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -469,8 +485,8 @@ class SummaryApi:
         """Anular factura via comunicación de baja
 
 
-        :param api_v1_invoice_cancel_post_request: (required)
-        :type api_v1_invoice_cancel_post_request: ApiV1InvoiceCancelPostRequest
+        :param cancel_invoice_request: (required)
+        :type cancel_invoice_request: CancelInvoiceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -493,8 +509,8 @@ class SummaryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_cancel_post_serialize(
-            api_v1_invoice_cancel_post_request=api_v1_invoice_cancel_post_request,
+        _param = self._cancel_invoice_serialize(
+            cancel_invoice_request=cancel_invoice_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -502,8 +518,11 @@ class SummaryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1SummarySendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "SendSummary202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -512,9 +531,9 @@ class SummaryApi:
         return response_data.response
 
 
-    def _api_v1_invoice_cancel_post_serialize(
+    def _cancel_invoice_serialize(
         self,
-        api_v1_invoice_cancel_post_request,
+        cancel_invoice_request,
         _request_auth,
         _content_type,
         _headers,
@@ -540,8 +559,8 @@ class SummaryApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_invoice_cancel_post_request is not None:
-            _body_params = api_v1_invoice_cancel_post_request
+        if cancel_invoice_request is not None:
+            _body_params = cancel_invoice_request
 
 
         # set the HTTP header `Accept`
@@ -568,6 +587,7 @@ class SummaryApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -589,280 +609,7 @@ class SummaryApi:
 
 
     @validate_call
-    def api_v1_summary_send_post(
-        self,
-        api_v1_summary_send_post_request: ApiV1SummarySendPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1SummarySendPost202Response:
-        """Enviar resumen diario de boletas (RC)
-
-
-        :param api_v1_summary_send_post_request: (required)
-        :type api_v1_summary_send_post_request: ApiV1SummarySendPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_summary_send_post_serialize(
-            api_v1_summary_send_post_request=api_v1_summary_send_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1SummarySendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def api_v1_summary_send_post_with_http_info(
-        self,
-        api_v1_summary_send_post_request: ApiV1SummarySendPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1SummarySendPost202Response]:
-        """Enviar resumen diario de boletas (RC)
-
-
-        :param api_v1_summary_send_post_request: (required)
-        :type api_v1_summary_send_post_request: ApiV1SummarySendPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_summary_send_post_serialize(
-            api_v1_summary_send_post_request=api_v1_summary_send_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1SummarySendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def api_v1_summary_send_post_without_preload_content(
-        self,
-        api_v1_summary_send_post_request: ApiV1SummarySendPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Enviar resumen diario de boletas (RC)
-
-
-        :param api_v1_summary_send_post_request: (required)
-        :type api_v1_summary_send_post_request: ApiV1SummarySendPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_summary_send_post_serialize(
-            api_v1_summary_send_post_request=api_v1_summary_send_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1SummarySendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _api_v1_summary_send_post_serialize(
-        self,
-        api_v1_summary_send_post_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if api_v1_summary_send_post_request is not None:
-            _body_params = api_v1_summary_send_post_request
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/api/v1/summary/send',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def api_v1_ticket_ticket_status_get(
+    def get_ticket_status(
         self,
         ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
         ticket: Annotated[str, Field(min_length=1, strict=True, max_length=100)],
@@ -878,7 +625,7 @@ class SummaryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1TicketTicketStatusGet200Response:
+    ) -> GetTicketStatus200Response:
         """Consultar estado de ticket asíncrono (SOAP o GRE)
 
 
@@ -908,7 +655,7 @@ class SummaryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_ticket_ticket_status_get_serialize(
+        _param = self._get_ticket_status_serialize(
             ruc=ruc,
             ticket=ticket,
             _request_auth=_request_auth,
@@ -918,8 +665,11 @@ class SummaryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1TicketTicketStatusGet200Response",
-            '202': "ApiV1TicketTicketStatusGet202Response",
+            '200': "GetTicketStatus200Response",
+            '202': "GetTicketStatus202Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -933,7 +683,7 @@ class SummaryApi:
 
 
     @validate_call
-    def api_v1_ticket_ticket_status_get_with_http_info(
+    def get_ticket_status_with_http_info(
         self,
         ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
         ticket: Annotated[str, Field(min_length=1, strict=True, max_length=100)],
@@ -949,7 +699,7 @@ class SummaryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1TicketTicketStatusGet200Response]:
+    ) -> ApiResponse[GetTicketStatus200Response]:
         """Consultar estado de ticket asíncrono (SOAP o GRE)
 
 
@@ -979,7 +729,7 @@ class SummaryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_ticket_ticket_status_get_serialize(
+        _param = self._get_ticket_status_serialize(
             ruc=ruc,
             ticket=ticket,
             _request_auth=_request_auth,
@@ -989,8 +739,11 @@ class SummaryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1TicketTicketStatusGet200Response",
-            '202': "ApiV1TicketTicketStatusGet202Response",
+            '200': "GetTicketStatus200Response",
+            '202': "GetTicketStatus202Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1004,7 +757,7 @@ class SummaryApi:
 
 
     @validate_call
-    def api_v1_ticket_ticket_status_get_without_preload_content(
+    def get_ticket_status_without_preload_content(
         self,
         ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
         ticket: Annotated[str, Field(min_length=1, strict=True, max_length=100)],
@@ -1050,7 +803,7 @@ class SummaryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_ticket_ticket_status_get_serialize(
+        _param = self._get_ticket_status_serialize(
             ruc=ruc,
             ticket=ticket,
             _request_auth=_request_auth,
@@ -1060,8 +813,11 @@ class SummaryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1TicketTicketStatusGet200Response",
-            '202': "ApiV1TicketTicketStatusGet202Response",
+            '200': "GetTicketStatus200Response",
+            '202': "GetTicketStatus202Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1070,7 +826,7 @@ class SummaryApi:
         return response_data.response
 
 
-    def _api_v1_ticket_ticket_status_get_serialize(
+    def _get_ticket_status_serialize(
         self,
         ruc,
         ticket,
@@ -1118,6 +874,7 @@ class SummaryApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -1139,9 +896,9 @@ class SummaryApi:
 
 
     @validate_call
-    def api_v1_voided_send_post(
+    def send_summary(
         self,
-        api_v1_voided_send_post_request: ApiV1VoidedSendPostRequest,
+        send_summary_request: SendSummaryRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1154,12 +911,12 @@ class SummaryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1SummarySendPost202Response:
-        """Enviar comunicación de baja (RA)
+    ) -> SendSummary202Response:
+        """Enviar resumen diario de boletas (RC)
 
 
-        :param api_v1_voided_send_post_request: (required)
-        :type api_v1_voided_send_post_request: ApiV1VoidedSendPostRequest
+        :param send_summary_request: (required)
+        :type send_summary_request: SendSummaryRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1182,8 +939,8 @@ class SummaryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_voided_send_post_serialize(
-            api_v1_voided_send_post_request=api_v1_voided_send_post_request,
+        _param = self._send_summary_serialize(
+            send_summary_request=send_summary_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1191,8 +948,11 @@ class SummaryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1SummarySendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "SendSummary202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1206,9 +966,9 @@ class SummaryApi:
 
 
     @validate_call
-    def api_v1_voided_send_post_with_http_info(
+    def send_summary_with_http_info(
         self,
-        api_v1_voided_send_post_request: ApiV1VoidedSendPostRequest,
+        send_summary_request: SendSummaryRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1221,12 +981,12 @@ class SummaryApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1SummarySendPost202Response]:
-        """Enviar comunicación de baja (RA)
+    ) -> ApiResponse[SendSummary202Response]:
+        """Enviar resumen diario de boletas (RC)
 
 
-        :param api_v1_voided_send_post_request: (required)
-        :type api_v1_voided_send_post_request: ApiV1VoidedSendPostRequest
+        :param send_summary_request: (required)
+        :type send_summary_request: SendSummaryRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1249,8 +1009,8 @@ class SummaryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_voided_send_post_serialize(
-            api_v1_voided_send_post_request=api_v1_voided_send_post_request,
+        _param = self._send_summary_serialize(
+            send_summary_request=send_summary_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1258,8 +1018,11 @@ class SummaryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1SummarySendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "SendSummary202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1273,9 +1036,9 @@ class SummaryApi:
 
 
     @validate_call
-    def api_v1_voided_send_post_without_preload_content(
+    def send_summary_without_preload_content(
         self,
-        api_v1_voided_send_post_request: ApiV1VoidedSendPostRequest,
+        send_summary_request: SendSummaryRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1289,11 +1052,11 @@ class SummaryApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Enviar comunicación de baja (RA)
+        """Enviar resumen diario de boletas (RC)
 
 
-        :param api_v1_voided_send_post_request: (required)
-        :type api_v1_voided_send_post_request: ApiV1VoidedSendPostRequest
+        :param send_summary_request: (required)
+        :type send_summary_request: SendSummaryRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1316,8 +1079,8 @@ class SummaryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_voided_send_post_serialize(
-            api_v1_voided_send_post_request=api_v1_voided_send_post_request,
+        _param = self._send_summary_serialize(
+            send_summary_request=send_summary_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1325,8 +1088,11 @@ class SummaryApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1SummarySendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "SendSummary202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1335,9 +1101,9 @@ class SummaryApi:
         return response_data.response
 
 
-    def _api_v1_voided_send_post_serialize(
+    def _send_summary_serialize(
         self,
-        api_v1_voided_send_post_request,
+        send_summary_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1363,8 +1129,8 @@ class SummaryApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_voided_send_post_request is not None:
-            _body_params = api_v1_voided_send_post_request
+        if send_summary_request is not None:
+            _body_params = send_summary_request
 
 
         # set the HTTP header `Accept`
@@ -1391,6 +1157,290 @@ class SummaryApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/v1/summary/send',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def send_voided(
+        self,
+        send_voided_request: SendVoidedRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> SendSummary202Response:
+        """Enviar comunicación de baja (RA)
+
+
+        :param send_voided_request: (required)
+        :type send_voided_request: SendVoidedRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_voided_serialize(
+            send_voided_request=send_voided_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '202': "SendSummary202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def send_voided_with_http_info(
+        self,
+        send_voided_request: SendVoidedRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[SendSummary202Response]:
+        """Enviar comunicación de baja (RA)
+
+
+        :param send_voided_request: (required)
+        :type send_voided_request: SendVoidedRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_voided_serialize(
+            send_voided_request=send_voided_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '202': "SendSummary202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def send_voided_without_preload_content(
+        self,
+        send_voided_request: SendVoidedRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Enviar comunicación de baja (RA)
+
+
+        :param send_voided_request: (required)
+        :type send_voided_request: SendVoidedRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_voided_serialize(
+            send_voided_request=send_voided_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '202': "SendSummary202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _send_voided_serialize(
+        self,
+        send_voided_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if send_voided_request is not None:
+            _body_params = send_voided_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(

@@ -18,10 +18,10 @@ from typing_extensions import Annotated
 from pydantic import StrictStr, field_validator
 from typing import Optional
 from uuid import UUID
-from intifact_sdk.models.api_v1_invoice_compute_post200_response import ApiV1InvoiceComputePost200Response
-from intifact_sdk.models.api_v1_invoice_compute_post_request import ApiV1InvoiceComputePostRequest
-from intifact_sdk.models.api_v1_invoice_send_post202_response import ApiV1InvoiceSendPost202Response
-from intifact_sdk.models.api_v1_invoice_send_post_request import ApiV1InvoiceSendPostRequest
+from intifact_sdk.models.compute_invoice200_response import ComputeInvoice200Response
+from intifact_sdk.models.compute_invoice_request import ComputeInvoiceRequest
+from intifact_sdk.models.send_invoice202_response import SendInvoice202Response
+from intifact_sdk.models.send_invoice_request import SendInvoiceRequest
 
 from intifact_sdk.api_client import ApiClient, RequestSerialized
 from intifact_sdk.api_response import ApiResponse
@@ -42,9 +42,9 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_compute_post(
+    def compute_invoice(
         self,
-        api_v1_invoice_compute_post_request: ApiV1InvoiceComputePostRequest,
+        compute_invoice_request: ComputeInvoiceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -57,13 +57,13 @@ class InvoiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1InvoiceComputePost200Response:
+    ) -> ComputeInvoice200Response:
         """Calcular importes (IGV, descuentos, totales) sin emitir
 
         Motor de cálculo: recibe ítems crudos (cantidad, valorUnitario sin IGV, afectación, descuento) y un descuento global opcional, y devuelve TODOS los importes fiscales calculados (bases, IGV, descuentos, totales, monto en letras). No emite ni persiste nada — úsalo para previsualizar o para alimentar POST /invoice/send.
 
-        :param api_v1_invoice_compute_post_request: (required)
-        :type api_v1_invoice_compute_post_request: ApiV1InvoiceComputePostRequest
+        :param compute_invoice_request: (required)
+        :type compute_invoice_request: ComputeInvoiceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -86,8 +86,8 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_compute_post_serialize(
-            api_v1_invoice_compute_post_request=api_v1_invoice_compute_post_request,
+        _param = self._compute_invoice_serialize(
+            compute_invoice_request=compute_invoice_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -95,7 +95,10 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1InvoiceComputePost200Response",
+            '200': "ComputeInvoice200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -109,9 +112,9 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_compute_post_with_http_info(
+    def compute_invoice_with_http_info(
         self,
-        api_v1_invoice_compute_post_request: ApiV1InvoiceComputePostRequest,
+        compute_invoice_request: ComputeInvoiceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -124,13 +127,13 @@ class InvoiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1InvoiceComputePost200Response]:
+    ) -> ApiResponse[ComputeInvoice200Response]:
         """Calcular importes (IGV, descuentos, totales) sin emitir
 
         Motor de cálculo: recibe ítems crudos (cantidad, valorUnitario sin IGV, afectación, descuento) y un descuento global opcional, y devuelve TODOS los importes fiscales calculados (bases, IGV, descuentos, totales, monto en letras). No emite ni persiste nada — úsalo para previsualizar o para alimentar POST /invoice/send.
 
-        :param api_v1_invoice_compute_post_request: (required)
-        :type api_v1_invoice_compute_post_request: ApiV1InvoiceComputePostRequest
+        :param compute_invoice_request: (required)
+        :type compute_invoice_request: ComputeInvoiceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -153,8 +156,8 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_compute_post_serialize(
-            api_v1_invoice_compute_post_request=api_v1_invoice_compute_post_request,
+        _param = self._compute_invoice_serialize(
+            compute_invoice_request=compute_invoice_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -162,7 +165,10 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1InvoiceComputePost200Response",
+            '200': "ComputeInvoice200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -176,9 +182,9 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_compute_post_without_preload_content(
+    def compute_invoice_without_preload_content(
         self,
-        api_v1_invoice_compute_post_request: ApiV1InvoiceComputePostRequest,
+        compute_invoice_request: ComputeInvoiceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -196,8 +202,8 @@ class InvoiceApi:
 
         Motor de cálculo: recibe ítems crudos (cantidad, valorUnitario sin IGV, afectación, descuento) y un descuento global opcional, y devuelve TODOS los importes fiscales calculados (bases, IGV, descuentos, totales, monto en letras). No emite ni persiste nada — úsalo para previsualizar o para alimentar POST /invoice/send.
 
-        :param api_v1_invoice_compute_post_request: (required)
-        :type api_v1_invoice_compute_post_request: ApiV1InvoiceComputePostRequest
+        :param compute_invoice_request: (required)
+        :type compute_invoice_request: ComputeInvoiceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -220,8 +226,8 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_compute_post_serialize(
-            api_v1_invoice_compute_post_request=api_v1_invoice_compute_post_request,
+        _param = self._compute_invoice_serialize(
+            compute_invoice_request=compute_invoice_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -229,7 +235,10 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1InvoiceComputePost200Response",
+            '200': "ComputeInvoice200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -238,9 +247,9 @@ class InvoiceApi:
         return response_data.response
 
 
-    def _api_v1_invoice_compute_post_serialize(
+    def _compute_invoice_serialize(
         self,
-        api_v1_invoice_compute_post_request,
+        compute_invoice_request,
         _request_auth,
         _content_type,
         _headers,
@@ -266,8 +275,8 @@ class InvoiceApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_invoice_compute_post_request is not None:
-            _body_params = api_v1_invoice_compute_post_request
+        if compute_invoice_request is not None:
+            _body_params = compute_invoice_request
 
 
         # set the HTTP header `Accept`
@@ -294,6 +303,7 @@ class InvoiceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -315,7 +325,7 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_id_cdr_get(
+    def get_invoice_cdr(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -358,7 +368,7 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_id_cdr_get_serialize(
+        _param = self._get_invoice_cdr_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -367,7 +377,9 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -381,7 +393,7 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_id_cdr_get_with_http_info(
+    def get_invoice_cdr_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -424,7 +436,7 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_id_cdr_get_serialize(
+        _param = self._get_invoice_cdr_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -433,7 +445,9 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -447,7 +461,7 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_id_cdr_get_without_preload_content(
+    def get_invoice_cdr_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -490,7 +504,7 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_id_cdr_get_serialize(
+        _param = self._get_invoice_cdr_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -499,7 +513,9 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -508,7 +524,7 @@ class InvoiceApi:
         return response_data.response
 
 
-    def _api_v1_invoice_id_cdr_get_serialize(
+    def _get_invoice_cdr_serialize(
         self,
         id,
         _request_auth,
@@ -540,10 +556,18 @@ class InvoiceApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -565,7 +589,7 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_id_pdf_get(
+    def get_invoice_pdf(
         self,
         id: UUID,
         format: Optional[StrictStr] = None,
@@ -611,7 +635,7 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_id_pdf_get_serialize(
+        _param = self._get_invoice_pdf_serialize(
             id=id,
             format=format,
             _request_auth=_request_auth,
@@ -621,7 +645,9 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -635,7 +661,7 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_id_pdf_get_with_http_info(
+    def get_invoice_pdf_with_http_info(
         self,
         id: UUID,
         format: Optional[StrictStr] = None,
@@ -681,7 +707,7 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_id_pdf_get_serialize(
+        _param = self._get_invoice_pdf_serialize(
             id=id,
             format=format,
             _request_auth=_request_auth,
@@ -691,7 +717,9 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -705,7 +733,7 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_id_pdf_get_without_preload_content(
+    def get_invoice_pdf_without_preload_content(
         self,
         id: UUID,
         format: Optional[StrictStr] = None,
@@ -751,7 +779,7 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_id_pdf_get_serialize(
+        _param = self._get_invoice_pdf_serialize(
             id=id,
             format=format,
             _request_auth=_request_auth,
@@ -761,7 +789,9 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -770,7 +800,7 @@ class InvoiceApi:
         return response_data.response
 
 
-    def _api_v1_invoice_id_pdf_get_serialize(
+    def _get_invoice_pdf_serialize(
         self,
         id,
         format,
@@ -807,10 +837,18 @@ class InvoiceApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -832,7 +870,7 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_id_xml_get(
+    def get_invoice_xml(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -875,7 +913,7 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_id_xml_get_serialize(
+        _param = self._get_invoice_xml_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -884,7 +922,9 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -898,7 +938,7 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_id_xml_get_with_http_info(
+    def get_invoice_xml_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -941,7 +981,7 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_id_xml_get_serialize(
+        _param = self._get_invoice_xml_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -950,7 +990,9 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -964,7 +1006,7 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_id_xml_get_without_preload_content(
+    def get_invoice_xml_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -1007,7 +1049,7 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_id_xml_get_serialize(
+        _param = self._get_invoice_xml_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1016,7 +1058,9 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1025,7 +1069,7 @@ class InvoiceApi:
         return response_data.response
 
 
-    def _api_v1_invoice_id_xml_get_serialize(
+    def _get_invoice_xml_serialize(
         self,
         id,
         _request_auth,
@@ -1057,10 +1101,18 @@ class InvoiceApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -1082,9 +1134,9 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_send_post(
+    def send_invoice(
         self,
-        api_v1_invoice_send_post_request: ApiV1InvoiceSendPostRequest,
+        send_invoice_request: SendInvoiceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1097,13 +1149,13 @@ class InvoiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1InvoiceSendPost202Response:
+    ) -> SendInvoice202Response:
         """Enviar factura (01) o boleta (03) a SUNAT
 
         Genera el XML UBL 2.1, lo firma digitalmente y lo encola para envío asíncrono a SUNAT. Responde 202 inmediatamente. Para conocer el resultado final consultar GET /documents/{id}. Idempotente por (RUC emisor, tipoDoc, serie, correlativo): reenviar el mismo comprobante NO lo duplica. Si ya fue aceptado devuelve el mismo id y hash sin reenviar nada a SUNAT; si sigue en proceso responde 409 (esperá el resultado, no cambies el correlativo). Solo un RECHAZADO exige un correlativo nuevo.
 
-        :param api_v1_invoice_send_post_request: (required)
-        :type api_v1_invoice_send_post_request: ApiV1InvoiceSendPostRequest
+        :param send_invoice_request: (required)
+        :type send_invoice_request: SendInvoiceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1126,8 +1178,8 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_send_post_serialize(
-            api_v1_invoice_send_post_request=api_v1_invoice_send_post_request,
+        _param = self._send_invoice_serialize(
+            send_invoice_request=send_invoice_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1135,9 +1187,12 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1InvoiceSendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '409': "ApiV1InvoiceSendPost400Response",
+            '202': "SendInvoice202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '409': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1151,9 +1206,9 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_send_post_with_http_info(
+    def send_invoice_with_http_info(
         self,
-        api_v1_invoice_send_post_request: ApiV1InvoiceSendPostRequest,
+        send_invoice_request: SendInvoiceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1166,13 +1221,13 @@ class InvoiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1InvoiceSendPost202Response]:
+    ) -> ApiResponse[SendInvoice202Response]:
         """Enviar factura (01) o boleta (03) a SUNAT
 
         Genera el XML UBL 2.1, lo firma digitalmente y lo encola para envío asíncrono a SUNAT. Responde 202 inmediatamente. Para conocer el resultado final consultar GET /documents/{id}. Idempotente por (RUC emisor, tipoDoc, serie, correlativo): reenviar el mismo comprobante NO lo duplica. Si ya fue aceptado devuelve el mismo id y hash sin reenviar nada a SUNAT; si sigue en proceso responde 409 (esperá el resultado, no cambies el correlativo). Solo un RECHAZADO exige un correlativo nuevo.
 
-        :param api_v1_invoice_send_post_request: (required)
-        :type api_v1_invoice_send_post_request: ApiV1InvoiceSendPostRequest
+        :param send_invoice_request: (required)
+        :type send_invoice_request: SendInvoiceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1195,8 +1250,8 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_send_post_serialize(
-            api_v1_invoice_send_post_request=api_v1_invoice_send_post_request,
+        _param = self._send_invoice_serialize(
+            send_invoice_request=send_invoice_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1204,9 +1259,12 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1InvoiceSendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '409': "ApiV1InvoiceSendPost400Response",
+            '202': "SendInvoice202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '409': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1220,9 +1278,9 @@ class InvoiceApi:
 
 
     @validate_call
-    def api_v1_invoice_send_post_without_preload_content(
+    def send_invoice_without_preload_content(
         self,
-        api_v1_invoice_send_post_request: ApiV1InvoiceSendPostRequest,
+        send_invoice_request: SendInvoiceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1240,8 +1298,8 @@ class InvoiceApi:
 
         Genera el XML UBL 2.1, lo firma digitalmente y lo encola para envío asíncrono a SUNAT. Responde 202 inmediatamente. Para conocer el resultado final consultar GET /documents/{id}. Idempotente por (RUC emisor, tipoDoc, serie, correlativo): reenviar el mismo comprobante NO lo duplica. Si ya fue aceptado devuelve el mismo id y hash sin reenviar nada a SUNAT; si sigue en proceso responde 409 (esperá el resultado, no cambies el correlativo). Solo un RECHAZADO exige un correlativo nuevo.
 
-        :param api_v1_invoice_send_post_request: (required)
-        :type api_v1_invoice_send_post_request: ApiV1InvoiceSendPostRequest
+        :param send_invoice_request: (required)
+        :type send_invoice_request: SendInvoiceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1264,8 +1322,8 @@ class InvoiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_invoice_send_post_serialize(
-            api_v1_invoice_send_post_request=api_v1_invoice_send_post_request,
+        _param = self._send_invoice_serialize(
+            send_invoice_request=send_invoice_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1273,9 +1331,12 @@ class InvoiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1InvoiceSendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '409': "ApiV1InvoiceSendPost400Response",
+            '202': "SendInvoice202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '409': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1284,9 +1345,9 @@ class InvoiceApi:
         return response_data.response
 
 
-    def _api_v1_invoice_send_post_serialize(
+    def _send_invoice_serialize(
         self,
-        api_v1_invoice_send_post_request,
+        send_invoice_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1312,8 +1373,8 @@ class InvoiceApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_invoice_send_post_request is not None:
-            _body_params = api_v1_invoice_send_post_request
+        if send_invoice_request is not None:
+            _body_params = send_invoice_request
 
 
         # set the HTTP header `Accept`
@@ -1340,6 +1401,7 @@ class InvoiceApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(

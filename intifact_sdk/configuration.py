@@ -114,6 +114,7 @@ HTTPSignatureAuthSetting = TypedDict(
 AuthSettings = TypedDict(
     "AuthSettings",
     {
+        "apiKey": BearerAuthSetting,
     },
     total=False,
 )
@@ -180,6 +181,7 @@ class Configuration:
     :param datetime_format: Datetime format string for serialization.
     :param date_format: Date format string for serialization.
 
+    :Example:
     """
 
     _default: ClassVar[Optional[Self]] = None
@@ -542,6 +544,13 @@ class Configuration:
         :return: The Auth Settings information dict.
         """
         auth: AuthSettings = {}
+        if self.access_token is not None:
+            auth['apiKey'] = {
+                'type': 'bearer',
+                'in': 'header',
+                'key': 'Authorization',
+                'value': 'Bearer ' + self.access_token
+            }
         return auth
 
     def to_debug_report(self) -> str:

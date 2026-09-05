@@ -38,7 +38,7 @@ class PublicApi:
 
 
     @validate_call
-    def api_v1_public_consultar_ruc_tipo_doc_serie_numero_get(
+    def consultar_comprobante(
         self,
         ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
         tipo_doc: Annotated[str, Field(min_length=2, strict=True, max_length=2)],
@@ -100,7 +100,7 @@ class PublicApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_public_consultar_ruc_tipo_doc_serie_numero_get_serialize(
+        _param = self._consultar_comprobante_serialize(
             ruc=ruc,
             tipo_doc=tipo_doc,
             serie=serie,
@@ -129,7 +129,7 @@ class PublicApi:
 
 
     @validate_call
-    def api_v1_public_consultar_ruc_tipo_doc_serie_numero_get_with_http_info(
+    def consultar_comprobante_with_http_info(
         self,
         ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
         tipo_doc: Annotated[str, Field(min_length=2, strict=True, max_length=2)],
@@ -191,7 +191,7 @@ class PublicApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_public_consultar_ruc_tipo_doc_serie_numero_get_serialize(
+        _param = self._consultar_comprobante_serialize(
             ruc=ruc,
             tipo_doc=tipo_doc,
             serie=serie,
@@ -220,7 +220,7 @@ class PublicApi:
 
 
     @validate_call
-    def api_v1_public_consultar_ruc_tipo_doc_serie_numero_get_without_preload_content(
+    def consultar_comprobante_without_preload_content(
         self,
         ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
         tipo_doc: Annotated[str, Field(min_length=2, strict=True, max_length=2)],
@@ -282,7 +282,7 @@ class PublicApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_public_consultar_ruc_tipo_doc_serie_numero_get_serialize(
+        _param = self._consultar_comprobante_serialize(
             ruc=ruc,
             tipo_doc=tipo_doc,
             serie=serie,
@@ -306,7 +306,7 @@ class PublicApi:
         return response_data.response
 
 
-    def _api_v1_public_consultar_ruc_tipo_doc_serie_numero_get_serialize(
+    def _consultar_comprobante_serialize(
         self,
         ruc,
         tipo_doc,
@@ -387,12 +387,15 @@ class PublicApi:
 
 
     @validate_call
-    def api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get(
+    def consultar_comprobante_pdf(
         self,
         ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
         tipo_doc: Annotated[str, Field(min_length=2, strict=True, max_length=2)],
         serie: Annotated[str, Field(min_length=4, strict=True, max_length=4)],
         numero: Annotated[str, Field(min_length=1, strict=True, max_length=8)],
+        total: Optional[Union[StrictFloat, StrictInt]] = None,
+        fecha: Optional[StrictStr] = None,
+        receptor: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -417,6 +420,12 @@ class PublicApi:
         :type serie: str
         :param numero: (required)
         :type numero: str
+        :param total:
+        :type total: float
+        :param fecha:
+        :type fecha: str
+        :param receptor:
+        :type receptor: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -439,11 +448,14 @@ class PublicApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get_serialize(
+        _param = self._consultar_comprobante_pdf_serialize(
             ruc=ruc,
             tipo_doc=tipo_doc,
             serie=serie,
             numero=numero,
+            total=total,
+            fecha=fecha,
+            receptor=receptor,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -465,12 +477,15 @@ class PublicApi:
 
 
     @validate_call
-    def api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get_with_http_info(
+    def consultar_comprobante_pdf_with_http_info(
         self,
         ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
         tipo_doc: Annotated[str, Field(min_length=2, strict=True, max_length=2)],
         serie: Annotated[str, Field(min_length=4, strict=True, max_length=4)],
         numero: Annotated[str, Field(min_length=1, strict=True, max_length=8)],
+        total: Optional[Union[StrictFloat, StrictInt]] = None,
+        fecha: Optional[StrictStr] = None,
+        receptor: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -495,6 +510,12 @@ class PublicApi:
         :type serie: str
         :param numero: (required)
         :type numero: str
+        :param total:
+        :type total: float
+        :param fecha:
+        :type fecha: str
+        :param receptor:
+        :type receptor: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -517,11 +538,14 @@ class PublicApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get_serialize(
+        _param = self._consultar_comprobante_pdf_serialize(
             ruc=ruc,
             tipo_doc=tipo_doc,
             serie=serie,
             numero=numero,
+            total=total,
+            fecha=fecha,
+            receptor=receptor,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -543,12 +567,15 @@ class PublicApi:
 
 
     @validate_call
-    def api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get_without_preload_content(
+    def consultar_comprobante_pdf_without_preload_content(
         self,
         ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
         tipo_doc: Annotated[str, Field(min_length=2, strict=True, max_length=2)],
         serie: Annotated[str, Field(min_length=4, strict=True, max_length=4)],
         numero: Annotated[str, Field(min_length=1, strict=True, max_length=8)],
+        total: Optional[Union[StrictFloat, StrictInt]] = None,
+        fecha: Optional[StrictStr] = None,
+        receptor: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -573,6 +600,12 @@ class PublicApi:
         :type serie: str
         :param numero: (required)
         :type numero: str
+        :param total:
+        :type total: float
+        :param fecha:
+        :type fecha: str
+        :param receptor:
+        :type receptor: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -595,11 +628,14 @@ class PublicApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get_serialize(
+        _param = self._consultar_comprobante_pdf_serialize(
             ruc=ruc,
             tipo_doc=tipo_doc,
             serie=serie,
             numero=numero,
+            total=total,
+            fecha=fecha,
+            receptor=receptor,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -616,12 +652,15 @@ class PublicApi:
         return response_data.response
 
 
-    def _api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get_serialize(
+    def _consultar_comprobante_pdf_serialize(
         self,
         ruc,
         tipo_doc,
         serie,
         numero,
+        total,
+        fecha,
+        receptor,
         _request_auth,
         _content_type,
         _headers,
@@ -652,6 +691,18 @@ class PublicApi:
         if numero is not None:
             _path_params['numero'] = numero
         # process the query parameters
+        if total is not None:
+            
+            _query_params.append(('total', total))
+            
+        if fecha is not None:
+            
+            _query_params.append(('fecha', fecha))
+            
+        if receptor is not None:
+            
+            _query_params.append(('receptor', receptor))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -682,12 +733,15 @@ class PublicApi:
 
 
     @validate_call
-    def api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get(
+    def consultar_comprobante_xml(
         self,
         ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
         tipo_doc: Annotated[str, Field(min_length=2, strict=True, max_length=2)],
         serie: Annotated[str, Field(min_length=4, strict=True, max_length=4)],
         numero: Annotated[str, Field(min_length=1, strict=True, max_length=8)],
+        total: Optional[Union[StrictFloat, StrictInt]] = None,
+        fecha: Optional[StrictStr] = None,
+        receptor: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -712,6 +766,12 @@ class PublicApi:
         :type serie: str
         :param numero: (required)
         :type numero: str
+        :param total:
+        :type total: float
+        :param fecha:
+        :type fecha: str
+        :param receptor:
+        :type receptor: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -734,11 +794,14 @@ class PublicApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get_serialize(
+        _param = self._consultar_comprobante_xml_serialize(
             ruc=ruc,
             tipo_doc=tipo_doc,
             serie=serie,
             numero=numero,
+            total=total,
+            fecha=fecha,
+            receptor=receptor,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -760,12 +823,15 @@ class PublicApi:
 
 
     @validate_call
-    def api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get_with_http_info(
+    def consultar_comprobante_xml_with_http_info(
         self,
         ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
         tipo_doc: Annotated[str, Field(min_length=2, strict=True, max_length=2)],
         serie: Annotated[str, Field(min_length=4, strict=True, max_length=4)],
         numero: Annotated[str, Field(min_length=1, strict=True, max_length=8)],
+        total: Optional[Union[StrictFloat, StrictInt]] = None,
+        fecha: Optional[StrictStr] = None,
+        receptor: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -790,6 +856,12 @@ class PublicApi:
         :type serie: str
         :param numero: (required)
         :type numero: str
+        :param total:
+        :type total: float
+        :param fecha:
+        :type fecha: str
+        :param receptor:
+        :type receptor: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -812,11 +884,14 @@ class PublicApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get_serialize(
+        _param = self._consultar_comprobante_xml_serialize(
             ruc=ruc,
             tipo_doc=tipo_doc,
             serie=serie,
             numero=numero,
+            total=total,
+            fecha=fecha,
+            receptor=receptor,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -838,12 +913,15 @@ class PublicApi:
 
 
     @validate_call
-    def api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get_without_preload_content(
+    def consultar_comprobante_xml_without_preload_content(
         self,
         ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
         tipo_doc: Annotated[str, Field(min_length=2, strict=True, max_length=2)],
         serie: Annotated[str, Field(min_length=4, strict=True, max_length=4)],
         numero: Annotated[str, Field(min_length=1, strict=True, max_length=8)],
+        total: Optional[Union[StrictFloat, StrictInt]] = None,
+        fecha: Optional[StrictStr] = None,
+        receptor: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -868,6 +946,12 @@ class PublicApi:
         :type serie: str
         :param numero: (required)
         :type numero: str
+        :param total:
+        :type total: float
+        :param fecha:
+        :type fecha: str
+        :param receptor:
+        :type receptor: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -890,11 +974,14 @@ class PublicApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get_serialize(
+        _param = self._consultar_comprobante_xml_serialize(
             ruc=ruc,
             tipo_doc=tipo_doc,
             serie=serie,
             numero=numero,
+            total=total,
+            fecha=fecha,
+            receptor=receptor,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -911,12 +998,15 @@ class PublicApi:
         return response_data.response
 
 
-    def _api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get_serialize(
+    def _consultar_comprobante_xml_serialize(
         self,
         ruc,
         tipo_doc,
         serie,
         numero,
+        total,
+        fecha,
+        receptor,
         _request_auth,
         _content_type,
         _headers,
@@ -947,6 +1037,18 @@ class PublicApi:
         if numero is not None:
             _path_params['numero'] = numero
         # process the query parameters
+        if total is not None:
+            
+            _query_params.append(('total', total))
+            
+        if fecha is not None:
+            
+            _query_params.append(('fecha', fecha))
+            
+        if receptor is not None:
+            
+            _query_params.append(('receptor', receptor))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter

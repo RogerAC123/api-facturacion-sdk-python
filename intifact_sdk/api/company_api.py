@@ -17,9 +17,9 @@ from typing_extensions import Annotated
 
 from pydantic import field_validator
 from uuid import UUID
-from intifact_sdk.models.api_v1_companies_claim_post_request import ApiV1CompaniesClaimPostRequest
-from intifact_sdk.models.api_v1_companies_id_put_request import ApiV1CompaniesIdPutRequest
-from intifact_sdk.models.api_v1_companies_post_request import ApiV1CompaniesPostRequest
+from intifact_sdk.models.claim_company_request import ClaimCompanyRequest
+from intifact_sdk.models.create_company_request import CreateCompanyRequest
+from intifact_sdk.models.update_company_request import UpdateCompanyRequest
 
 from intifact_sdk.api_client import ApiClient, RequestSerialized
 from intifact_sdk.api_response import ApiResponse
@@ -40,9 +40,9 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_claim_post(
+    def claim_company(
         self,
-        api_v1_companies_claim_post_request: ApiV1CompaniesClaimPostRequest,
+        claim_company_request: ClaimCompanyRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -60,8 +60,8 @@ class CompanyApi:
 
         Prueba de titularidad = certificado digital del RUC. Si la cuenta que lo tiene no acreditó titularidad y no emitió documentos, el RUC pasa a tu cuenta.
 
-        :param api_v1_companies_claim_post_request: (required)
-        :type api_v1_companies_claim_post_request: ApiV1CompaniesClaimPostRequest
+        :param claim_company_request: (required)
+        :type claim_company_request: ClaimCompanyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -84,8 +84,8 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_claim_post_serialize(
-            api_v1_companies_claim_post_request=api_v1_companies_claim_post_request,
+        _param = self._claim_company_serialize(
+            claim_company_request=claim_company_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -93,7 +93,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -107,9 +109,9 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_claim_post_with_http_info(
+    def claim_company_with_http_info(
         self,
-        api_v1_companies_claim_post_request: ApiV1CompaniesClaimPostRequest,
+        claim_company_request: ClaimCompanyRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -127,8 +129,8 @@ class CompanyApi:
 
         Prueba de titularidad = certificado digital del RUC. Si la cuenta que lo tiene no acreditó titularidad y no emitió documentos, el RUC pasa a tu cuenta.
 
-        :param api_v1_companies_claim_post_request: (required)
-        :type api_v1_companies_claim_post_request: ApiV1CompaniesClaimPostRequest
+        :param claim_company_request: (required)
+        :type claim_company_request: ClaimCompanyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -151,8 +153,8 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_claim_post_serialize(
-            api_v1_companies_claim_post_request=api_v1_companies_claim_post_request,
+        _param = self._claim_company_serialize(
+            claim_company_request=claim_company_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -160,7 +162,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -174,9 +178,9 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_claim_post_without_preload_content(
+    def claim_company_without_preload_content(
         self,
-        api_v1_companies_claim_post_request: ApiV1CompaniesClaimPostRequest,
+        claim_company_request: ClaimCompanyRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -194,8 +198,8 @@ class CompanyApi:
 
         Prueba de titularidad = certificado digital del RUC. Si la cuenta que lo tiene no acreditó titularidad y no emitió documentos, el RUC pasa a tu cuenta.
 
-        :param api_v1_companies_claim_post_request: (required)
-        :type api_v1_companies_claim_post_request: ApiV1CompaniesClaimPostRequest
+        :param claim_company_request: (required)
+        :type claim_company_request: ClaimCompanyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -218,8 +222,8 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_claim_post_serialize(
-            api_v1_companies_claim_post_request=api_v1_companies_claim_post_request,
+        _param = self._claim_company_serialize(
+            claim_company_request=claim_company_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -227,7 +231,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -236,9 +242,9 @@ class CompanyApi:
         return response_data.response
 
 
-    def _api_v1_companies_claim_post_serialize(
+    def _claim_company_serialize(
         self,
-        api_v1_companies_claim_post_request,
+        claim_company_request,
         _request_auth,
         _content_type,
         _headers,
@@ -264,10 +270,17 @@ class CompanyApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_companies_claim_post_request is not None:
-            _body_params = api_v1_companies_claim_post_request
+        if claim_company_request is not None:
+            _body_params = claim_company_request
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -285,6 +298,7 @@ class CompanyApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -306,8 +320,9 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_get(
+    def create_company(
         self,
+        create_company_request: CreateCompanyRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -321,9 +336,11 @@ class CompanyApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Listar empresas emisoras
+        """Crear empresa emisora
 
 
+        :param create_company_request: (required)
+        :type create_company_request: CreateCompanyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -346,7 +363,8 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_get_serialize(
+        _param = self._create_company_serialize(
+            create_company_request=create_company_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -354,7 +372,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -368,8 +388,9 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_get_with_http_info(
+    def create_company_with_http_info(
         self,
+        create_company_request: CreateCompanyRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -383,9 +404,11 @@ class CompanyApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Listar empresas emisoras
+        """Crear empresa emisora
 
 
+        :param create_company_request: (required)
+        :type create_company_request: CreateCompanyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -408,7 +431,8 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_get_serialize(
+        _param = self._create_company_serialize(
+            create_company_request=create_company_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -416,7 +440,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -430,8 +456,9 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_get_without_preload_content(
+    def create_company_without_preload_content(
         self,
+        create_company_request: CreateCompanyRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -445,9 +472,11 @@ class CompanyApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Listar empresas emisoras
+        """Crear empresa emisora
 
 
+        :param create_company_request: (required)
+        :type create_company_request: CreateCompanyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -470,7 +499,8 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_get_serialize(
+        _param = self._create_company_serialize(
+            create_company_request=create_company_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -478,7 +508,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -487,8 +519,9 @@ class CompanyApi:
         return response_data.response
 
 
-    def _api_v1_companies_get_serialize(
+    def _create_company_serialize(
         self,
+        create_company_request,
         _request_auth,
         _content_type,
         _headers,
@@ -514,16 +547,39 @@ class CompanyApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if create_company_request is not None:
+            _body_params = create_company_request
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
-            method='GET',
+            method='POST',
             resource_path='/api/v1/companies',
             path_params=_path_params,
             query_params=_query_params,
@@ -541,7 +597,7 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_id_get(
+    def get_company(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -584,7 +640,7 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_get_serialize(
+        _param = self._get_company_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -593,7 +649,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -607,7 +665,7 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_id_get_with_http_info(
+    def get_company_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -650,7 +708,7 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_get_serialize(
+        _param = self._get_company_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -659,7 +717,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -673,7 +733,7 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_id_get_without_preload_content(
+    def get_company_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -716,7 +776,7 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_get_serialize(
+        _param = self._get_company_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -725,7 +785,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -734,7 +796,7 @@ class CompanyApi:
         return response_data.response
 
 
-    def _api_v1_companies_id_get_serialize(
+    def _get_company_serialize(
         self,
         id,
         _request_auth,
@@ -766,10 +828,18 @@ class CompanyApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -791,7 +861,7 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_id_logo_get(
+    def get_company_logo(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -834,7 +904,7 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_logo_get_serialize(
+        _param = self._get_company_logo_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -843,7 +913,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -857,7 +929,7 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_id_logo_get_with_http_info(
+    def get_company_logo_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -900,7 +972,7 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_logo_get_serialize(
+        _param = self._get_company_logo_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -909,7 +981,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -923,7 +997,7 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_id_logo_get_without_preload_content(
+    def get_company_logo_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -966,7 +1040,7 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_logo_get_serialize(
+        _param = self._get_company_logo_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -975,7 +1049,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -984,7 +1060,7 @@ class CompanyApi:
         return response_data.response
 
 
-    def _api_v1_companies_id_logo_get_serialize(
+    def _get_company_logo_serialize(
         self,
         id,
         _request_auth,
@@ -1016,10 +1092,18 @@ class CompanyApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -1041,10 +1125,259 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_id_put(
+    def list_companies(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Listar empresas emisoras
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_companies_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def list_companies_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Listar empresas emisoras
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_companies_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def list_companies_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Listar empresas emisoras
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_companies_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_companies_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v1/companies',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_company(
         self,
         id: UUID,
-        api_v1_companies_id_put_request: ApiV1CompaniesIdPutRequest,
+        update_company_request: UpdateCompanyRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1063,8 +1396,8 @@ class CompanyApi:
 
         :param id: (required)
         :type id: UUID
-        :param api_v1_companies_id_put_request: (required)
-        :type api_v1_companies_id_put_request: ApiV1CompaniesIdPutRequest
+        :param update_company_request: (required)
+        :type update_company_request: UpdateCompanyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1087,9 +1420,9 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_put_serialize(
+        _param = self._update_company_serialize(
             id=id,
-            api_v1_companies_id_put_request=api_v1_companies_id_put_request,
+            update_company_request=update_company_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1097,7 +1430,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1111,10 +1446,10 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_id_put_with_http_info(
+    def update_company_with_http_info(
         self,
         id: UUID,
-        api_v1_companies_id_put_request: ApiV1CompaniesIdPutRequest,
+        update_company_request: UpdateCompanyRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1133,8 +1468,8 @@ class CompanyApi:
 
         :param id: (required)
         :type id: UUID
-        :param api_v1_companies_id_put_request: (required)
-        :type api_v1_companies_id_put_request: ApiV1CompaniesIdPutRequest
+        :param update_company_request: (required)
+        :type update_company_request: UpdateCompanyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1157,9 +1492,9 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_put_serialize(
+        _param = self._update_company_serialize(
             id=id,
-            api_v1_companies_id_put_request=api_v1_companies_id_put_request,
+            update_company_request=update_company_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1167,7 +1502,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1181,10 +1518,10 @@ class CompanyApi:
 
 
     @validate_call
-    def api_v1_companies_id_put_without_preload_content(
+    def update_company_without_preload_content(
         self,
         id: UUID,
-        api_v1_companies_id_put_request: ApiV1CompaniesIdPutRequest,
+        update_company_request: UpdateCompanyRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1203,8 +1540,8 @@ class CompanyApi:
 
         :param id: (required)
         :type id: UUID
-        :param api_v1_companies_id_put_request: (required)
-        :type api_v1_companies_id_put_request: ApiV1CompaniesIdPutRequest
+        :param update_company_request: (required)
+        :type update_company_request: UpdateCompanyRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1227,9 +1564,9 @@ class CompanyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_put_serialize(
+        _param = self._update_company_serialize(
             id=id,
-            api_v1_companies_id_put_request=api_v1_companies_id_put_request,
+            update_company_request=update_company_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1237,7 +1574,9 @@ class CompanyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1246,10 +1585,10 @@ class CompanyApi:
         return response_data.response
 
 
-    def _api_v1_companies_id_put_serialize(
+    def _update_company_serialize(
         self,
         id,
-        api_v1_companies_id_put_request,
+        update_company_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1277,10 +1616,17 @@ class CompanyApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_companies_id_put_request is not None:
-            _body_params = api_v1_companies_id_put_request
+        if update_company_request is not None:
+            _body_params = update_company_request
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -1298,274 +1644,12 @@ class CompanyApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/api/v1/companies/{id}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def api_v1_companies_post(
-        self,
-        api_v1_companies_post_request: ApiV1CompaniesPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Crear empresa emisora
-
-
-        :param api_v1_companies_post_request: (required)
-        :type api_v1_companies_post_request: ApiV1CompaniesPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_companies_post_serialize(
-            api_v1_companies_post_request=api_v1_companies_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def api_v1_companies_post_with_http_info(
-        self,
-        api_v1_companies_post_request: ApiV1CompaniesPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Crear empresa emisora
-
-
-        :param api_v1_companies_post_request: (required)
-        :type api_v1_companies_post_request: ApiV1CompaniesPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_companies_post_serialize(
-            api_v1_companies_post_request=api_v1_companies_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def api_v1_companies_post_without_preload_content(
-        self,
-        api_v1_companies_post_request: ApiV1CompaniesPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Crear empresa emisora
-
-
-        :param api_v1_companies_post_request: (required)
-        :type api_v1_companies_post_request: ApiV1CompaniesPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_companies_post_serialize(
-            api_v1_companies_post_request=api_v1_companies_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _api_v1_companies_post_serialize(
-        self,
-        api_v1_companies_post_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if api_v1_companies_post_request is not None:
-            _body_params = api_v1_companies_post_request
-
-
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/api/v1/companies',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

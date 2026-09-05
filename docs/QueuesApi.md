@@ -4,20 +4,21 @@ All URIs are relative to *http://localhost:3000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api_v1_queues_stats_get**](QueuesApi.md#api_v1_queues_stats_get) | **GET** /api/v1/queues/stats | Estado de las colas BullMQ
+[**get_queue_stats**](QueuesApi.md#get_queue_stats) | **GET** /api/v1/queues/stats | Estado de las colas BullMQ
 
 
-# **api_v1_queues_stats_get**
-> ApiV1QueuesStatsGet200Response api_v1_queues_stats_get()
+# **get_queue_stats**
+> GetQueueStats200Response get_queue_stats()
 
 Estado de las colas BullMQ
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_queues_stats_get200_response import ApiV1QueuesStatsGet200Response
+from intifact_sdk.models.get_queue_stats200_response import GetQueueStats200Response
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -27,6 +28,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -35,11 +45,11 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Estado de las colas BullMQ
-        api_response = api_instance.api_v1_queues_stats_get()
-        print("The response of QueuesApi->api_v1_queues_stats_get:\n")
+        api_response = api_instance.get_queue_stats()
+        print("The response of QueuesApi->get_queue_stats:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling QueuesApi->api_v1_queues_stats_get: %s\n" % e)
+        print("Exception when calling QueuesApi->get_queue_stats: %s\n" % e)
 ```
 
 
@@ -50,11 +60,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ApiV1QueuesStatsGet200Response**](ApiV1QueuesStatsGet200Response.md)
+[**GetQueueStats200Response**](GetQueueStats200Response.md)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
@@ -66,7 +76,9 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Default Response |  -  |
+**401** | Default Response |  -  |
 **403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

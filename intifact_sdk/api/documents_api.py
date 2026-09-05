@@ -19,12 +19,12 @@ from pydantic import Field, StrictStr, field_validator
 from typing import Optional
 from typing_extensions import Annotated
 from uuid import UUID
-from intifact_sdk.models.api_v1_cdr_consultar_post200_response import ApiV1CdrConsultarPost200Response
-from intifact_sdk.models.api_v1_cdr_consultar_post_request import ApiV1CdrConsultarPostRequest
-from intifact_sdk.models.api_v1_documents_get200_response import ApiV1DocumentsGet200Response
-from intifact_sdk.models.api_v1_documents_id_recover_post200_response import ApiV1DocumentsIdRecoverPost200Response
-from intifact_sdk.models.api_v1_documents_id_retry_post202_response import ApiV1DocumentsIdRetryPost202Response
-from intifact_sdk.models.api_v1_documents_next_correlativo_get200_response import ApiV1DocumentsNextCorrelativoGet200Response
+from intifact_sdk.models.consultar_cdr200_response import ConsultarCdr200Response
+from intifact_sdk.models.consultar_cdr_request import ConsultarCdrRequest
+from intifact_sdk.models.get_next_correlativo200_response import GetNextCorrelativo200Response
+from intifact_sdk.models.list_documents200_response import ListDocuments200Response
+from intifact_sdk.models.reconcile_document200_response import ReconcileDocument200Response
+from intifact_sdk.models.retry_document202_response import RetryDocument202Response
 
 from intifact_sdk.api_client import ApiClient, RequestSerialized
 from intifact_sdk.api_response import ApiResponse
@@ -45,9 +45,9 @@ class DocumentsApi:
 
 
     @validate_call
-    def api_v1_cdr_consultar_post(
+    def consultar_cdr(
         self,
-        api_v1_cdr_consultar_post_request: ApiV1CdrConsultarPostRequest,
+        consultar_cdr_request: ConsultarCdrRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -60,13 +60,13 @@ class DocumentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1CdrConsultarPost200Response:
+    ) -> ConsultarCdr200Response:
         """Consultar el CDR de un comprobante en SUNAT por referencia
 
         Recupera el CDR oficial (billConsultService / getStatusCdr) de un comprobante 01/03/07/08 por RUC+serie+número, aunque no exista en esta BD. Útil para recuperar el histórico emitido por otro PSE. Solo en producción; usa la Clave SOL de la empresa (debe existir y estar en scope de la API key).
 
-        :param api_v1_cdr_consultar_post_request: (required)
-        :type api_v1_cdr_consultar_post_request: ApiV1CdrConsultarPostRequest
+        :param consultar_cdr_request: (required)
+        :type consultar_cdr_request: ConsultarCdrRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -89,8 +89,8 @@ class DocumentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_cdr_consultar_post_serialize(
-            api_v1_cdr_consultar_post_request=api_v1_cdr_consultar_post_request,
+        _param = self._consultar_cdr_serialize(
+            consultar_cdr_request=consultar_cdr_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -98,9 +98,12 @@ class DocumentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1CdrConsultarPost200Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '404': "ApiV1InvoiceSendPost400Response",
+            '200': "ConsultarCdr200Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '404': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -114,9 +117,9 @@ class DocumentsApi:
 
 
     @validate_call
-    def api_v1_cdr_consultar_post_with_http_info(
+    def consultar_cdr_with_http_info(
         self,
-        api_v1_cdr_consultar_post_request: ApiV1CdrConsultarPostRequest,
+        consultar_cdr_request: ConsultarCdrRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -129,13 +132,13 @@ class DocumentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1CdrConsultarPost200Response]:
+    ) -> ApiResponse[ConsultarCdr200Response]:
         """Consultar el CDR de un comprobante en SUNAT por referencia
 
         Recupera el CDR oficial (billConsultService / getStatusCdr) de un comprobante 01/03/07/08 por RUC+serie+número, aunque no exista en esta BD. Útil para recuperar el histórico emitido por otro PSE. Solo en producción; usa la Clave SOL de la empresa (debe existir y estar en scope de la API key).
 
-        :param api_v1_cdr_consultar_post_request: (required)
-        :type api_v1_cdr_consultar_post_request: ApiV1CdrConsultarPostRequest
+        :param consultar_cdr_request: (required)
+        :type consultar_cdr_request: ConsultarCdrRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -158,8 +161,8 @@ class DocumentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_cdr_consultar_post_serialize(
-            api_v1_cdr_consultar_post_request=api_v1_cdr_consultar_post_request,
+        _param = self._consultar_cdr_serialize(
+            consultar_cdr_request=consultar_cdr_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -167,9 +170,12 @@ class DocumentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1CdrConsultarPost200Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '404': "ApiV1InvoiceSendPost400Response",
+            '200': "ConsultarCdr200Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '404': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -183,9 +189,9 @@ class DocumentsApi:
 
 
     @validate_call
-    def api_v1_cdr_consultar_post_without_preload_content(
+    def consultar_cdr_without_preload_content(
         self,
-        api_v1_cdr_consultar_post_request: ApiV1CdrConsultarPostRequest,
+        consultar_cdr_request: ConsultarCdrRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -203,8 +209,8 @@ class DocumentsApi:
 
         Recupera el CDR oficial (billConsultService / getStatusCdr) de un comprobante 01/03/07/08 por RUC+serie+número, aunque no exista en esta BD. Útil para recuperar el histórico emitido por otro PSE. Solo en producción; usa la Clave SOL de la empresa (debe existir y estar en scope de la API key).
 
-        :param api_v1_cdr_consultar_post_request: (required)
-        :type api_v1_cdr_consultar_post_request: ApiV1CdrConsultarPostRequest
+        :param consultar_cdr_request: (required)
+        :type consultar_cdr_request: ConsultarCdrRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -227,8 +233,8 @@ class DocumentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_cdr_consultar_post_serialize(
-            api_v1_cdr_consultar_post_request=api_v1_cdr_consultar_post_request,
+        _param = self._consultar_cdr_serialize(
+            consultar_cdr_request=consultar_cdr_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -236,9 +242,12 @@ class DocumentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1CdrConsultarPost200Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '404': "ApiV1InvoiceSendPost400Response",
+            '200': "ConsultarCdr200Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '404': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -247,9 +256,9 @@ class DocumentsApi:
         return response_data.response
 
 
-    def _api_v1_cdr_consultar_post_serialize(
+    def _consultar_cdr_serialize(
         self,
-        api_v1_cdr_consultar_post_request,
+        consultar_cdr_request,
         _request_auth,
         _content_type,
         _headers,
@@ -275,8 +284,8 @@ class DocumentsApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_cdr_consultar_post_request is not None:
-            _body_params = api_v1_cdr_consultar_post_request
+        if consultar_cdr_request is not None:
+            _body_params = consultar_cdr_request
 
 
         # set the HTTP header `Accept`
@@ -303,6 +312,7 @@ class DocumentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -324,18 +334,9 @@ class DocumentsApi:
 
 
     @validate_call
-    def api_v1_documents_get(
+    def get_document(
         self,
-        ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
-        tipo_doc: Optional[StrictStr] = None,
-        serie: Optional[StrictStr] = None,
-        estado: Optional[StrictStr] = None,
-        env: Optional[StrictStr] = None,
-        fecha_desde: Optional[StrictStr] = None,
-        fecha_hasta: Optional[StrictStr] = None,
-        cliente_num_doc: Optional[StrictStr] = None,
-        page: Optional[Annotated[int, Field(le=9007199254740991, strict=True, gt=0)]] = None,
-        limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
+        id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -348,30 +349,12 @@ class DocumentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1DocumentsGet200Response:
-        """Listar documentos con filtros y paginación
+    ) -> None:
+        """Detalle completo de un documento
 
 
-        :param ruc:
-        :type ruc: str
-        :param tipo_doc:
-        :type tipo_doc: str
-        :param serie:
-        :type serie: str
-        :param estado:
-        :type estado: str
-        :param env:
-        :type env: str
-        :param fecha_desde:
-        :type fecha_desde: str
-        :param fecha_hasta:
-        :type fecha_hasta: str
-        :param cliente_num_doc:
-        :type cliente_num_doc: str
-        :param page:
-        :type page: int
-        :param limit:
-        :type limit: int
+        :param id: (required)
+        :type id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -394,17 +377,8 @@ class DocumentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_documents_get_serialize(
-            ruc=ruc,
-            tipo_doc=tipo_doc,
-            serie=serie,
-            estado=estado,
-            env=env,
-            fecha_desde=fecha_desde,
-            fecha_hasta=fecha_hasta,
-            cliente_num_doc=cliente_num_doc,
-            page=page,
-            limit=limit,
+        _param = self._get_document_serialize(
+            id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -412,7 +386,9 @@ class DocumentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1DocumentsGet200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -426,7 +402,512 @@ class DocumentsApi:
 
 
     @validate_call
-    def api_v1_documents_get_with_http_info(
+    def get_document_with_http_info(
+        self,
+        id: UUID,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Detalle completo de un documento
+
+
+        :param id: (required)
+        :type id: UUID
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_document_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_document_without_preload_content(
+        self,
+        id: UUID,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Detalle completo de un documento
+
+
+        :param id: (required)
+        :type id: UUID
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_document_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_document_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v1/documents/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def get_next_correlativo(
+        self,
+        company_ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
+        tipo_doc: Annotated[str, Field(min_length=1, strict=True, max_length=2)],
+        serie: Annotated[str, Field(min_length=4, strict=True, max_length=4)],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetNextCorrelativo200Response:
+        """Obtener el siguiente correlativo disponible para una serie
+
+        Busca el correlativo más alto existente para la combinación empresa+tipoDoc+serie y retorna el siguiente. Útil para auto-numeración.
+
+        :param company_ruc: (required)
+        :type company_ruc: str
+        :param tipo_doc: (required)
+        :type tipo_doc: str
+        :param serie: (required)
+        :type serie: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_next_correlativo_serialize(
+            company_ruc=company_ruc,
+            tipo_doc=tipo_doc,
+            serie=serie,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetNextCorrelativo200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '404': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def get_next_correlativo_with_http_info(
+        self,
+        company_ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
+        tipo_doc: Annotated[str, Field(min_length=1, strict=True, max_length=2)],
+        serie: Annotated[str, Field(min_length=4, strict=True, max_length=4)],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetNextCorrelativo200Response]:
+        """Obtener el siguiente correlativo disponible para una serie
+
+        Busca el correlativo más alto existente para la combinación empresa+tipoDoc+serie y retorna el siguiente. Útil para auto-numeración.
+
+        :param company_ruc: (required)
+        :type company_ruc: str
+        :param tipo_doc: (required)
+        :type tipo_doc: str
+        :param serie: (required)
+        :type serie: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_next_correlativo_serialize(
+            company_ruc=company_ruc,
+            tipo_doc=tipo_doc,
+            serie=serie,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetNextCorrelativo200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '404': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def get_next_correlativo_without_preload_content(
+        self,
+        company_ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
+        tipo_doc: Annotated[str, Field(min_length=1, strict=True, max_length=2)],
+        serie: Annotated[str, Field(min_length=4, strict=True, max_length=4)],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Obtener el siguiente correlativo disponible para una serie
+
+        Busca el correlativo más alto existente para la combinación empresa+tipoDoc+serie y retorna el siguiente. Útil para auto-numeración.
+
+        :param company_ruc: (required)
+        :type company_ruc: str
+        :param tipo_doc: (required)
+        :type tipo_doc: str
+        :param serie: (required)
+        :type serie: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_next_correlativo_serialize(
+            company_ruc=company_ruc,
+            tipo_doc=tipo_doc,
+            serie=serie,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetNextCorrelativo200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '404': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_next_correlativo_serialize(
+        self,
+        company_ruc,
+        tipo_doc,
+        serie,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if company_ruc is not None:
+            
+            _query_params.append(('companyRuc', company_ruc))
+            
+        if tipo_doc is not None:
+            
+            _query_params.append(('tipoDoc', tipo_doc))
+            
+        if serie is not None:
+            
+            _query_params.append(('serie', serie))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v1/documents/next-correlativo',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def list_documents(
         self,
         ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
         tipo_doc: Optional[StrictStr] = None,
@@ -450,7 +931,7 @@ class DocumentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1DocumentsGet200Response]:
+    ) -> ListDocuments200Response:
         """Listar documentos con filtros y paginación
 
 
@@ -496,7 +977,7 @@ class DocumentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_documents_get_serialize(
+        _param = self._list_documents_serialize(
             ruc=ruc,
             tipo_doc=tipo_doc,
             serie=serie,
@@ -514,7 +995,115 @@ class DocumentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1DocumentsGet200Response",
+            '200': "ListDocuments200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def list_documents_with_http_info(
+        self,
+        ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
+        tipo_doc: Optional[StrictStr] = None,
+        serie: Optional[StrictStr] = None,
+        estado: Optional[StrictStr] = None,
+        env: Optional[StrictStr] = None,
+        fecha_desde: Optional[StrictStr] = None,
+        fecha_hasta: Optional[StrictStr] = None,
+        cliente_num_doc: Optional[StrictStr] = None,
+        page: Optional[Annotated[int, Field(le=9007199254740991, strict=True, gt=0)]] = None,
+        limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ListDocuments200Response]:
+        """Listar documentos con filtros y paginación
+
+
+        :param ruc:
+        :type ruc: str
+        :param tipo_doc:
+        :type tipo_doc: str
+        :param serie:
+        :type serie: str
+        :param estado:
+        :type estado: str
+        :param env:
+        :type env: str
+        :param fecha_desde:
+        :type fecha_desde: str
+        :param fecha_hasta:
+        :type fecha_hasta: str
+        :param cliente_num_doc:
+        :type cliente_num_doc: str
+        :param page:
+        :type page: int
+        :param limit:
+        :type limit: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_documents_serialize(
+            ruc=ruc,
+            tipo_doc=tipo_doc,
+            serie=serie,
+            estado=estado,
+            env=env,
+            fecha_desde=fecha_desde,
+            fecha_hasta=fecha_hasta,
+            cliente_num_doc=cliente_num_doc,
+            page=page,
+            limit=limit,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListDocuments200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -528,7 +1117,7 @@ class DocumentsApi:
 
 
     @validate_call
-    def api_v1_documents_get_without_preload_content(
+    def list_documents_without_preload_content(
         self,
         ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
         tipo_doc: Optional[StrictStr] = None,
@@ -598,7 +1187,7 @@ class DocumentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_documents_get_serialize(
+        _param = self._list_documents_serialize(
             ruc=ruc,
             tipo_doc=tipo_doc,
             serie=serie,
@@ -616,7 +1205,10 @@ class DocumentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1DocumentsGet200Response",
+            '200': "ListDocuments200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -625,7 +1217,7 @@ class DocumentsApi:
         return response_data.response
 
 
-    def _api_v1_documents_get_serialize(
+    def _list_documents_serialize(
         self,
         ruc,
         tipo_doc,
@@ -715,6 +1307,7 @@ class DocumentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -736,7 +1329,7 @@ class DocumentsApi:
 
 
     @validate_call
-    def api_v1_documents_id_get(
+    def reconcile_document(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -751,257 +1344,7 @@ class DocumentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Detalle completo de un documento
-
-
-        :param id: (required)
-        :type id: UUID
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_documents_id_get_serialize(
-            id=id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def api_v1_documents_id_get_with_http_info(
-        self,
-        id: UUID,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Detalle completo de un documento
-
-
-        :param id: (required)
-        :type id: UUID
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_documents_id_get_serialize(
-            id=id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def api_v1_documents_id_get_without_preload_content(
-        self,
-        id: UUID,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Detalle completo de un documento
-
-
-        :param id: (required)
-        :type id: UUID
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_documents_id_get_serialize(
-            id=id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _api_v1_documents_id_get_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if id is not None:
-            _path_params['id'] = id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/api/v1/documents/{id}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def api_v1_documents_id_recover_post(
-        self,
-        id: UUID,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1DocumentsIdRecoverPost200Response:
+    ) -> ReconcileDocument200Response:
         """Reconciliar un documento con SUNAT (consulta de CDR, solo master)
 
         Consulta el estado REAL en SUNAT (getStatusCdr / billConsultService) SIN reenviar y corrige la BD. Útil cuando un documento quedó desincronizado (ej. una boleta ACEPTADA figurando RECHAZADO/COLA_FALLIDA/ENCOLADO). Solo comprobantes 01/03/07/08, solo en producción. Restringido al master API key.
@@ -1030,7 +1373,7 @@ class DocumentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_documents_id_recover_post_serialize(
+        _param = self._reconcile_document_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1039,10 +1382,12 @@ class DocumentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1DocumentsIdRecoverPost200Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '403': "ApiV1InvoiceSendPost400Response",
-            '404': "ApiV1InvoiceSendPost400Response",
+            '200': "ReconcileDocument200Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '404': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1056,7 +1401,7 @@ class DocumentsApi:
 
 
     @validate_call
-    def api_v1_documents_id_recover_post_with_http_info(
+    def reconcile_document_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -1071,7 +1416,7 @@ class DocumentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1DocumentsIdRecoverPost200Response]:
+    ) -> ApiResponse[ReconcileDocument200Response]:
         """Reconciliar un documento con SUNAT (consulta de CDR, solo master)
 
         Consulta el estado REAL en SUNAT (getStatusCdr / billConsultService) SIN reenviar y corrige la BD. Útil cuando un documento quedó desincronizado (ej. una boleta ACEPTADA figurando RECHAZADO/COLA_FALLIDA/ENCOLADO). Solo comprobantes 01/03/07/08, solo en producción. Restringido al master API key.
@@ -1100,7 +1445,7 @@ class DocumentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_documents_id_recover_post_serialize(
+        _param = self._reconcile_document_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1109,10 +1454,12 @@ class DocumentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1DocumentsIdRecoverPost200Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '403': "ApiV1InvoiceSendPost400Response",
-            '404': "ApiV1InvoiceSendPost400Response",
+            '200': "ReconcileDocument200Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '404': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1126,7 +1473,7 @@ class DocumentsApi:
 
 
     @validate_call
-    def api_v1_documents_id_recover_post_without_preload_content(
+    def reconcile_document_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -1170,7 +1517,7 @@ class DocumentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_documents_id_recover_post_serialize(
+        _param = self._reconcile_document_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1179,10 +1526,12 @@ class DocumentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1DocumentsIdRecoverPost200Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '403': "ApiV1InvoiceSendPost400Response",
-            '404': "ApiV1InvoiceSendPost400Response",
+            '200': "ReconcileDocument200Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '404': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1191,7 +1540,7 @@ class DocumentsApi:
         return response_data.response
 
 
-    def _api_v1_documents_id_recover_post_serialize(
+    def _reconcile_document_serialize(
         self,
         id,
         _request_auth,
@@ -1234,6 +1583,7 @@ class DocumentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -1255,7 +1605,7 @@ class DocumentsApi:
 
 
     @validate_call
-    def api_v1_documents_id_retry_post(
+    def retry_document(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -1270,7 +1620,7 @@ class DocumentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1DocumentsIdRetryPost202Response:
+    ) -> RetryDocument202Response:
         """Re-encolar un documento fallido
 
         Útil cuando un documento quedó en estado COLA_FALLIDA tras agotar los reintentos automáticos.
@@ -1299,7 +1649,7 @@ class DocumentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_documents_id_retry_post_serialize(
+        _param = self._retry_document_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1308,8 +1658,11 @@ class DocumentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1DocumentsIdRetryPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "RetryDocument202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1323,7 +1676,7 @@ class DocumentsApi:
 
 
     @validate_call
-    def api_v1_documents_id_retry_post_with_http_info(
+    def retry_document_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -1338,7 +1691,7 @@ class DocumentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1DocumentsIdRetryPost202Response]:
+    ) -> ApiResponse[RetryDocument202Response]:
         """Re-encolar un documento fallido
 
         Útil cuando un documento quedó en estado COLA_FALLIDA tras agotar los reintentos automáticos.
@@ -1367,7 +1720,7 @@ class DocumentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_documents_id_retry_post_serialize(
+        _param = self._retry_document_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1376,8 +1729,11 @@ class DocumentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1DocumentsIdRetryPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "RetryDocument202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1391,7 +1747,7 @@ class DocumentsApi:
 
 
     @validate_call
-    def api_v1_documents_id_retry_post_without_preload_content(
+    def retry_document_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -1435,7 +1791,7 @@ class DocumentsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_documents_id_retry_post_serialize(
+        _param = self._retry_document_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1444,8 +1800,11 @@ class DocumentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1DocumentsIdRetryPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "RetryDocument202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1454,7 +1813,7 @@ class DocumentsApi:
         return response_data.response
 
 
-    def _api_v1_documents_id_retry_post_serialize(
+    def _retry_document_serialize(
         self,
         id,
         _request_auth,
@@ -1497,310 +1856,12 @@ class DocumentsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/api/v1/documents/{id}/retry',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def api_v1_documents_next_correlativo_get(
-        self,
-        company_ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
-        tipo_doc: Annotated[str, Field(min_length=1, strict=True, max_length=2)],
-        serie: Annotated[str, Field(min_length=4, strict=True, max_length=4)],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1DocumentsNextCorrelativoGet200Response:
-        """Obtener el siguiente correlativo disponible para una serie
-
-        Busca el correlativo más alto existente para la combinación empresa+tipoDoc+serie y retorna el siguiente. Útil para auto-numeración.
-
-        :param company_ruc: (required)
-        :type company_ruc: str
-        :param tipo_doc: (required)
-        :type tipo_doc: str
-        :param serie: (required)
-        :type serie: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_documents_next_correlativo_get_serialize(
-            company_ruc=company_ruc,
-            tipo_doc=tipo_doc,
-            serie=serie,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1DocumentsNextCorrelativoGet200Response",
-            '404': "ApiV1InvoiceSendPost400Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def api_v1_documents_next_correlativo_get_with_http_info(
-        self,
-        company_ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
-        tipo_doc: Annotated[str, Field(min_length=1, strict=True, max_length=2)],
-        serie: Annotated[str, Field(min_length=4, strict=True, max_length=4)],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1DocumentsNextCorrelativoGet200Response]:
-        """Obtener el siguiente correlativo disponible para una serie
-
-        Busca el correlativo más alto existente para la combinación empresa+tipoDoc+serie y retorna el siguiente. Útil para auto-numeración.
-
-        :param company_ruc: (required)
-        :type company_ruc: str
-        :param tipo_doc: (required)
-        :type tipo_doc: str
-        :param serie: (required)
-        :type serie: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_documents_next_correlativo_get_serialize(
-            company_ruc=company_ruc,
-            tipo_doc=tipo_doc,
-            serie=serie,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1DocumentsNextCorrelativoGet200Response",
-            '404': "ApiV1InvoiceSendPost400Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def api_v1_documents_next_correlativo_get_without_preload_content(
-        self,
-        company_ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)],
-        tipo_doc: Annotated[str, Field(min_length=1, strict=True, max_length=2)],
-        serie: Annotated[str, Field(min_length=4, strict=True, max_length=4)],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Obtener el siguiente correlativo disponible para una serie
-
-        Busca el correlativo más alto existente para la combinación empresa+tipoDoc+serie y retorna el siguiente. Útil para auto-numeración.
-
-        :param company_ruc: (required)
-        :type company_ruc: str
-        :param tipo_doc: (required)
-        :type tipo_doc: str
-        :param serie: (required)
-        :type serie: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_documents_next_correlativo_get_serialize(
-            company_ruc=company_ruc,
-            tipo_doc=tipo_doc,
-            serie=serie,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1DocumentsNextCorrelativoGet200Response",
-            '404': "ApiV1InvoiceSendPost400Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _api_v1_documents_next_correlativo_get_serialize(
-        self,
-        company_ruc,
-        tipo_doc,
-        serie,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if company_ruc is not None:
-            
-            _query_params.append(('companyRuc', company_ruc))
-            
-        if tipo_doc is not None:
-            
-            _query_params.append(('tipoDoc', tipo_doc))
-            
-        if serie is not None:
-            
-            _query_params.append(('serie', serie))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/api/v1/documents/next-correlativo',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

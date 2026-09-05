@@ -17,8 +17,8 @@ from typing_extensions import Annotated
 
 from pydantic import field_validator
 from uuid import UUID
-from intifact_sdk.models.api_v1_companies_id_branches_branch_id_put_request import ApiV1CompaniesIdBranchesBranchIdPutRequest
-from intifact_sdk.models.api_v1_companies_id_branches_post_request import ApiV1CompaniesIdBranchesPostRequest
+from intifact_sdk.models.create_branch_request import CreateBranchRequest
+from intifact_sdk.models.update_branch_request import UpdateBranchRequest
 
 from intifact_sdk.api_client import ApiClient, RequestSerialized
 from intifact_sdk.api_response import ApiResponse
@@ -39,7 +39,302 @@ class BranchesApi:
 
 
     @validate_call
-    def api_v1_companies_id_branches_branch_id_delete(
+    def create_branch(
+        self,
+        id: UUID,
+        create_branch_request: CreateBranchRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Crear establecimiento (sucursal)
+
+        El código debe coincidir con el que SUNAT asignó a la sucursal al registrarla en el portal SOL (Mis Trámites > Establecimientos Anexos).
+
+        :param id: (required)
+        :type id: UUID
+        :param create_branch_request: (required)
+        :type create_branch_request: CreateBranchRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_branch_serialize(
+            id=id,
+            create_branch_request=create_branch_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def create_branch_with_http_info(
+        self,
+        id: UUID,
+        create_branch_request: CreateBranchRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Crear establecimiento (sucursal)
+
+        El código debe coincidir con el que SUNAT asignó a la sucursal al registrarla en el portal SOL (Mis Trámites > Establecimientos Anexos).
+
+        :param id: (required)
+        :type id: UUID
+        :param create_branch_request: (required)
+        :type create_branch_request: CreateBranchRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_branch_serialize(
+            id=id,
+            create_branch_request=create_branch_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def create_branch_without_preload_content(
+        self,
+        id: UUID,
+        create_branch_request: CreateBranchRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Crear establecimiento (sucursal)
+
+        El código debe coincidir con el que SUNAT asignó a la sucursal al registrarla en el portal SOL (Mis Trámites > Establecimientos Anexos).
+
+        :param id: (required)
+        :type id: UUID
+        :param create_branch_request: (required)
+        :type create_branch_request: CreateBranchRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_branch_serialize(
+            id=id,
+            create_branch_request=create_branch_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _create_branch_serialize(
+        self,
+        id,
+        create_branch_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_branch_request is not None:
+            _body_params = create_branch_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/v1/companies/{id}/branches',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def deactivate_branch(
         self,
         id: UUID,
         branch_id: UUID,
@@ -86,7 +381,7 @@ class BranchesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_branches_branch_id_delete_serialize(
+        _param = self._deactivate_branch_serialize(
             id=id,
             branch_id=branch_id,
             _request_auth=_request_auth,
@@ -96,7 +391,9 @@ class BranchesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -110,7 +407,7 @@ class BranchesApi:
 
 
     @validate_call
-    def api_v1_companies_id_branches_branch_id_delete_with_http_info(
+    def deactivate_branch_with_http_info(
         self,
         id: UUID,
         branch_id: UUID,
@@ -157,7 +454,7 @@ class BranchesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_branches_branch_id_delete_serialize(
+        _param = self._deactivate_branch_serialize(
             id=id,
             branch_id=branch_id,
             _request_auth=_request_auth,
@@ -167,7 +464,9 @@ class BranchesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -181,7 +480,7 @@ class BranchesApi:
 
 
     @validate_call
-    def api_v1_companies_id_branches_branch_id_delete_without_preload_content(
+    def deactivate_branch_without_preload_content(
         self,
         id: UUID,
         branch_id: UUID,
@@ -228,7 +527,7 @@ class BranchesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_branches_branch_id_delete_serialize(
+        _param = self._deactivate_branch_serialize(
             id=id,
             branch_id=branch_id,
             _request_auth=_request_auth,
@@ -238,7 +537,9 @@ class BranchesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -247,7 +548,7 @@ class BranchesApi:
         return response_data.response
 
 
-    def _api_v1_companies_id_branches_branch_id_delete_serialize(
+    def _deactivate_branch_serialize(
         self,
         id,
         branch_id,
@@ -282,10 +583,18 @@ class BranchesApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -307,11 +616,275 @@ class BranchesApi:
 
 
     @validate_call
-    def api_v1_companies_id_branches_branch_id_put(
+    def list_branches(
+        self,
+        id: UUID,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Listar establecimientos (sucursales) de una empresa
+
+
+        :param id: (required)
+        :type id: UUID
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_branches_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def list_branches_with_http_info(
+        self,
+        id: UUID,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Listar establecimientos (sucursales) de una empresa
+
+
+        :param id: (required)
+        :type id: UUID
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_branches_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def list_branches_without_preload_content(
+        self,
+        id: UUID,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Listar establecimientos (sucursales) de una empresa
+
+
+        :param id: (required)
+        :type id: UUID
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_branches_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_branches_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v1/companies/{id}/branches',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_branch(
         self,
         id: UUID,
         branch_id: UUID,
-        api_v1_companies_id_branches_branch_id_put_request: ApiV1CompaniesIdBranchesBranchIdPutRequest,
+        update_branch_request: UpdateBranchRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -332,8 +905,8 @@ class BranchesApi:
         :type id: UUID
         :param branch_id: (required)
         :type branch_id: UUID
-        :param api_v1_companies_id_branches_branch_id_put_request: (required)
-        :type api_v1_companies_id_branches_branch_id_put_request: ApiV1CompaniesIdBranchesBranchIdPutRequest
+        :param update_branch_request: (required)
+        :type update_branch_request: UpdateBranchRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -356,10 +929,10 @@ class BranchesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_branches_branch_id_put_serialize(
+        _param = self._update_branch_serialize(
             id=id,
             branch_id=branch_id,
-            api_v1_companies_id_branches_branch_id_put_request=api_v1_companies_id_branches_branch_id_put_request,
+            update_branch_request=update_branch_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -367,7 +940,9 @@ class BranchesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -381,11 +956,11 @@ class BranchesApi:
 
 
     @validate_call
-    def api_v1_companies_id_branches_branch_id_put_with_http_info(
+    def update_branch_with_http_info(
         self,
         id: UUID,
         branch_id: UUID,
-        api_v1_companies_id_branches_branch_id_put_request: ApiV1CompaniesIdBranchesBranchIdPutRequest,
+        update_branch_request: UpdateBranchRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -406,8 +981,8 @@ class BranchesApi:
         :type id: UUID
         :param branch_id: (required)
         :type branch_id: UUID
-        :param api_v1_companies_id_branches_branch_id_put_request: (required)
-        :type api_v1_companies_id_branches_branch_id_put_request: ApiV1CompaniesIdBranchesBranchIdPutRequest
+        :param update_branch_request: (required)
+        :type update_branch_request: UpdateBranchRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -430,10 +1005,10 @@ class BranchesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_branches_branch_id_put_serialize(
+        _param = self._update_branch_serialize(
             id=id,
             branch_id=branch_id,
-            api_v1_companies_id_branches_branch_id_put_request=api_v1_companies_id_branches_branch_id_put_request,
+            update_branch_request=update_branch_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -441,7 +1016,9 @@ class BranchesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -455,11 +1032,11 @@ class BranchesApi:
 
 
     @validate_call
-    def api_v1_companies_id_branches_branch_id_put_without_preload_content(
+    def update_branch_without_preload_content(
         self,
         id: UUID,
         branch_id: UUID,
-        api_v1_companies_id_branches_branch_id_put_request: ApiV1CompaniesIdBranchesBranchIdPutRequest,
+        update_branch_request: UpdateBranchRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -480,8 +1057,8 @@ class BranchesApi:
         :type id: UUID
         :param branch_id: (required)
         :type branch_id: UUID
-        :param api_v1_companies_id_branches_branch_id_put_request: (required)
-        :type api_v1_companies_id_branches_branch_id_put_request: ApiV1CompaniesIdBranchesBranchIdPutRequest
+        :param update_branch_request: (required)
+        :type update_branch_request: UpdateBranchRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -504,10 +1081,10 @@ class BranchesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_companies_id_branches_branch_id_put_serialize(
+        _param = self._update_branch_serialize(
             id=id,
             branch_id=branch_id,
-            api_v1_companies_id_branches_branch_id_put_request=api_v1_companies_id_branches_branch_id_put_request,
+            update_branch_request=update_branch_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -515,7 +1092,9 @@ class BranchesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -524,11 +1103,11 @@ class BranchesApi:
         return response_data.response
 
 
-    def _api_v1_companies_id_branches_branch_id_put_serialize(
+    def _update_branch_serialize(
         self,
         id,
         branch_id,
-        api_v1_companies_id_branches_branch_id_put_request,
+        update_branch_request,
         _request_auth,
         _content_type,
         _headers,
@@ -558,10 +1137,17 @@ class BranchesApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_companies_id_branches_branch_id_put_request is not None:
-            _body_params = api_v1_companies_id_branches_branch_id_put_request
+        if update_branch_request is not None:
+            _body_params = update_branch_request
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -579,542 +1165,12 @@ class BranchesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/api/v1/companies/{id}/branches/{branchId}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def api_v1_companies_id_branches_get(
-        self,
-        id: UUID,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Listar establecimientos (sucursales) de una empresa
-
-
-        :param id: (required)
-        :type id: UUID
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_companies_id_branches_get_serialize(
-            id=id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def api_v1_companies_id_branches_get_with_http_info(
-        self,
-        id: UUID,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Listar establecimientos (sucursales) de una empresa
-
-
-        :param id: (required)
-        :type id: UUID
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_companies_id_branches_get_serialize(
-            id=id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def api_v1_companies_id_branches_get_without_preload_content(
-        self,
-        id: UUID,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Listar establecimientos (sucursales) de una empresa
-
-
-        :param id: (required)
-        :type id: UUID
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_companies_id_branches_get_serialize(
-            id=id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _api_v1_companies_id_branches_get_serialize(
-        self,
-        id,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if id is not None:
-            _path_params['id'] = id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/api/v1/companies/{id}/branches',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def api_v1_companies_id_branches_post(
-        self,
-        id: UUID,
-        api_v1_companies_id_branches_post_request: ApiV1CompaniesIdBranchesPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Crear establecimiento (sucursal)
-
-        El código debe coincidir con el que SUNAT asignó a la sucursal al registrarla en el portal SOL (Mis Trámites > Establecimientos Anexos).
-
-        :param id: (required)
-        :type id: UUID
-        :param api_v1_companies_id_branches_post_request: (required)
-        :type api_v1_companies_id_branches_post_request: ApiV1CompaniesIdBranchesPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_companies_id_branches_post_serialize(
-            id=id,
-            api_v1_companies_id_branches_post_request=api_v1_companies_id_branches_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def api_v1_companies_id_branches_post_with_http_info(
-        self,
-        id: UUID,
-        api_v1_companies_id_branches_post_request: ApiV1CompaniesIdBranchesPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Crear establecimiento (sucursal)
-
-        El código debe coincidir con el que SUNAT asignó a la sucursal al registrarla en el portal SOL (Mis Trámites > Establecimientos Anexos).
-
-        :param id: (required)
-        :type id: UUID
-        :param api_v1_companies_id_branches_post_request: (required)
-        :type api_v1_companies_id_branches_post_request: ApiV1CompaniesIdBranchesPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_companies_id_branches_post_serialize(
-            id=id,
-            api_v1_companies_id_branches_post_request=api_v1_companies_id_branches_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def api_v1_companies_id_branches_post_without_preload_content(
-        self,
-        id: UUID,
-        api_v1_companies_id_branches_post_request: ApiV1CompaniesIdBranchesPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Crear establecimiento (sucursal)
-
-        El código debe coincidir con el que SUNAT asignó a la sucursal al registrarla en el portal SOL (Mis Trámites > Establecimientos Anexos).
-
-        :param id: (required)
-        :type id: UUID
-        :param api_v1_companies_id_branches_post_request: (required)
-        :type api_v1_companies_id_branches_post_request: ApiV1CompaniesIdBranchesPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_companies_id_branches_post_serialize(
-            id=id,
-            api_v1_companies_id_branches_post_request=api_v1_companies_id_branches_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _api_v1_companies_id_branches_post_serialize(
-        self,
-        id,
-        api_v1_companies_id_branches_post_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if id is not None:
-            _path_params['id'] = id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if api_v1_companies_id_branches_post_request is not None:
-            _body_params = api_v1_companies_id_branches_post_request
-
-
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/api/v1/companies/{id}/branches',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -18,11 +18,11 @@ from typing_extensions import Annotated
 from pydantic import StrictStr, field_validator
 from typing import Optional
 from uuid import UUID
-from intifact_sdk.models.api_v1_despatch_send_multi_post202_response import ApiV1DespatchSendMultiPost202Response
-from intifact_sdk.models.api_v1_despatch_send_multi_post_request import ApiV1DespatchSendMultiPostRequest
-from intifact_sdk.models.api_v1_despatch_send_post_request import ApiV1DespatchSendPostRequest
-from intifact_sdk.models.api_v1_despatch_transportista_send_post_request import ApiV1DespatchTransportistaSendPostRequest
-from intifact_sdk.models.api_v1_note_send_post202_response import ApiV1NoteSendPost202Response
+from intifact_sdk.models.send_despatch_multi202_response import SendDespatchMulti202Response
+from intifact_sdk.models.send_despatch_multi_request import SendDespatchMultiRequest
+from intifact_sdk.models.send_despatch_request import SendDespatchRequest
+from intifact_sdk.models.send_despatch_transportista_request import SendDespatchTransportistaRequest
+from intifact_sdk.models.send_invoice202_response import SendInvoice202Response
 
 from intifact_sdk.api_client import ApiClient, RequestSerialized
 from intifact_sdk.api_response import ApiResponse
@@ -43,7 +43,7 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_id_cdr_get(
+    def get_despatch_cdr(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -86,7 +86,7 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_id_cdr_get_serialize(
+        _param = self._get_despatch_cdr_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -95,7 +95,9 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -109,7 +111,7 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_id_cdr_get_with_http_info(
+    def get_despatch_cdr_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -152,7 +154,7 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_id_cdr_get_serialize(
+        _param = self._get_despatch_cdr_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -161,7 +163,9 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -175,7 +179,7 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_id_cdr_get_without_preload_content(
+    def get_despatch_cdr_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -218,7 +222,7 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_id_cdr_get_serialize(
+        _param = self._get_despatch_cdr_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -227,7 +231,9 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -236,7 +242,7 @@ class DespatchApi:
         return response_data.response
 
 
-    def _api_v1_despatch_id_cdr_get_serialize(
+    def _get_despatch_cdr_serialize(
         self,
         id,
         _request_auth,
@@ -268,10 +274,18 @@ class DespatchApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -293,7 +307,7 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_id_pdf_get(
+    def get_despatch_pdf(
         self,
         id: UUID,
         format: Optional[StrictStr] = None,
@@ -339,7 +353,7 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_id_pdf_get_serialize(
+        _param = self._get_despatch_pdf_serialize(
             id=id,
             format=format,
             _request_auth=_request_auth,
@@ -349,7 +363,9 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -363,7 +379,7 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_id_pdf_get_with_http_info(
+    def get_despatch_pdf_with_http_info(
         self,
         id: UUID,
         format: Optional[StrictStr] = None,
@@ -409,7 +425,7 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_id_pdf_get_serialize(
+        _param = self._get_despatch_pdf_serialize(
             id=id,
             format=format,
             _request_auth=_request_auth,
@@ -419,7 +435,9 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -433,7 +451,7 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_id_pdf_get_without_preload_content(
+    def get_despatch_pdf_without_preload_content(
         self,
         id: UUID,
         format: Optional[StrictStr] = None,
@@ -479,7 +497,7 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_id_pdf_get_serialize(
+        _param = self._get_despatch_pdf_serialize(
             id=id,
             format=format,
             _request_auth=_request_auth,
@@ -489,7 +507,9 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -498,7 +518,7 @@ class DespatchApi:
         return response_data.response
 
 
-    def _api_v1_despatch_id_pdf_get_serialize(
+    def _get_despatch_pdf_serialize(
         self,
         id,
         format,
@@ -535,10 +555,18 @@ class DespatchApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -560,7 +588,7 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_id_xml_get(
+    def get_despatch_xml(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -603,7 +631,7 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_id_xml_get_serialize(
+        _param = self._get_despatch_xml_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -612,7 +640,9 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -626,7 +656,7 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_id_xml_get_with_http_info(
+    def get_despatch_xml_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -669,7 +699,7 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_id_xml_get_serialize(
+        _param = self._get_despatch_xml_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -678,7 +708,9 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -692,7 +724,7 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_id_xml_get_without_preload_content(
+    def get_despatch_xml_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -735,7 +767,7 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_id_xml_get_serialize(
+        _param = self._get_despatch_xml_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -744,7 +776,9 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -753,7 +787,7 @@ class DespatchApi:
         return response_data.response
 
 
-    def _api_v1_despatch_id_xml_get_serialize(
+    def _get_despatch_xml_serialize(
         self,
         id,
         _request_auth,
@@ -785,10 +819,18 @@ class DespatchApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -810,9 +852,9 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_send_multi_post(
+    def send_despatch(
         self,
-        api_v1_despatch_send_multi_post_request: ApiV1DespatchSendMultiPostRequest,
+        send_despatch_request: SendDespatchRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -825,13 +867,13 @@ class DespatchApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1DespatchSendMultiPost202Response:
-        """Enviar múltiples guías de remisión por destino
+    ) -> SendInvoice202Response:
+        """Enviar guía de remisión (09) via API GRE REST
 
-        Recibe datos comunes de transporte + array de destinos. Genera una guía por cada destino con correlativo auto-asignado. Cada guía se encola independientemente para envío a SUNAT GRE.
+        Genera XML UBL 2.1, firma y encola. El worker obtiene token OAuth2, envía a SUNAT GRE, guarda ticket y luego hace polling de getStatus. Idempotente por (RUC emisor, tipoDoc, serie, correlativo): reenviar el mismo comprobante NO lo duplica. Si ya fue aceptado devuelve el mismo id y hash sin reenviar nada a SUNAT; si sigue en proceso responde 409 (esperá el resultado, no cambies el correlativo). Solo un RECHAZADO exige un correlativo nuevo.
 
-        :param api_v1_despatch_send_multi_post_request: (required)
-        :type api_v1_despatch_send_multi_post_request: ApiV1DespatchSendMultiPostRequest
+        :param send_despatch_request: (required)
+        :type send_despatch_request: SendDespatchRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -854,8 +896,8 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_send_multi_post_serialize(
-            api_v1_despatch_send_multi_post_request=api_v1_despatch_send_multi_post_request,
+        _param = self._send_despatch_serialize(
+            send_despatch_request=send_despatch_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -863,8 +905,12 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1DespatchSendMultiPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "SendInvoice202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '409': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -878,9 +924,9 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_send_multi_post_with_http_info(
+    def send_despatch_with_http_info(
         self,
-        api_v1_despatch_send_multi_post_request: ApiV1DespatchSendMultiPostRequest,
+        send_despatch_request: SendDespatchRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -893,13 +939,13 @@ class DespatchApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1DespatchSendMultiPost202Response]:
-        """Enviar múltiples guías de remisión por destino
+    ) -> ApiResponse[SendInvoice202Response]:
+        """Enviar guía de remisión (09) via API GRE REST
 
-        Recibe datos comunes de transporte + array de destinos. Genera una guía por cada destino con correlativo auto-asignado. Cada guía se encola independientemente para envío a SUNAT GRE.
+        Genera XML UBL 2.1, firma y encola. El worker obtiene token OAuth2, envía a SUNAT GRE, guarda ticket y luego hace polling de getStatus. Idempotente por (RUC emisor, tipoDoc, serie, correlativo): reenviar el mismo comprobante NO lo duplica. Si ya fue aceptado devuelve el mismo id y hash sin reenviar nada a SUNAT; si sigue en proceso responde 409 (esperá el resultado, no cambies el correlativo). Solo un RECHAZADO exige un correlativo nuevo.
 
-        :param api_v1_despatch_send_multi_post_request: (required)
-        :type api_v1_despatch_send_multi_post_request: ApiV1DespatchSendMultiPostRequest
+        :param send_despatch_request: (required)
+        :type send_despatch_request: SendDespatchRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -922,8 +968,8 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_send_multi_post_serialize(
-            api_v1_despatch_send_multi_post_request=api_v1_despatch_send_multi_post_request,
+        _param = self._send_despatch_serialize(
+            send_despatch_request=send_despatch_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -931,8 +977,12 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1DespatchSendMultiPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "SendInvoice202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '409': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -946,9 +996,9 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_send_multi_post_without_preload_content(
+    def send_despatch_without_preload_content(
         self,
-        api_v1_despatch_send_multi_post_request: ApiV1DespatchSendMultiPostRequest,
+        send_despatch_request: SendDespatchRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -962,12 +1012,12 @@ class DespatchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Enviar múltiples guías de remisión por destino
+        """Enviar guía de remisión (09) via API GRE REST
 
-        Recibe datos comunes de transporte + array de destinos. Genera una guía por cada destino con correlativo auto-asignado. Cada guía se encola independientemente para envío a SUNAT GRE.
+        Genera XML UBL 2.1, firma y encola. El worker obtiene token OAuth2, envía a SUNAT GRE, guarda ticket y luego hace polling de getStatus. Idempotente por (RUC emisor, tipoDoc, serie, correlativo): reenviar el mismo comprobante NO lo duplica. Si ya fue aceptado devuelve el mismo id y hash sin reenviar nada a SUNAT; si sigue en proceso responde 409 (esperá el resultado, no cambies el correlativo). Solo un RECHAZADO exige un correlativo nuevo.
 
-        :param api_v1_despatch_send_multi_post_request: (required)
-        :type api_v1_despatch_send_multi_post_request: ApiV1DespatchSendMultiPostRequest
+        :param send_despatch_request: (required)
+        :type send_despatch_request: SendDespatchRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -990,8 +1040,8 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_send_multi_post_serialize(
-            api_v1_despatch_send_multi_post_request=api_v1_despatch_send_multi_post_request,
+        _param = self._send_despatch_serialize(
+            send_despatch_request=send_despatch_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -999,8 +1049,12 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1DespatchSendMultiPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
+            '202': "SendInvoice202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '409': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1009,9 +1063,9 @@ class DespatchApi:
         return response_data.response
 
 
-    def _api_v1_despatch_send_multi_post_serialize(
+    def _send_despatch_serialize(
         self,
-        api_v1_despatch_send_multi_post_request,
+        send_despatch_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1037,8 +1091,8 @@ class DespatchApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_despatch_send_multi_post_request is not None:
-            _body_params = api_v1_despatch_send_multi_post_request
+        if send_despatch_request is not None:
+            _body_params = send_despatch_request
 
 
         # set the HTTP header `Accept`
@@ -1065,285 +1119,7 @@ class DespatchApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/api/v1/despatch/send-multi',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def api_v1_despatch_send_post(
-        self,
-        api_v1_despatch_send_post_request: ApiV1DespatchSendPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1NoteSendPost202Response:
-        """Enviar guía de remisión (09) via API GRE REST
-
-        Genera XML UBL 2.1, firma y encola. El worker obtiene token OAuth2, envía a SUNAT GRE, guarda ticket y luego hace polling de getStatus. Idempotente por (RUC emisor, tipoDoc, serie, correlativo): reenviar el mismo comprobante NO lo duplica. Si ya fue aceptado devuelve el mismo id y hash sin reenviar nada a SUNAT; si sigue en proceso responde 409 (esperá el resultado, no cambies el correlativo). Solo un RECHAZADO exige un correlativo nuevo.
-
-        :param api_v1_despatch_send_post_request: (required)
-        :type api_v1_despatch_send_post_request: ApiV1DespatchSendPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_despatch_send_post_serialize(
-            api_v1_despatch_send_post_request=api_v1_despatch_send_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1NoteSendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '409': "ApiV1InvoiceSendPost400Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def api_v1_despatch_send_post_with_http_info(
-        self,
-        api_v1_despatch_send_post_request: ApiV1DespatchSendPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1NoteSendPost202Response]:
-        """Enviar guía de remisión (09) via API GRE REST
-
-        Genera XML UBL 2.1, firma y encola. El worker obtiene token OAuth2, envía a SUNAT GRE, guarda ticket y luego hace polling de getStatus. Idempotente por (RUC emisor, tipoDoc, serie, correlativo): reenviar el mismo comprobante NO lo duplica. Si ya fue aceptado devuelve el mismo id y hash sin reenviar nada a SUNAT; si sigue en proceso responde 409 (esperá el resultado, no cambies el correlativo). Solo un RECHAZADO exige un correlativo nuevo.
-
-        :param api_v1_despatch_send_post_request: (required)
-        :type api_v1_despatch_send_post_request: ApiV1DespatchSendPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_despatch_send_post_serialize(
-            api_v1_despatch_send_post_request=api_v1_despatch_send_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1NoteSendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '409': "ApiV1InvoiceSendPost400Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def api_v1_despatch_send_post_without_preload_content(
-        self,
-        api_v1_despatch_send_post_request: ApiV1DespatchSendPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Enviar guía de remisión (09) via API GRE REST
-
-        Genera XML UBL 2.1, firma y encola. El worker obtiene token OAuth2, envía a SUNAT GRE, guarda ticket y luego hace polling de getStatus. Idempotente por (RUC emisor, tipoDoc, serie, correlativo): reenviar el mismo comprobante NO lo duplica. Si ya fue aceptado devuelve el mismo id y hash sin reenviar nada a SUNAT; si sigue en proceso responde 409 (esperá el resultado, no cambies el correlativo). Solo un RECHAZADO exige un correlativo nuevo.
-
-        :param api_v1_despatch_send_post_request: (required)
-        :type api_v1_despatch_send_post_request: ApiV1DespatchSendPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_despatch_send_post_serialize(
-            api_v1_despatch_send_post_request=api_v1_despatch_send_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1NoteSendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '409': "ApiV1InvoiceSendPost400Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _api_v1_despatch_send_post_serialize(
-        self,
-        api_v1_despatch_send_post_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if api_v1_despatch_send_post_request is not None:
-            _body_params = api_v1_despatch_send_post_request
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json'
-                ]
-            )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -1365,9 +1141,9 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_transportista_send_post(
+    def send_despatch_multi(
         self,
-        api_v1_despatch_transportista_send_post_request: ApiV1DespatchTransportistaSendPostRequest,
+        send_despatch_multi_request: SendDespatchMultiRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1380,13 +1156,13 @@ class DespatchApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1NoteSendPost202Response:
-        """Enviar guía de remisión TRANSPORTISTA (31) via API GRE REST
+    ) -> SendDespatchMulti202Response:
+        """Enviar múltiples guías de remisión por destino
 
-        Guía emitida por la empresa de transporte (emisor=transportista). Incluye remitente (dueño de los bienes) y destinatario. Genera XML UBL 2.1, firma y encola para envío a SUNAT GRE.
+        Recibe datos comunes de transporte + array de destinos. Genera una guía por cada destino con correlativo auto-asignado. Cada guía se encola independientemente para envío a SUNAT GRE.
 
-        :param api_v1_despatch_transportista_send_post_request: (required)
-        :type api_v1_despatch_transportista_send_post_request: ApiV1DespatchTransportistaSendPostRequest
+        :param send_despatch_multi_request: (required)
+        :type send_despatch_multi_request: SendDespatchMultiRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1409,8 +1185,8 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_transportista_send_post_serialize(
-            api_v1_despatch_transportista_send_post_request=api_v1_despatch_transportista_send_post_request,
+        _param = self._send_despatch_multi_serialize(
+            send_despatch_multi_request=send_despatch_multi_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1418,9 +1194,11 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1NoteSendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '409': "ApiV1InvoiceSendPost400Response",
+            '202': "SendDespatchMulti202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1434,9 +1212,9 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_transportista_send_post_with_http_info(
+    def send_despatch_multi_with_http_info(
         self,
-        api_v1_despatch_transportista_send_post_request: ApiV1DespatchTransportistaSendPostRequest,
+        send_despatch_multi_request: SendDespatchMultiRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1449,13 +1227,13 @@ class DespatchApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1NoteSendPost202Response]:
-        """Enviar guía de remisión TRANSPORTISTA (31) via API GRE REST
+    ) -> ApiResponse[SendDespatchMulti202Response]:
+        """Enviar múltiples guías de remisión por destino
 
-        Guía emitida por la empresa de transporte (emisor=transportista). Incluye remitente (dueño de los bienes) y destinatario. Genera XML UBL 2.1, firma y encola para envío a SUNAT GRE.
+        Recibe datos comunes de transporte + array de destinos. Genera una guía por cada destino con correlativo auto-asignado. Cada guía se encola independientemente para envío a SUNAT GRE.
 
-        :param api_v1_despatch_transportista_send_post_request: (required)
-        :type api_v1_despatch_transportista_send_post_request: ApiV1DespatchTransportistaSendPostRequest
+        :param send_despatch_multi_request: (required)
+        :type send_despatch_multi_request: SendDespatchMultiRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1478,8 +1256,8 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_transportista_send_post_serialize(
-            api_v1_despatch_transportista_send_post_request=api_v1_despatch_transportista_send_post_request,
+        _param = self._send_despatch_multi_serialize(
+            send_despatch_multi_request=send_despatch_multi_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1487,9 +1265,11 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1NoteSendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '409': "ApiV1InvoiceSendPost400Response",
+            '202': "SendDespatchMulti202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1503,9 +1283,9 @@ class DespatchApi:
 
 
     @validate_call
-    def api_v1_despatch_transportista_send_post_without_preload_content(
+    def send_despatch_multi_without_preload_content(
         self,
-        api_v1_despatch_transportista_send_post_request: ApiV1DespatchTransportistaSendPostRequest,
+        send_despatch_multi_request: SendDespatchMultiRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1519,12 +1299,12 @@ class DespatchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Enviar guía de remisión TRANSPORTISTA (31) via API GRE REST
+        """Enviar múltiples guías de remisión por destino
 
-        Guía emitida por la empresa de transporte (emisor=transportista). Incluye remitente (dueño de los bienes) y destinatario. Genera XML UBL 2.1, firma y encola para envío a SUNAT GRE.
+        Recibe datos comunes de transporte + array de destinos. Genera una guía por cada destino con correlativo auto-asignado. Cada guía se encola independientemente para envío a SUNAT GRE.
 
-        :param api_v1_despatch_transportista_send_post_request: (required)
-        :type api_v1_despatch_transportista_send_post_request: ApiV1DespatchTransportistaSendPostRequest
+        :param send_despatch_multi_request: (required)
+        :type send_despatch_multi_request: SendDespatchMultiRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1547,8 +1327,8 @@ class DespatchApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_despatch_transportista_send_post_serialize(
-            api_v1_despatch_transportista_send_post_request=api_v1_despatch_transportista_send_post_request,
+        _param = self._send_despatch_multi_serialize(
+            send_despatch_multi_request=send_despatch_multi_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1556,9 +1336,11 @@ class DespatchApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1NoteSendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '409': "ApiV1InvoiceSendPost400Response",
+            '202': "SendDespatchMulti202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1567,9 +1349,9 @@ class DespatchApi:
         return response_data.response
 
 
-    def _api_v1_despatch_transportista_send_post_serialize(
+    def _send_despatch_multi_serialize(
         self,
-        api_v1_despatch_transportista_send_post_request,
+        send_despatch_multi_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1595,8 +1377,8 @@ class DespatchApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_despatch_transportista_send_post_request is not None:
-            _body_params = api_v1_despatch_transportista_send_post_request
+        if send_despatch_multi_request is not None:
+            _body_params = send_despatch_multi_request
 
 
         # set the HTTP header `Accept`
@@ -1623,6 +1405,296 @@ class DespatchApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/api/v1/despatch/send-multi',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def send_despatch_transportista(
+        self,
+        send_despatch_transportista_request: SendDespatchTransportistaRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> SendInvoice202Response:
+        """Enviar guía de remisión TRANSPORTISTA (31) via API GRE REST
+
+        Guía emitida por la empresa de transporte (emisor=transportista). Incluye remitente (dueño de los bienes) y destinatario. Genera XML UBL 2.1, firma y encola para envío a SUNAT GRE.
+
+        :param send_despatch_transportista_request: (required)
+        :type send_despatch_transportista_request: SendDespatchTransportistaRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_despatch_transportista_serialize(
+            send_despatch_transportista_request=send_despatch_transportista_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '202': "SendInvoice202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '409': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def send_despatch_transportista_with_http_info(
+        self,
+        send_despatch_transportista_request: SendDespatchTransportistaRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[SendInvoice202Response]:
+        """Enviar guía de remisión TRANSPORTISTA (31) via API GRE REST
+
+        Guía emitida por la empresa de transporte (emisor=transportista). Incluye remitente (dueño de los bienes) y destinatario. Genera XML UBL 2.1, firma y encola para envío a SUNAT GRE.
+
+        :param send_despatch_transportista_request: (required)
+        :type send_despatch_transportista_request: SendDespatchTransportistaRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_despatch_transportista_serialize(
+            send_despatch_transportista_request=send_despatch_transportista_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '202': "SendInvoice202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '409': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def send_despatch_transportista_without_preload_content(
+        self,
+        send_despatch_transportista_request: SendDespatchTransportistaRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Enviar guía de remisión TRANSPORTISTA (31) via API GRE REST
+
+        Guía emitida por la empresa de transporte (emisor=transportista). Incluye remitente (dueño de los bienes) y destinatario. Genera XML UBL 2.1, firma y encola para envío a SUNAT GRE.
+
+        :param send_despatch_transportista_request: (required)
+        :type send_despatch_transportista_request: SendDespatchTransportistaRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._send_despatch_transportista_serialize(
+            send_despatch_transportista_request=send_despatch_transportista_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '202': "SendInvoice202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '409': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _send_despatch_transportista_serialize(
+        self,
+        send_despatch_transportista_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if send_despatch_transportista_request is not None:
+            _body_params = send_despatch_transportista_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(

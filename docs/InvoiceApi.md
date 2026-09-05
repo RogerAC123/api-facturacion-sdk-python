@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost:3000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api_v1_invoice_compute_post**](InvoiceApi.md#api_v1_invoice_compute_post) | **POST** /api/v1/invoice/compute | Calcular importes (IGV, descuentos, totales) sin emitir
-[**api_v1_invoice_id_cdr_get**](InvoiceApi.md#api_v1_invoice_id_cdr_get) | **GET** /api/v1/invoice/{id}/cdr | Descargar CDR (constancia de SUNAT)
-[**api_v1_invoice_id_pdf_get**](InvoiceApi.md#api_v1_invoice_id_pdf_get) | **GET** /api/v1/invoice/{id}/pdf | Obtener PDF (A4 oficina, ticket 80mm o ticket 58mm POS)
-[**api_v1_invoice_id_xml_get**](InvoiceApi.md#api_v1_invoice_id_xml_get) | **GET** /api/v1/invoice/{id}/xml | Descargar XML firmado
-[**api_v1_invoice_send_post**](InvoiceApi.md#api_v1_invoice_send_post) | **POST** /api/v1/invoice/send | Enviar factura (01) o boleta (03) a SUNAT
+[**compute_invoice**](InvoiceApi.md#compute_invoice) | **POST** /api/v1/invoice/compute | Calcular importes (IGV, descuentos, totales) sin emitir
+[**get_invoice_cdr**](InvoiceApi.md#get_invoice_cdr) | **GET** /api/v1/invoice/{id}/cdr | Descargar CDR (constancia de SUNAT)
+[**get_invoice_pdf**](InvoiceApi.md#get_invoice_pdf) | **GET** /api/v1/invoice/{id}/pdf | Obtener PDF (A4 oficina, ticket 80mm o ticket 58mm POS)
+[**get_invoice_xml**](InvoiceApi.md#get_invoice_xml) | **GET** /api/v1/invoice/{id}/xml | Descargar XML firmado
+[**send_invoice**](InvoiceApi.md#send_invoice) | **POST** /api/v1/invoice/send | Enviar factura (01) o boleta (03) a SUNAT
 
 
-# **api_v1_invoice_compute_post**
-> ApiV1InvoiceComputePost200Response api_v1_invoice_compute_post(api_v1_invoice_compute_post_request)
+# **compute_invoice**
+> ComputeInvoice200Response compute_invoice(compute_invoice_request)
 
 Calcular importes (IGV, descuentos, totales) sin emitir
 
@@ -20,11 +20,12 @@ Motor de cálculo: recibe ítems crudos (cantidad, valorUnitario sin IGV, afecta
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_invoice_compute_post200_response import ApiV1InvoiceComputePost200Response
-from intifact_sdk.models.api_v1_invoice_compute_post_request import ApiV1InvoiceComputePostRequest
+from intifact_sdk.models.compute_invoice200_response import ComputeInvoice200Response
+from intifact_sdk.models.compute_invoice_request import ComputeInvoiceRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -34,20 +35,29 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.InvoiceApi(api_client)
-    api_v1_invoice_compute_post_request = intifact_sdk.ApiV1InvoiceComputePostRequest() # ApiV1InvoiceComputePostRequest | 
+    compute_invoice_request = intifact_sdk.ComputeInvoiceRequest() # ComputeInvoiceRequest | 
 
     try:
         # Calcular importes (IGV, descuentos, totales) sin emitir
-        api_response = api_instance.api_v1_invoice_compute_post(api_v1_invoice_compute_post_request)
-        print("The response of InvoiceApi->api_v1_invoice_compute_post:\n")
+        api_response = api_instance.compute_invoice(compute_invoice_request)
+        print("The response of InvoiceApi->compute_invoice:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling InvoiceApi->api_v1_invoice_compute_post: %s\n" % e)
+        print("Exception when calling InvoiceApi->compute_invoice: %s\n" % e)
 ```
 
 
@@ -57,15 +67,15 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_v1_invoice_compute_post_request** | [**ApiV1InvoiceComputePostRequest**](ApiV1InvoiceComputePostRequest.md)|  | 
+ **compute_invoice_request** | [**ComputeInvoiceRequest**](ComputeInvoiceRequest.md)|  | 
 
 ### Return type
 
-[**ApiV1InvoiceComputePost200Response**](ApiV1InvoiceComputePost200Response.md)
+[**ComputeInvoice200Response**](ComputeInvoice200Response.md)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
@@ -77,16 +87,20 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_invoice_id_cdr_get**
-> api_v1_invoice_id_cdr_get(id)
+# **get_invoice_cdr**
+> get_invoice_cdr(id)
 
 Descargar CDR (constancia de SUNAT)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -99,6 +113,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -108,9 +131,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Descargar CDR (constancia de SUNAT)
-        api_instance.api_v1_invoice_id_cdr_get(id)
+        api_instance.get_invoice_cdr(id)
     except Exception as e:
-        print("Exception when calling InvoiceApi->api_v1_invoice_id_cdr_get: %s\n" % e)
+        print("Exception when calling InvoiceApi->get_invoice_cdr: %s\n" % e)
 ```
 
 
@@ -128,28 +151,31 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_invoice_id_pdf_get**
-> api_v1_invoice_id_pdf_get(id, format=format)
+# **get_invoice_pdf**
+> get_invoice_pdf(id, format=format)
 
 Obtener PDF (A4 oficina, ticket 80mm o ticket 58mm POS)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -162,6 +188,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -172,9 +207,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Obtener PDF (A4 oficina, ticket 80mm o ticket 58mm POS)
-        api_instance.api_v1_invoice_id_pdf_get(id, format=format)
+        api_instance.get_invoice_pdf(id, format=format)
     except Exception as e:
-        print("Exception when calling InvoiceApi->api_v1_invoice_id_pdf_get: %s\n" % e)
+        print("Exception when calling InvoiceApi->get_invoice_pdf: %s\n" % e)
 ```
 
 
@@ -193,28 +228,31 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_invoice_id_xml_get**
-> api_v1_invoice_id_xml_get(id)
+# **get_invoice_xml**
+> get_invoice_xml(id)
 
 Descargar XML firmado
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -227,6 +265,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -236,9 +283,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Descargar XML firmado
-        api_instance.api_v1_invoice_id_xml_get(id)
+        api_instance.get_invoice_xml(id)
     except Exception as e:
-        print("Exception when calling InvoiceApi->api_v1_invoice_id_xml_get: %s\n" % e)
+        print("Exception when calling InvoiceApi->get_invoice_xml: %s\n" % e)
 ```
 
 
@@ -256,23 +303,25 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_invoice_send_post**
-> ApiV1InvoiceSendPost202Response api_v1_invoice_send_post(api_v1_invoice_send_post_request)
+# **send_invoice**
+> SendInvoice202Response send_invoice(send_invoice_request)
 
 Enviar factura (01) o boleta (03) a SUNAT
 
@@ -280,11 +329,12 @@ Genera el XML UBL 2.1, lo firma digitalmente y lo encola para envío asíncrono 
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_invoice_send_post202_response import ApiV1InvoiceSendPost202Response
-from intifact_sdk.models.api_v1_invoice_send_post_request import ApiV1InvoiceSendPostRequest
+from intifact_sdk.models.send_invoice202_response import SendInvoice202Response
+from intifact_sdk.models.send_invoice_request import SendInvoiceRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -294,20 +344,29 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.InvoiceApi(api_client)
-    api_v1_invoice_send_post_request = intifact_sdk.ApiV1InvoiceSendPostRequest() # ApiV1InvoiceSendPostRequest | 
+    send_invoice_request = intifact_sdk.SendInvoiceRequest() # SendInvoiceRequest | 
 
     try:
         # Enviar factura (01) o boleta (03) a SUNAT
-        api_response = api_instance.api_v1_invoice_send_post(api_v1_invoice_send_post_request)
-        print("The response of InvoiceApi->api_v1_invoice_send_post:\n")
+        api_response = api_instance.send_invoice(send_invoice_request)
+        print("The response of InvoiceApi->send_invoice:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling InvoiceApi->api_v1_invoice_send_post: %s\n" % e)
+        print("Exception when calling InvoiceApi->send_invoice: %s\n" % e)
 ```
 
 
@@ -317,15 +376,15 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_v1_invoice_send_post_request** | [**ApiV1InvoiceSendPostRequest**](ApiV1InvoiceSendPostRequest.md)|  | 
+ **send_invoice_request** | [**SendInvoiceRequest**](SendInvoiceRequest.md)|  | 
 
 ### Return type
 
-[**ApiV1InvoiceSendPost202Response**](ApiV1InvoiceSendPost202Response.md)
+[**SendInvoice202Response**](SendInvoice202Response.md)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
@@ -338,7 +397,10 @@ No authorization required
 |-------------|-------------|------------------|
 **202** | Default Response |  -  |
 **400** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
 **409** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -4,15 +4,15 @@ All URIs are relative to *http://localhost:3000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api_v1_note_compute_post**](NoteApi.md#api_v1_note_compute_post) | **POST** /api/v1/note/compute | Calcular importes (IGV, descuentos, totales) sin emitir
-[**api_v1_note_id_cdr_get**](NoteApi.md#api_v1_note_id_cdr_get) | **GET** /api/v1/note/{id}/cdr | Descargar CDR (constancia de SUNAT)
-[**api_v1_note_id_pdf_get**](NoteApi.md#api_v1_note_id_pdf_get) | **GET** /api/v1/note/{id}/pdf | Obtener PDF de la nota
-[**api_v1_note_id_xml_get**](NoteApi.md#api_v1_note_id_xml_get) | **GET** /api/v1/note/{id}/xml | Descargar XML firmado
-[**api_v1_note_send_post**](NoteApi.md#api_v1_note_send_post) | **POST** /api/v1/note/send | Enviar nota de crédito (07) o débito (08) a SUNAT
+[**compute_note**](NoteApi.md#compute_note) | **POST** /api/v1/note/compute | Calcular importes (IGV, descuentos, totales) sin emitir
+[**get_note_cdr**](NoteApi.md#get_note_cdr) | **GET** /api/v1/note/{id}/cdr | Descargar CDR (constancia de SUNAT)
+[**get_note_pdf**](NoteApi.md#get_note_pdf) | **GET** /api/v1/note/{id}/pdf | Obtener PDF de la nota
+[**get_note_xml**](NoteApi.md#get_note_xml) | **GET** /api/v1/note/{id}/xml | Descargar XML firmado
+[**send_note**](NoteApi.md#send_note) | **POST** /api/v1/note/send | Enviar nota de crédito (07) o débito (08) a SUNAT
 
 
-# **api_v1_note_compute_post**
-> ApiV1InvoiceComputePost200Response api_v1_note_compute_post(api_v1_note_compute_post_request)
+# **compute_note**
+> ComputeInvoice200Response compute_note(compute_invoice_request)
 
 Calcular importes (IGV, descuentos, totales) sin emitir
 
@@ -20,11 +20,12 @@ Motor de cálculo para notas: recibe ítems crudos (cantidad, valorUnitario sin 
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_invoice_compute_post200_response import ApiV1InvoiceComputePost200Response
-from intifact_sdk.models.api_v1_note_compute_post_request import ApiV1NoteComputePostRequest
+from intifact_sdk.models.compute_invoice200_response import ComputeInvoice200Response
+from intifact_sdk.models.compute_invoice_request import ComputeInvoiceRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -34,20 +35,29 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.NoteApi(api_client)
-    api_v1_note_compute_post_request = intifact_sdk.ApiV1NoteComputePostRequest() # ApiV1NoteComputePostRequest | 
+    compute_invoice_request = intifact_sdk.ComputeInvoiceRequest() # ComputeInvoiceRequest | 
 
     try:
         # Calcular importes (IGV, descuentos, totales) sin emitir
-        api_response = api_instance.api_v1_note_compute_post(api_v1_note_compute_post_request)
-        print("The response of NoteApi->api_v1_note_compute_post:\n")
+        api_response = api_instance.compute_note(compute_invoice_request)
+        print("The response of NoteApi->compute_note:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling NoteApi->api_v1_note_compute_post: %s\n" % e)
+        print("Exception when calling NoteApi->compute_note: %s\n" % e)
 ```
 
 
@@ -57,15 +67,15 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_v1_note_compute_post_request** | [**ApiV1NoteComputePostRequest**](ApiV1NoteComputePostRequest.md)|  | 
+ **compute_invoice_request** | [**ComputeInvoiceRequest**](ComputeInvoiceRequest.md)|  | 
 
 ### Return type
 
-[**ApiV1InvoiceComputePost200Response**](ApiV1InvoiceComputePost200Response.md)
+[**ComputeInvoice200Response**](ComputeInvoice200Response.md)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
@@ -77,16 +87,20 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_note_id_cdr_get**
-> api_v1_note_id_cdr_get(id)
+# **get_note_cdr**
+> get_note_cdr(id)
 
 Descargar CDR (constancia de SUNAT)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -99,6 +113,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -108,9 +131,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Descargar CDR (constancia de SUNAT)
-        api_instance.api_v1_note_id_cdr_get(id)
+        api_instance.get_note_cdr(id)
     except Exception as e:
-        print("Exception when calling NoteApi->api_v1_note_id_cdr_get: %s\n" % e)
+        print("Exception when calling NoteApi->get_note_cdr: %s\n" % e)
 ```
 
 
@@ -128,28 +151,31 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_note_id_pdf_get**
-> api_v1_note_id_pdf_get(id)
+# **get_note_pdf**
+> get_note_pdf(id)
 
 Obtener PDF de la nota
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -162,6 +188,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -171,9 +206,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Obtener PDF de la nota
-        api_instance.api_v1_note_id_pdf_get(id)
+        api_instance.get_note_pdf(id)
     except Exception as e:
-        print("Exception when calling NoteApi->api_v1_note_id_pdf_get: %s\n" % e)
+        print("Exception when calling NoteApi->get_note_pdf: %s\n" % e)
 ```
 
 
@@ -191,28 +226,31 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_note_id_xml_get**
-> api_v1_note_id_xml_get(id)
+# **get_note_xml**
+> get_note_xml(id)
 
 Descargar XML firmado
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -225,6 +263,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -234,9 +281,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Descargar XML firmado
-        api_instance.api_v1_note_id_xml_get(id)
+        api_instance.get_note_xml(id)
     except Exception as e:
-        print("Exception when calling NoteApi->api_v1_note_id_xml_get: %s\n" % e)
+        print("Exception when calling NoteApi->get_note_xml: %s\n" % e)
 ```
 
 
@@ -254,23 +301,25 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_note_send_post**
-> ApiV1NoteSendPost202Response api_v1_note_send_post(api_v1_note_send_post_request)
+# **send_note**
+> SendInvoice202Response send_note(send_note_request)
 
 Enviar nota de crédito (07) o débito (08) a SUNAT
 
@@ -278,11 +327,12 @@ Genera XML UBL 2.1, firma y encola. Responde 202. Consultar GET /documents/{id} 
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_note_send_post202_response import ApiV1NoteSendPost202Response
-from intifact_sdk.models.api_v1_note_send_post_request import ApiV1NoteSendPostRequest
+from intifact_sdk.models.send_invoice202_response import SendInvoice202Response
+from intifact_sdk.models.send_note_request import SendNoteRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -292,20 +342,29 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.NoteApi(api_client)
-    api_v1_note_send_post_request = intifact_sdk.ApiV1NoteSendPostRequest() # ApiV1NoteSendPostRequest | 
+    send_note_request = intifact_sdk.SendNoteRequest() # SendNoteRequest | 
 
     try:
         # Enviar nota de crédito (07) o débito (08) a SUNAT
-        api_response = api_instance.api_v1_note_send_post(api_v1_note_send_post_request)
-        print("The response of NoteApi->api_v1_note_send_post:\n")
+        api_response = api_instance.send_note(send_note_request)
+        print("The response of NoteApi->send_note:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling NoteApi->api_v1_note_send_post: %s\n" % e)
+        print("Exception when calling NoteApi->send_note: %s\n" % e)
 ```
 
 
@@ -315,15 +374,15 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_v1_note_send_post_request** | [**ApiV1NoteSendPostRequest**](ApiV1NoteSendPostRequest.md)|  | 
+ **send_note_request** | [**SendNoteRequest**](SendNoteRequest.md)|  | 
 
 ### Return type
 
-[**ApiV1NoteSendPost202Response**](ApiV1NoteSendPost202Response.md)
+[**SendInvoice202Response**](SendInvoice202Response.md)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
@@ -336,7 +395,10 @@ No authorization required
 |-------------|-------------|------------------|
 **202** | Default Response |  -  |
 **400** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
 **409** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

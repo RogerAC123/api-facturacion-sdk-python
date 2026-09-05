@@ -17,8 +17,8 @@ from typing_extensions import Annotated
 
 from pydantic import field_validator
 from uuid import UUID
-from intifact_sdk.models.api_v1_plans_id_put_request import ApiV1PlansIdPutRequest
-from intifact_sdk.models.api_v1_plans_post_request import ApiV1PlansPostRequest
+from intifact_sdk.models.create_plan_request import CreatePlanRequest
+from intifact_sdk.models.update_plan_request import UpdatePlanRequest
 
 from intifact_sdk.api_client import ApiClient, RequestSerialized
 from intifact_sdk.api_response import ApiResponse
@@ -39,8 +39,9 @@ class PlansApi:
 
 
     @validate_call
-    def api_v1_plans_get(
+    def create_plan(
         self,
+        create_plan_request: CreatePlanRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -54,9 +55,11 @@ class PlansApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Listar planes (solo master)
+        """Crear plan
 
 
+        :param create_plan_request: (required)
+        :type create_plan_request: CreatePlanRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -79,7 +82,8 @@ class PlansApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_plans_get_serialize(
+        _param = self._create_plan_serialize(
+            create_plan_request=create_plan_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -87,7 +91,9 @@ class PlansApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -101,8 +107,9 @@ class PlansApi:
 
 
     @validate_call
-    def api_v1_plans_get_with_http_info(
+    def create_plan_with_http_info(
         self,
+        create_plan_request: CreatePlanRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -116,9 +123,11 @@ class PlansApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Listar planes (solo master)
+        """Crear plan
 
 
+        :param create_plan_request: (required)
+        :type create_plan_request: CreatePlanRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -141,7 +150,8 @@ class PlansApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_plans_get_serialize(
+        _param = self._create_plan_serialize(
+            create_plan_request=create_plan_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -149,7 +159,9 @@ class PlansApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -163,8 +175,9 @@ class PlansApi:
 
 
     @validate_call
-    def api_v1_plans_get_without_preload_content(
+    def create_plan_without_preload_content(
         self,
+        create_plan_request: CreatePlanRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -178,9 +191,11 @@ class PlansApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Listar planes (solo master)
+        """Crear plan
 
 
+        :param create_plan_request: (required)
+        :type create_plan_request: CreatePlanRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -203,7 +218,8 @@ class PlansApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_plans_get_serialize(
+        _param = self._create_plan_serialize(
+            create_plan_request=create_plan_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -211,7 +227,9 @@ class PlansApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -220,8 +238,9 @@ class PlansApi:
         return response_data.response
 
 
-    def _api_v1_plans_get_serialize(
+    def _create_plan_serialize(
         self,
+        create_plan_request,
         _request_auth,
         _content_type,
         _headers,
@@ -247,16 +266,39 @@ class PlansApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if create_plan_request is not None:
+            _body_params = create_plan_request
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
-            method='GET',
+            method='POST',
             resource_path='/api/v1/plans',
             path_params=_path_params,
             query_params=_query_params,
@@ -274,7 +316,7 @@ class PlansApi:
 
 
     @validate_call
-    def api_v1_plans_id_delete(
+    def deactivate_plan(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -317,7 +359,7 @@ class PlansApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_plans_id_delete_serialize(
+        _param = self._deactivate_plan_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -326,7 +368,9 @@ class PlansApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -340,7 +384,7 @@ class PlansApi:
 
 
     @validate_call
-    def api_v1_plans_id_delete_with_http_info(
+    def deactivate_plan_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -383,7 +427,7 @@ class PlansApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_plans_id_delete_serialize(
+        _param = self._deactivate_plan_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -392,7 +436,9 @@ class PlansApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -406,7 +452,7 @@ class PlansApi:
 
 
     @validate_call
-    def api_v1_plans_id_delete_without_preload_content(
+    def deactivate_plan_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -449,7 +495,7 @@ class PlansApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_plans_id_delete_serialize(
+        _param = self._deactivate_plan_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -458,7 +504,9 @@ class PlansApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -467,7 +515,7 @@ class PlansApi:
         return response_data.response
 
 
-    def _api_v1_plans_id_delete_serialize(
+    def _deactivate_plan_serialize(
         self,
         id,
         _request_auth,
@@ -499,10 +547,18 @@ class PlansApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -524,10 +580,259 @@ class PlansApi:
 
 
     @validate_call
-    def api_v1_plans_id_put(
+    def list_plans(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Listar planes (solo master)
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_plans_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    def list_plans_with_http_info(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Listar planes (solo master)
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_plans_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    def list_plans_without_preload_content(
+        self,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Listar planes (solo master)
+
+
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_plans_serialize(
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_plans_serialize(
+        self,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[
+            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
+        ] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiKey'
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/api/v1/plans',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_plan(
         self,
         id: UUID,
-        api_v1_plans_id_put_request: ApiV1PlansIdPutRequest,
+        update_plan_request: UpdatePlanRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -546,8 +851,8 @@ class PlansApi:
 
         :param id: (required)
         :type id: UUID
-        :param api_v1_plans_id_put_request: (required)
-        :type api_v1_plans_id_put_request: ApiV1PlansIdPutRequest
+        :param update_plan_request: (required)
+        :type update_plan_request: UpdatePlanRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -570,9 +875,9 @@ class PlansApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_plans_id_put_serialize(
+        _param = self._update_plan_serialize(
             id=id,
-            api_v1_plans_id_put_request=api_v1_plans_id_put_request,
+            update_plan_request=update_plan_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -580,7 +885,9 @@ class PlansApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -594,10 +901,10 @@ class PlansApi:
 
 
     @validate_call
-    def api_v1_plans_id_put_with_http_info(
+    def update_plan_with_http_info(
         self,
         id: UUID,
-        api_v1_plans_id_put_request: ApiV1PlansIdPutRequest,
+        update_plan_request: UpdatePlanRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -616,8 +923,8 @@ class PlansApi:
 
         :param id: (required)
         :type id: UUID
-        :param api_v1_plans_id_put_request: (required)
-        :type api_v1_plans_id_put_request: ApiV1PlansIdPutRequest
+        :param update_plan_request: (required)
+        :type update_plan_request: UpdatePlanRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -640,9 +947,9 @@ class PlansApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_plans_id_put_serialize(
+        _param = self._update_plan_serialize(
             id=id,
-            api_v1_plans_id_put_request=api_v1_plans_id_put_request,
+            update_plan_request=update_plan_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -650,7 +957,9 @@ class PlansApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -664,10 +973,10 @@ class PlansApi:
 
 
     @validate_call
-    def api_v1_plans_id_put_without_preload_content(
+    def update_plan_without_preload_content(
         self,
         id: UUID,
-        api_v1_plans_id_put_request: ApiV1PlansIdPutRequest,
+        update_plan_request: UpdatePlanRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -686,8 +995,8 @@ class PlansApi:
 
         :param id: (required)
         :type id: UUID
-        :param api_v1_plans_id_put_request: (required)
-        :type api_v1_plans_id_put_request: ApiV1PlansIdPutRequest
+        :param update_plan_request: (required)
+        :type update_plan_request: UpdatePlanRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -710,9 +1019,9 @@ class PlansApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_plans_id_put_serialize(
+        _param = self._update_plan_serialize(
             id=id,
-            api_v1_plans_id_put_request=api_v1_plans_id_put_request,
+            update_plan_request=update_plan_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -720,7 +1029,9 @@ class PlansApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -729,10 +1040,10 @@ class PlansApi:
         return response_data.response
 
 
-    def _api_v1_plans_id_put_serialize(
+    def _update_plan_serialize(
         self,
         id,
-        api_v1_plans_id_put_request,
+        update_plan_request,
         _request_auth,
         _content_type,
         _headers,
@@ -760,10 +1071,17 @@ class PlansApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_plans_id_put_request is not None:
-            _body_params = api_v1_plans_id_put_request
+        if update_plan_request is not None:
+            _body_params = update_plan_request
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -781,274 +1099,12 @@ class PlansApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/api/v1/plans/{id}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def api_v1_plans_post(
-        self,
-        api_v1_plans_post_request: ApiV1PlansPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Crear plan
-
-
-        :param api_v1_plans_post_request: (required)
-        :type api_v1_plans_post_request: ApiV1PlansPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_plans_post_serialize(
-            api_v1_plans_post_request=api_v1_plans_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def api_v1_plans_post_with_http_info(
-        self,
-        api_v1_plans_post_request: ApiV1PlansPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """Crear plan
-
-
-        :param api_v1_plans_post_request: (required)
-        :type api_v1_plans_post_request: ApiV1PlansPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_plans_post_serialize(
-            api_v1_plans_post_request=api_v1_plans_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def api_v1_plans_post_without_preload_content(
-        self,
-        api_v1_plans_post_request: ApiV1PlansPostRequest,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Crear plan
-
-
-        :param api_v1_plans_post_request: (required)
-        :type api_v1_plans_post_request: ApiV1PlansPostRequest
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._api_v1_plans_post_serialize(
-            api_v1_plans_post_request=api_v1_plans_post_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        return response_data.response
-
-
-    def _api_v1_plans_post_serialize(
-        self,
-        api_v1_plans_post_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if api_v1_plans_post_request is not None:
-            _body_params = api_v1_plans_post_request
-
-
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/api/v1/plans',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

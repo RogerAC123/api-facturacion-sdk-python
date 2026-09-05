@@ -4,27 +4,31 @@ All URIs are relative to *http://localhost:3000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api_v1_webhooks_get**](WebhooksApi.md#api_v1_webhooks_get) | **GET** /api/v1/webhooks | Listar webhooks (filtra por RUC opcional)
-[**api_v1_webhooks_id_delete**](WebhooksApi.md#api_v1_webhooks_id_delete) | **DELETE** /api/v1/webhooks/{id} | Eliminar webhook (también elimina su historial de deliveries)
-[**api_v1_webhooks_id_deliveries_delivery_id_redeliver_post**](WebhooksApi.md#api_v1_webhooks_id_deliveries_delivery_id_redeliver_post) | **POST** /api/v1/webhooks/{id}/deliveries/{deliveryId}/redeliver | Reintentar manualmente una entrega
-[**api_v1_webhooks_id_deliveries_get**](WebhooksApi.md#api_v1_webhooks_id_deliveries_get) | **GET** /api/v1/webhooks/{id}/deliveries | Log de entregas del webhook
-[**api_v1_webhooks_id_get**](WebhooksApi.md#api_v1_webhooks_id_get) | **GET** /api/v1/webhooks/{id} | Detalle de webhook (sin secret)
-[**api_v1_webhooks_id_put**](WebhooksApi.md#api_v1_webhooks_id_put) | **PUT** /api/v1/webhooks/{id} | Actualizar webhook (url, eventos, activación)
-[**api_v1_webhooks_id_rotate_secret_post**](WebhooksApi.md#api_v1_webhooks_id_rotate_secret_post) | **POST** /api/v1/webhooks/{id}/rotate-secret | Rotar el secret de firma (devuelto UNA sola vez)
-[**api_v1_webhooks_id_test_post**](WebhooksApi.md#api_v1_webhooks_id_test_post) | **POST** /api/v1/webhooks/{id}/test | Enviar un evento de prueba (webhook.test)
-[**api_v1_webhooks_post**](WebhooksApi.md#api_v1_webhooks_post) | **POST** /api/v1/webhooks | Crear endpoint webhook
+[**create_webhook**](WebhooksApi.md#create_webhook) | **POST** /api/v1/webhooks | Crear endpoint webhook
+[**delete_webhook**](WebhooksApi.md#delete_webhook) | **DELETE** /api/v1/webhooks/{id} | Eliminar webhook (también elimina su historial de deliveries)
+[**get_webhook**](WebhooksApi.md#get_webhook) | **GET** /api/v1/webhooks/{id} | Detalle de webhook (sin secret)
+[**list_webhook_deliveries**](WebhooksApi.md#list_webhook_deliveries) | **GET** /api/v1/webhooks/{id}/deliveries | Log de entregas del webhook
+[**list_webhooks**](WebhooksApi.md#list_webhooks) | **GET** /api/v1/webhooks | Listar webhooks (filtra por RUC opcional)
+[**redeliver_webhook_delivery**](WebhooksApi.md#redeliver_webhook_delivery) | **POST** /api/v1/webhooks/{id}/deliveries/{deliveryId}/redeliver | Reintentar manualmente una entrega
+[**rotate_webhook_secret**](WebhooksApi.md#rotate_webhook_secret) | **POST** /api/v1/webhooks/{id}/rotate-secret | Rotar el secret de firma (devuelto UNA sola vez)
+[**test_webhook**](WebhooksApi.md#test_webhook) | **POST** /api/v1/webhooks/{id}/test | Enviar un evento de prueba (webhook.test)
+[**update_webhook**](WebhooksApi.md#update_webhook) | **PUT** /api/v1/webhooks/{id} | Actualizar webhook (url, eventos, activación)
 
 
-# **api_v1_webhooks_get**
-> api_v1_webhooks_get(ruc=ruc)
+# **create_webhook**
+> create_webhook(create_webhook_request)
 
-Listar webhooks (filtra por RUC opcional)
+Crear endpoint webhook
+
+Registra una URL que recibirá POSTs cuando ocurran los eventos suscritos. Sin `empresaRuc` el webhook cubre TODAS las empresas de tu cuenta (un solo secret; el `empresaRuc` viaja en cada payload). La respuesta incluye el `secret` (mostrado UNA sola vez) — guárdalo para verificar las firmas HMAC-SHA256.
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
+from intifact_sdk.models.create_webhook_request import CreateWebhookRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -34,18 +38,27 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.WebhooksApi(api_client)
-    ruc = 'ruc_example' # str |  (optional)
+    create_webhook_request = intifact_sdk.CreateWebhookRequest() # CreateWebhookRequest | 
 
     try:
-        # Listar webhooks (filtra por RUC opcional)
-        api_instance.api_v1_webhooks_get(ruc=ruc)
+        # Crear endpoint webhook
+        api_instance.create_webhook(create_webhook_request)
     except Exception as e:
-        print("Exception when calling WebhooksApi->api_v1_webhooks_get: %s\n" % e)
+        print("Exception when calling WebhooksApi->create_webhook: %s\n" % e)
 ```
 
 
@@ -55,7 +68,7 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ruc** | **str**|  | [optional] 
+ **create_webhook_request** | [**CreateWebhookRequest**](CreateWebhookRequest.md)|  | 
 
 ### Return type
 
@@ -63,28 +76,31 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_webhooks_id_delete**
-> api_v1_webhooks_id_delete(id)
+# **delete_webhook**
+> delete_webhook(id)
 
 Eliminar webhook (también elimina su historial de deliveries)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -97,6 +113,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -106,9 +131,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Eliminar webhook (también elimina su historial de deliveries)
-        api_instance.api_v1_webhooks_id_delete(id)
+        api_instance.delete_webhook(id)
     except Exception as e:
-        print("Exception when calling WebhooksApi->api_v1_webhooks_id_delete: %s\n" % e)
+        print("Exception when calling WebhooksApi->delete_webhook: %s\n" % e)
 ```
 
 
@@ -126,28 +151,31 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_webhooks_id_deliveries_delivery_id_redeliver_post**
-> api_v1_webhooks_id_deliveries_delivery_id_redeliver_post(id, delivery_id)
+# **get_webhook**
+> get_webhook(id)
 
-Reintentar manualmente una entrega
+Detalle de webhook (sin secret)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -160,19 +188,27 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.WebhooksApi(api_client)
     id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    delivery_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
-        # Reintentar manualmente una entrega
-        api_instance.api_v1_webhooks_id_deliveries_delivery_id_redeliver_post(id, delivery_id)
+        # Detalle de webhook (sin secret)
+        api_instance.get_webhook(id)
     except Exception as e:
-        print("Exception when calling WebhooksApi->api_v1_webhooks_id_deliveries_delivery_id_redeliver_post: %s\n" % e)
+        print("Exception when calling WebhooksApi->get_webhook: %s\n" % e)
 ```
 
 
@@ -183,7 +219,6 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**|  | 
- **delivery_id** | **UUID**|  | 
 
 ### Return type
 
@@ -191,28 +226,31 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_webhooks_id_deliveries_get**
-> api_v1_webhooks_id_deliveries_get(id, limit=limit, success=success)
+# **list_webhook_deliveries**
+> list_webhook_deliveries(id, limit=limit, success=success)
 
 Log de entregas del webhook
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -225,6 +263,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -236,9 +283,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Log de entregas del webhook
-        api_instance.api_v1_webhooks_id_deliveries_get(id, limit=limit, success=success)
+        api_instance.list_webhook_deliveries(id, limit=limit, success=success)
     except Exception as e:
-        print("Exception when calling WebhooksApi->api_v1_webhooks_id_deliveries_get: %s\n" % e)
+        print("Exception when calling WebhooksApi->list_webhook_deliveries: %s\n" % e)
 ```
 
 
@@ -258,28 +305,31 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_webhooks_id_get**
-> api_v1_webhooks_id_get(id)
+# **list_webhooks**
+> list_webhooks(ruc=ruc)
 
-Detalle de webhook (sin secret)
+Listar webhooks (filtra por RUC opcional)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -292,18 +342,27 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.WebhooksApi(api_client)
-    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    ruc = 'ruc_example' # str |  (optional)
 
     try:
-        # Detalle de webhook (sin secret)
-        api_instance.api_v1_webhooks_id_get(id)
+        # Listar webhooks (filtra por RUC opcional)
+        api_instance.list_webhooks(ruc=ruc)
     except Exception as e:
-        print("Exception when calling WebhooksApi->api_v1_webhooks_id_get: %s\n" % e)
+        print("Exception when calling WebhooksApi->list_webhooks: %s\n" % e)
 ```
 
 
@@ -313,7 +372,7 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **UUID**|  | 
+ **ruc** | **str**|  | [optional] 
 
 ### Return type
 
@@ -321,32 +380,34 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_webhooks_id_put**
-> api_v1_webhooks_id_put(id, api_v1_webhooks_id_put_request)
+# **redeliver_webhook_delivery**
+> redeliver_webhook_delivery(id, delivery_id)
 
-Actualizar webhook (url, eventos, activación)
+Reintentar manualmente una entrega
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_webhooks_id_put_request import ApiV1WebhooksIdPutRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -356,19 +417,28 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.WebhooksApi(api_client)
     id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    api_v1_webhooks_id_put_request = intifact_sdk.ApiV1WebhooksIdPutRequest() # ApiV1WebhooksIdPutRequest | 
+    delivery_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
-        # Actualizar webhook (url, eventos, activación)
-        api_instance.api_v1_webhooks_id_put(id, api_v1_webhooks_id_put_request)
+        # Reintentar manualmente una entrega
+        api_instance.redeliver_webhook_delivery(id, delivery_id)
     except Exception as e:
-        print("Exception when calling WebhooksApi->api_v1_webhooks_id_put: %s\n" % e)
+        print("Exception when calling WebhooksApi->redeliver_webhook_delivery: %s\n" % e)
 ```
 
 
@@ -379,7 +449,7 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID**|  | 
- **api_v1_webhooks_id_put_request** | [**ApiV1WebhooksIdPutRequest**](ApiV1WebhooksIdPutRequest.md)|  | 
+ **delivery_id** | **UUID**|  | 
 
 ### Return type
 
@@ -387,23 +457,25 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_webhooks_id_rotate_secret_post**
-> api_v1_webhooks_id_rotate_secret_post(id)
+# **rotate_webhook_secret**
+> rotate_webhook_secret(id)
 
 Rotar el secret de firma (devuelto UNA sola vez)
 
@@ -411,6 +483,7 @@ Genera un nuevo secret HMAC y lo devuelve una única vez. Las firmas de entregas
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -423,6 +496,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -432,9 +514,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Rotar el secret de firma (devuelto UNA sola vez)
-        api_instance.api_v1_webhooks_id_rotate_secret_post(id)
+        api_instance.rotate_webhook_secret(id)
     except Exception as e:
-        print("Exception when calling WebhooksApi->api_v1_webhooks_id_rotate_secret_post: %s\n" % e)
+        print("Exception when calling WebhooksApi->rotate_webhook_secret: %s\n" % e)
 ```
 
 
@@ -452,28 +534,31 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_webhooks_id_test_post**
-> api_v1_webhooks_id_test_post(id)
+# **test_webhook**
+> test_webhook(id)
 
 Enviar un evento de prueba (webhook.test)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -486,6 +571,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -495,9 +589,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Enviar un evento de prueba (webhook.test)
-        api_instance.api_v1_webhooks_id_test_post(id)
+        api_instance.test_webhook(id)
     except Exception as e:
-        print("Exception when calling WebhooksApi->api_v1_webhooks_id_test_post: %s\n" % e)
+        print("Exception when calling WebhooksApi->test_webhook: %s\n" % e)
 ```
 
 
@@ -515,34 +609,35 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_webhooks_post**
-> api_v1_webhooks_post(api_v1_webhooks_post_request)
+# **update_webhook**
+> update_webhook(id, update_webhook_request)
 
-Crear endpoint webhook
-
-Registra una URL que recibirá POSTs cuando ocurran los eventos suscritos. Sin `empresaRuc` el webhook cubre TODAS las empresas de tu cuenta (un solo secret; el `empresaRuc` viaja en cada payload). La respuesta incluye el `secret` (mostrado UNA sola vez) — guárdalo para verificar las firmas HMAC-SHA256.
+Actualizar webhook (url, eventos, activación)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_webhooks_post_request import ApiV1WebhooksPostRequest
+from intifact_sdk.models.update_webhook_request import UpdateWebhookRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -552,18 +647,28 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.WebhooksApi(api_client)
-    api_v1_webhooks_post_request = intifact_sdk.ApiV1WebhooksPostRequest() # ApiV1WebhooksPostRequest | 
+    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    update_webhook_request = intifact_sdk.UpdateWebhookRequest() # UpdateWebhookRequest | 
 
     try:
-        # Crear endpoint webhook
-        api_instance.api_v1_webhooks_post(api_v1_webhooks_post_request)
+        # Actualizar webhook (url, eventos, activación)
+        api_instance.update_webhook(id, update_webhook_request)
     except Exception as e:
-        print("Exception when calling WebhooksApi->api_v1_webhooks_post: %s\n" % e)
+        print("Exception when calling WebhooksApi->update_webhook: %s\n" % e)
 ```
 
 
@@ -573,7 +678,8 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_v1_webhooks_post_request** | [**ApiV1WebhooksPostRequest**](ApiV1WebhooksPostRequest.md)|  | 
+ **id** | **UUID**|  | 
+ **update_webhook_request** | [**UpdateWebhookRequest**](UpdateWebhookRequest.md)|  | 
 
 ### Return type
 
@@ -581,18 +687,20 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

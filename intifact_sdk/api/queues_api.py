@@ -15,7 +15,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from intifact_sdk.models.api_v1_queues_stats_get200_response import ApiV1QueuesStatsGet200Response
+from intifact_sdk.models.get_queue_stats200_response import GetQueueStats200Response
 
 from intifact_sdk.api_client import ApiClient, RequestSerialized
 from intifact_sdk.api_response import ApiResponse
@@ -36,7 +36,7 @@ class QueuesApi:
 
 
     @validate_call
-    def api_v1_queues_stats_get(
+    def get_queue_stats(
         self,
         _request_timeout: Union[
             None,
@@ -50,7 +50,7 @@ class QueuesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1QueuesStatsGet200Response:
+    ) -> GetQueueStats200Response:
         """Estado de las colas BullMQ
 
 
@@ -76,7 +76,7 @@ class QueuesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_queues_stats_get_serialize(
+        _param = self._get_queue_stats_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -84,8 +84,10 @@ class QueuesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1QueuesStatsGet200Response",
-            '403': "ApiV1InvoiceSendPost400Response",
+            '200': "GetQueueStats200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -99,7 +101,7 @@ class QueuesApi:
 
 
     @validate_call
-    def api_v1_queues_stats_get_with_http_info(
+    def get_queue_stats_with_http_info(
         self,
         _request_timeout: Union[
             None,
@@ -113,7 +115,7 @@ class QueuesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1QueuesStatsGet200Response]:
+    ) -> ApiResponse[GetQueueStats200Response]:
         """Estado de las colas BullMQ
 
 
@@ -139,7 +141,7 @@ class QueuesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_queues_stats_get_serialize(
+        _param = self._get_queue_stats_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -147,8 +149,10 @@ class QueuesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1QueuesStatsGet200Response",
-            '403': "ApiV1InvoiceSendPost400Response",
+            '200': "GetQueueStats200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -162,7 +166,7 @@ class QueuesApi:
 
 
     @validate_call
-    def api_v1_queues_stats_get_without_preload_content(
+    def get_queue_stats_without_preload_content(
         self,
         _request_timeout: Union[
             None,
@@ -202,7 +206,7 @@ class QueuesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_queues_stats_get_serialize(
+        _param = self._get_queue_stats_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -210,8 +214,10 @@ class QueuesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1QueuesStatsGet200Response",
-            '403': "ApiV1InvoiceSendPost400Response",
+            '200': "GetQueueStats200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -220,7 +226,7 @@ class QueuesApi:
         return response_data.response
 
 
-    def _api_v1_queues_stats_get_serialize(
+    def _get_queue_stats_serialize(
         self,
         _request_auth,
         _content_type,
@@ -260,6 +266,7 @@ class QueuesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(

@@ -19,8 +19,8 @@ from pydantic import Field, StrictStr, field_validator
 from typing import Optional
 from typing_extensions import Annotated
 from uuid import UUID
-from intifact_sdk.models.api_v1_webhooks_id_put_request import ApiV1WebhooksIdPutRequest
-from intifact_sdk.models.api_v1_webhooks_post_request import ApiV1WebhooksPostRequest
+from intifact_sdk.models.create_webhook_request import CreateWebhookRequest
+from intifact_sdk.models.update_webhook_request import UpdateWebhookRequest
 
 from intifact_sdk.api_client import ApiClient, RequestSerialized
 from intifact_sdk.api_response import ApiResponse
@@ -41,9 +41,9 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_get(
+    def create_webhook(
         self,
-        ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
+        create_webhook_request: CreateWebhookRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -57,11 +57,12 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Listar webhooks (filtra por RUC opcional)
+        """Crear endpoint webhook
 
+        Registra una URL que recibirá POSTs cuando ocurran los eventos suscritos. Sin `empresaRuc` el webhook cubre TODAS las empresas de tu cuenta (un solo secret; el `empresaRuc` viaja en cada payload). La respuesta incluye el `secret` (mostrado UNA sola vez) — guárdalo para verificar las firmas HMAC-SHA256.
 
-        :param ruc:
-        :type ruc: str
+        :param create_webhook_request: (required)
+        :type create_webhook_request: CreateWebhookRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -84,8 +85,8 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_get_serialize(
-            ruc=ruc,
+        _param = self._create_webhook_serialize(
+            create_webhook_request=create_webhook_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -93,7 +94,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -107,9 +110,9 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_get_with_http_info(
+    def create_webhook_with_http_info(
         self,
-        ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
+        create_webhook_request: CreateWebhookRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -123,11 +126,12 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Listar webhooks (filtra por RUC opcional)
+        """Crear endpoint webhook
 
+        Registra una URL que recibirá POSTs cuando ocurran los eventos suscritos. Sin `empresaRuc` el webhook cubre TODAS las empresas de tu cuenta (un solo secret; el `empresaRuc` viaja en cada payload). La respuesta incluye el `secret` (mostrado UNA sola vez) — guárdalo para verificar las firmas HMAC-SHA256.
 
-        :param ruc:
-        :type ruc: str
+        :param create_webhook_request: (required)
+        :type create_webhook_request: CreateWebhookRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -150,8 +154,8 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_get_serialize(
-            ruc=ruc,
+        _param = self._create_webhook_serialize(
+            create_webhook_request=create_webhook_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -159,7 +163,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -173,9 +179,9 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_get_without_preload_content(
+    def create_webhook_without_preload_content(
         self,
-        ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
+        create_webhook_request: CreateWebhookRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -189,11 +195,12 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Listar webhooks (filtra por RUC opcional)
+        """Crear endpoint webhook
 
+        Registra una URL que recibirá POSTs cuando ocurran los eventos suscritos. Sin `empresaRuc` el webhook cubre TODAS las empresas de tu cuenta (un solo secret; el `empresaRuc` viaja en cada payload). La respuesta incluye el `secret` (mostrado UNA sola vez) — guárdalo para verificar las firmas HMAC-SHA256.
 
-        :param ruc:
-        :type ruc: str
+        :param create_webhook_request: (required)
+        :type create_webhook_request: CreateWebhookRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -216,8 +223,8 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_get_serialize(
-            ruc=ruc,
+        _param = self._create_webhook_serialize(
+            create_webhook_request=create_webhook_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -225,7 +232,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -234,9 +243,9 @@ class WebhooksApi:
         return response_data.response
 
 
-    def _api_v1_webhooks_get_serialize(
+    def _create_webhook_serialize(
         self,
-        ruc,
+        create_webhook_request,
         _request_auth,
         _content_type,
         _headers,
@@ -259,23 +268,42 @@ class WebhooksApi:
 
         # process the path parameters
         # process the query parameters
-        if ruc is not None:
-            
-            _query_params.append(('ruc', ruc))
-            
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if create_webhook_request is not None:
+            _body_params = create_webhook_request
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
-            method='GET',
+            method='POST',
             resource_path='/api/v1/webhooks',
             path_params=_path_params,
             query_params=_query_params,
@@ -293,7 +321,7 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_delete(
+    def delete_webhook(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -336,7 +364,7 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_delete_serialize(
+        _param = self._delete_webhook_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -345,7 +373,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -359,7 +389,7 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_delete_with_http_info(
+    def delete_webhook_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -402,7 +432,7 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_delete_serialize(
+        _param = self._delete_webhook_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -411,7 +441,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -425,7 +457,7 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_delete_without_preload_content(
+    def delete_webhook_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -468,7 +500,7 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_delete_serialize(
+        _param = self._delete_webhook_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -477,7 +509,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -486,7 +520,7 @@ class WebhooksApi:
         return response_data.response
 
 
-    def _api_v1_webhooks_id_delete_serialize(
+    def _delete_webhook_serialize(
         self,
         id,
         _request_auth,
@@ -518,10 +552,18 @@ class WebhooksApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -543,10 +585,9 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_deliveries_delivery_id_redeliver_post(
+    def get_webhook(
         self,
         id: UUID,
-        delivery_id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -560,13 +601,11 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Reintentar manualmente una entrega
+        """Detalle de webhook (sin secret)
 
 
         :param id: (required)
         :type id: UUID
-        :param delivery_id: (required)
-        :type delivery_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -589,9 +628,8 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_deliveries_delivery_id_redeliver_post_serialize(
+        _param = self._get_webhook_serialize(
             id=id,
-            delivery_id=delivery_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -599,7 +637,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -613,10 +653,9 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_deliveries_delivery_id_redeliver_post_with_http_info(
+    def get_webhook_with_http_info(
         self,
         id: UUID,
-        delivery_id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -630,13 +669,11 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Reintentar manualmente una entrega
+        """Detalle de webhook (sin secret)
 
 
         :param id: (required)
         :type id: UUID
-        :param delivery_id: (required)
-        :type delivery_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -659,9 +696,8 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_deliveries_delivery_id_redeliver_post_serialize(
+        _param = self._get_webhook_serialize(
             id=id,
-            delivery_id=delivery_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -669,7 +705,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -683,10 +721,9 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_deliveries_delivery_id_redeliver_post_without_preload_content(
+    def get_webhook_without_preload_content(
         self,
         id: UUID,
-        delivery_id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -700,13 +737,11 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Reintentar manualmente una entrega
+        """Detalle de webhook (sin secret)
 
 
         :param id: (required)
         :type id: UUID
-        :param delivery_id: (required)
-        :type delivery_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -729,9 +764,8 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_deliveries_delivery_id_redeliver_post_serialize(
+        _param = self._get_webhook_serialize(
             id=id,
-            delivery_id=delivery_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -739,7 +773,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -748,10 +784,9 @@ class WebhooksApi:
         return response_data.response
 
 
-    def _api_v1_webhooks_id_deliveries_delivery_id_redeliver_post_serialize(
+    def _get_webhook_serialize(
         self,
         id,
-        delivery_id,
         _request_auth,
         _content_type,
         _headers,
@@ -775,23 +810,29 @@ class WebhooksApi:
         # process the path parameters
         if id is not None:
             _path_params['id'] = id
-        if delivery_id is not None:
-            _path_params['deliveryId'] = delivery_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/api/v1/webhooks/{id}/deliveries/{deliveryId}/redeliver',
+            method='GET',
+            resource_path='/api/v1/webhooks/{id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -808,7 +849,7 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_deliveries_get(
+    def list_webhook_deliveries(
         self,
         id: UUID,
         limit: Optional[Annotated[int, Field(le=200, strict=True, ge=1)]] = None,
@@ -857,7 +898,7 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_deliveries_get_serialize(
+        _param = self._list_webhook_deliveries_serialize(
             id=id,
             limit=limit,
             success=success,
@@ -868,7 +909,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -882,7 +925,7 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_deliveries_get_with_http_info(
+    def list_webhook_deliveries_with_http_info(
         self,
         id: UUID,
         limit: Optional[Annotated[int, Field(le=200, strict=True, ge=1)]] = None,
@@ -931,7 +974,7 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_deliveries_get_serialize(
+        _param = self._list_webhook_deliveries_serialize(
             id=id,
             limit=limit,
             success=success,
@@ -942,7 +985,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -956,7 +1001,7 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_deliveries_get_without_preload_content(
+    def list_webhook_deliveries_without_preload_content(
         self,
         id: UUID,
         limit: Optional[Annotated[int, Field(le=200, strict=True, ge=1)]] = None,
@@ -1005,7 +1050,7 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_deliveries_get_serialize(
+        _param = self._list_webhook_deliveries_serialize(
             id=id,
             limit=limit,
             success=success,
@@ -1016,7 +1061,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1025,7 +1072,7 @@ class WebhooksApi:
         return response_data.response
 
 
-    def _api_v1_webhooks_id_deliveries_get_serialize(
+    def _list_webhook_deliveries_serialize(
         self,
         id,
         limit,
@@ -1067,10 +1114,18 @@ class WebhooksApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -1092,9 +1147,9 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_get(
+    def list_webhooks(
         self,
-        id: UUID,
+        ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1108,11 +1163,11 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Detalle de webhook (sin secret)
+        """Listar webhooks (filtra por RUC opcional)
 
 
-        :param id: (required)
-        :type id: UUID
+        :param ruc:
+        :type ruc: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1135,8 +1190,8 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_get_serialize(
-            id=id,
+        _param = self._list_webhooks_serialize(
+            ruc=ruc,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1144,7 +1199,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1158,9 +1215,9 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_get_with_http_info(
+    def list_webhooks_with_http_info(
         self,
-        id: UUID,
+        ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1174,11 +1231,11 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Detalle de webhook (sin secret)
+        """Listar webhooks (filtra por RUC opcional)
 
 
-        :param id: (required)
-        :type id: UUID
+        :param ruc:
+        :type ruc: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1201,8 +1258,8 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_get_serialize(
-            id=id,
+        _param = self._list_webhooks_serialize(
+            ruc=ruc,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1210,7 +1267,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1224,9 +1283,9 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_get_without_preload_content(
+    def list_webhooks_without_preload_content(
         self,
-        id: UUID,
+        ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1240,11 +1299,11 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Detalle de webhook (sin secret)
+        """Listar webhooks (filtra por RUC opcional)
 
 
-        :param id: (required)
-        :type id: UUID
+        :param ruc:
+        :type ruc: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1267,8 +1326,8 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_get_serialize(
-            id=id,
+        _param = self._list_webhooks_serialize(
+            ruc=ruc,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1276,7 +1335,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1285,9 +1346,9 @@ class WebhooksApi:
         return response_data.response
 
 
-    def _api_v1_webhooks_id_get_serialize(
+    def _list_webhooks_serialize(
         self,
-        id,
+        ruc,
         _request_auth,
         _content_type,
         _headers,
@@ -1309,23 +1370,33 @@ class WebhooksApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if id is not None:
-            _path_params['id'] = id
         # process the query parameters
+        if ruc is not None:
+            
+            _query_params.append(('ruc', ruc))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/api/v1/webhooks/{id}',
+            resource_path='/api/v1/webhooks',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1342,10 +1413,10 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_put(
+    def redeliver_webhook_delivery(
         self,
         id: UUID,
-        api_v1_webhooks_id_put_request: ApiV1WebhooksIdPutRequest,
+        delivery_id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1359,13 +1430,13 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Actualizar webhook (url, eventos, activación)
+        """Reintentar manualmente una entrega
 
 
         :param id: (required)
         :type id: UUID
-        :param api_v1_webhooks_id_put_request: (required)
-        :type api_v1_webhooks_id_put_request: ApiV1WebhooksIdPutRequest
+        :param delivery_id: (required)
+        :type delivery_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1388,9 +1459,9 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_put_serialize(
+        _param = self._redeliver_webhook_delivery_serialize(
             id=id,
-            api_v1_webhooks_id_put_request=api_v1_webhooks_id_put_request,
+            delivery_id=delivery_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1398,7 +1469,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1412,10 +1485,10 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_put_with_http_info(
+    def redeliver_webhook_delivery_with_http_info(
         self,
         id: UUID,
-        api_v1_webhooks_id_put_request: ApiV1WebhooksIdPutRequest,
+        delivery_id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1429,13 +1502,13 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Actualizar webhook (url, eventos, activación)
+        """Reintentar manualmente una entrega
 
 
         :param id: (required)
         :type id: UUID
-        :param api_v1_webhooks_id_put_request: (required)
-        :type api_v1_webhooks_id_put_request: ApiV1WebhooksIdPutRequest
+        :param delivery_id: (required)
+        :type delivery_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1458,9 +1531,9 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_put_serialize(
+        _param = self._redeliver_webhook_delivery_serialize(
             id=id,
-            api_v1_webhooks_id_put_request=api_v1_webhooks_id_put_request,
+            delivery_id=delivery_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1468,7 +1541,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1482,10 +1557,10 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_put_without_preload_content(
+    def redeliver_webhook_delivery_without_preload_content(
         self,
         id: UUID,
-        api_v1_webhooks_id_put_request: ApiV1WebhooksIdPutRequest,
+        delivery_id: UUID,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1499,13 +1574,13 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Actualizar webhook (url, eventos, activación)
+        """Reintentar manualmente una entrega
 
 
         :param id: (required)
         :type id: UUID
-        :param api_v1_webhooks_id_put_request: (required)
-        :type api_v1_webhooks_id_put_request: ApiV1WebhooksIdPutRequest
+        :param delivery_id: (required)
+        :type delivery_id: UUID
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1528,9 +1603,9 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_put_serialize(
+        _param = self._redeliver_webhook_delivery_serialize(
             id=id,
-            api_v1_webhooks_id_put_request=api_v1_webhooks_id_put_request,
+            delivery_id=delivery_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1538,7 +1613,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1547,10 +1624,10 @@ class WebhooksApi:
         return response_data.response
 
 
-    def _api_v1_webhooks_id_put_serialize(
+    def _redeliver_webhook_delivery_serialize(
         self,
         id,
-        api_v1_webhooks_id_put_request,
+        delivery_id,
         _request_auth,
         _content_type,
         _headers,
@@ -1574,36 +1651,31 @@ class WebhooksApi:
         # process the path parameters
         if id is not None:
             _path_params['id'] = id
+        if delivery_id is not None:
+            _path_params['deliveryId'] = delivery_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_webhooks_id_put_request is not None:
-            _body_params = api_v1_webhooks_id_put_request
 
 
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
             )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
-            method='PUT',
-            resource_path='/api/v1/webhooks/{id}',
+            method='POST',
+            resource_path='/api/v1/webhooks/{id}/deliveries/{deliveryId}/redeliver',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1620,7 +1692,7 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_rotate_secret_post(
+    def rotate_webhook_secret(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -1664,7 +1736,7 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_rotate_secret_post_serialize(
+        _param = self._rotate_webhook_secret_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1673,7 +1745,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1687,7 +1761,7 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_rotate_secret_post_with_http_info(
+    def rotate_webhook_secret_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -1731,7 +1805,7 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_rotate_secret_post_serialize(
+        _param = self._rotate_webhook_secret_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1740,7 +1814,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1754,7 +1830,7 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_rotate_secret_post_without_preload_content(
+    def rotate_webhook_secret_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -1798,7 +1874,7 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_rotate_secret_post_serialize(
+        _param = self._rotate_webhook_secret_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1807,7 +1883,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1816,7 +1894,7 @@ class WebhooksApi:
         return response_data.response
 
 
-    def _api_v1_webhooks_id_rotate_secret_post_serialize(
+    def _rotate_webhook_secret_serialize(
         self,
         id,
         _request_auth,
@@ -1848,10 +1926,18 @@ class WebhooksApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -1873,7 +1959,7 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_test_post(
+    def test_webhook(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -1916,7 +2002,7 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_test_post_serialize(
+        _param = self._test_webhook_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1925,7 +2011,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1939,7 +2027,7 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_test_post_with_http_info(
+    def test_webhook_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -1982,7 +2070,7 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_test_post_serialize(
+        _param = self._test_webhook_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1991,7 +2079,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2005,7 +2095,7 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_id_test_post_without_preload_content(
+    def test_webhook_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -2048,7 +2138,7 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_id_test_post_serialize(
+        _param = self._test_webhook_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2057,7 +2147,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2066,7 +2158,7 @@ class WebhooksApi:
         return response_data.response
 
 
-    def _api_v1_webhooks_id_test_post_serialize(
+    def _test_webhook_serialize(
         self,
         id,
         _request_auth,
@@ -2098,10 +2190,18 @@ class WebhooksApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -2123,9 +2223,10 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_post(
+    def update_webhook(
         self,
-        api_v1_webhooks_post_request: ApiV1WebhooksPostRequest,
+        id: UUID,
+        update_webhook_request: UpdateWebhookRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2139,12 +2240,13 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Crear endpoint webhook
+        """Actualizar webhook (url, eventos, activación)
 
-        Registra una URL que recibirá POSTs cuando ocurran los eventos suscritos. Sin `empresaRuc` el webhook cubre TODAS las empresas de tu cuenta (un solo secret; el `empresaRuc` viaja en cada payload). La respuesta incluye el `secret` (mostrado UNA sola vez) — guárdalo para verificar las firmas HMAC-SHA256.
 
-        :param api_v1_webhooks_post_request: (required)
-        :type api_v1_webhooks_post_request: ApiV1WebhooksPostRequest
+        :param id: (required)
+        :type id: UUID
+        :param update_webhook_request: (required)
+        :type update_webhook_request: UpdateWebhookRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2167,8 +2269,9 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_post_serialize(
-            api_v1_webhooks_post_request=api_v1_webhooks_post_request,
+        _param = self._update_webhook_serialize(
+            id=id,
+            update_webhook_request=update_webhook_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2176,7 +2279,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2190,9 +2295,10 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_post_with_http_info(
+    def update_webhook_with_http_info(
         self,
-        api_v1_webhooks_post_request: ApiV1WebhooksPostRequest,
+        id: UUID,
+        update_webhook_request: UpdateWebhookRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2206,12 +2312,13 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Crear endpoint webhook
+        """Actualizar webhook (url, eventos, activación)
 
-        Registra una URL que recibirá POSTs cuando ocurran los eventos suscritos. Sin `empresaRuc` el webhook cubre TODAS las empresas de tu cuenta (un solo secret; el `empresaRuc` viaja en cada payload). La respuesta incluye el `secret` (mostrado UNA sola vez) — guárdalo para verificar las firmas HMAC-SHA256.
 
-        :param api_v1_webhooks_post_request: (required)
-        :type api_v1_webhooks_post_request: ApiV1WebhooksPostRequest
+        :param id: (required)
+        :type id: UUID
+        :param update_webhook_request: (required)
+        :type update_webhook_request: UpdateWebhookRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2234,8 +2341,9 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_post_serialize(
-            api_v1_webhooks_post_request=api_v1_webhooks_post_request,
+        _param = self._update_webhook_serialize(
+            id=id,
+            update_webhook_request=update_webhook_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2243,7 +2351,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2257,9 +2367,10 @@ class WebhooksApi:
 
 
     @validate_call
-    def api_v1_webhooks_post_without_preload_content(
+    def update_webhook_without_preload_content(
         self,
-        api_v1_webhooks_post_request: ApiV1WebhooksPostRequest,
+        id: UUID,
+        update_webhook_request: UpdateWebhookRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2273,12 +2384,13 @@ class WebhooksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Crear endpoint webhook
+        """Actualizar webhook (url, eventos, activación)
 
-        Registra una URL que recibirá POSTs cuando ocurran los eventos suscritos. Sin `empresaRuc` el webhook cubre TODAS las empresas de tu cuenta (un solo secret; el `empresaRuc` viaja en cada payload). La respuesta incluye el `secret` (mostrado UNA sola vez) — guárdalo para verificar las firmas HMAC-SHA256.
 
-        :param api_v1_webhooks_post_request: (required)
-        :type api_v1_webhooks_post_request: ApiV1WebhooksPostRequest
+        :param id: (required)
+        :type id: UUID
+        :param update_webhook_request: (required)
+        :type update_webhook_request: UpdateWebhookRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2301,8 +2413,9 @@ class WebhooksApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_webhooks_post_serialize(
-            api_v1_webhooks_post_request=api_v1_webhooks_post_request,
+        _param = self._update_webhook_serialize(
+            id=id,
+            update_webhook_request=update_webhook_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2310,7 +2423,9 @@ class WebhooksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2319,9 +2434,10 @@ class WebhooksApi:
         return response_data.response
 
 
-    def _api_v1_webhooks_post_serialize(
+    def _update_webhook_serialize(
         self,
-        api_v1_webhooks_post_request,
+        id,
+        update_webhook_request,
         _request_auth,
         _content_type,
         _headers,
@@ -2343,14 +2459,23 @@ class WebhooksApi:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_webhooks_post_request is not None:
-            _body_params = api_v1_webhooks_post_request
+        if update_webhook_request is not None:
+            _body_params = update_webhook_request
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -2368,11 +2493,12 @@ class WebhooksApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/api/v1/webhooks',
+            method='PUT',
+            resource_path='/api/v1/webhooks/{id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

@@ -4,21 +4,22 @@ All URIs are relative to *http://localhost:3000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api_v1_despatch_id_cdr_get**](DespatchApi.md#api_v1_despatch_id_cdr_get) | **GET** /api/v1/despatch/{id}/cdr | Descargar CDR (constancia de SUNAT)
-[**api_v1_despatch_id_pdf_get**](DespatchApi.md#api_v1_despatch_id_pdf_get) | **GET** /api/v1/despatch/{id}/pdf | Obtener PDF de la guía (A4 oficina, ticket 80mm o 58mm POS)
-[**api_v1_despatch_id_xml_get**](DespatchApi.md#api_v1_despatch_id_xml_get) | **GET** /api/v1/despatch/{id}/xml | Descargar XML firmado de la guía
-[**api_v1_despatch_send_multi_post**](DespatchApi.md#api_v1_despatch_send_multi_post) | **POST** /api/v1/despatch/send-multi | Enviar múltiples guías de remisión por destino
-[**api_v1_despatch_send_post**](DespatchApi.md#api_v1_despatch_send_post) | **POST** /api/v1/despatch/send | Enviar guía de remisión (09) via API GRE REST
-[**api_v1_despatch_transportista_send_post**](DespatchApi.md#api_v1_despatch_transportista_send_post) | **POST** /api/v1/despatch-transportista/send | Enviar guía de remisión TRANSPORTISTA (31) via API GRE REST
+[**get_despatch_cdr**](DespatchApi.md#get_despatch_cdr) | **GET** /api/v1/despatch/{id}/cdr | Descargar CDR (constancia de SUNAT)
+[**get_despatch_pdf**](DespatchApi.md#get_despatch_pdf) | **GET** /api/v1/despatch/{id}/pdf | Obtener PDF de la guía (A4 oficina, ticket 80mm o 58mm POS)
+[**get_despatch_xml**](DespatchApi.md#get_despatch_xml) | **GET** /api/v1/despatch/{id}/xml | Descargar XML firmado de la guía
+[**send_despatch**](DespatchApi.md#send_despatch) | **POST** /api/v1/despatch/send | Enviar guía de remisión (09) via API GRE REST
+[**send_despatch_multi**](DespatchApi.md#send_despatch_multi) | **POST** /api/v1/despatch/send-multi | Enviar múltiples guías de remisión por destino
+[**send_despatch_transportista**](DespatchApi.md#send_despatch_transportista) | **POST** /api/v1/despatch-transportista/send | Enviar guía de remisión TRANSPORTISTA (31) via API GRE REST
 
 
-# **api_v1_despatch_id_cdr_get**
-> api_v1_despatch_id_cdr_get(id)
+# **get_despatch_cdr**
+> get_despatch_cdr(id)
 
 Descargar CDR (constancia de SUNAT)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -31,6 +32,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -40,9 +50,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Descargar CDR (constancia de SUNAT)
-        api_instance.api_v1_despatch_id_cdr_get(id)
+        api_instance.get_despatch_cdr(id)
     except Exception as e:
-        print("Exception when calling DespatchApi->api_v1_despatch_id_cdr_get: %s\n" % e)
+        print("Exception when calling DespatchApi->get_despatch_cdr: %s\n" % e)
 ```
 
 
@@ -60,28 +70,31 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_despatch_id_pdf_get**
-> api_v1_despatch_id_pdf_get(id, format=format)
+# **get_despatch_pdf**
+> get_despatch_pdf(id, format=format)
 
 Obtener PDF de la guía (A4 oficina, ticket 80mm o 58mm POS)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -94,6 +107,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -104,9 +126,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Obtener PDF de la guía (A4 oficina, ticket 80mm o 58mm POS)
-        api_instance.api_v1_despatch_id_pdf_get(id, format=format)
+        api_instance.get_despatch_pdf(id, format=format)
     except Exception as e:
-        print("Exception when calling DespatchApi->api_v1_despatch_id_pdf_get: %s\n" % e)
+        print("Exception when calling DespatchApi->get_despatch_pdf: %s\n" % e)
 ```
 
 
@@ -125,28 +147,31 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_despatch_id_xml_get**
-> api_v1_despatch_id_xml_get(id)
+# **get_despatch_xml**
+> get_despatch_xml(id)
 
 Descargar XML firmado de la guía
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
@@ -159,6 +184,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -168,9 +202,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Descargar XML firmado de la guía
-        api_instance.api_v1_despatch_id_xml_get(id)
+        api_instance.get_despatch_xml(id)
     except Exception as e:
-        print("Exception when calling DespatchApi->api_v1_despatch_id_xml_get: %s\n" % e)
+        print("Exception when calling DespatchApi->get_despatch_xml: %s\n" % e)
 ```
 
 
@@ -188,93 +222,25 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Default Response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **api_v1_despatch_send_multi_post**
-> ApiV1DespatchSendMultiPost202Response api_v1_despatch_send_multi_post(api_v1_despatch_send_multi_post_request)
-
-Enviar múltiples guías de remisión por destino
-
-Recibe datos comunes de transporte + array de destinos. Genera una guía por cada destino con correlativo auto-asignado. Cada guía se encola independientemente para envío a SUNAT GRE.
-
-### Example
-
-
-```python
-import intifact_sdk
-from intifact_sdk.models.api_v1_despatch_send_multi_post202_response import ApiV1DespatchSendMultiPost202Response
-from intifact_sdk.models.api_v1_despatch_send_multi_post_request import ApiV1DespatchSendMultiPostRequest
-from intifact_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:3000
-# See configuration.py for a list of all supported configuration parameters.
-configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
-)
-
-
-# Enter a context with an instance of the API client
-with intifact_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = intifact_sdk.DespatchApi(api_client)
-    api_v1_despatch_send_multi_post_request = intifact_sdk.ApiV1DespatchSendMultiPostRequest() # ApiV1DespatchSendMultiPostRequest | 
-
-    try:
-        # Enviar múltiples guías de remisión por destino
-        api_response = api_instance.api_v1_despatch_send_multi_post(api_v1_despatch_send_multi_post_request)
-        print("The response of DespatchApi->api_v1_despatch_send_multi_post:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling DespatchApi->api_v1_despatch_send_multi_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **api_v1_despatch_send_multi_post_request** | [**ApiV1DespatchSendMultiPostRequest**](ApiV1DespatchSendMultiPostRequest.md)|  | 
-
-### Return type
-
-[**ApiV1DespatchSendMultiPost202Response**](ApiV1DespatchSendMultiPost202Response.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Default Response |  -  |
-**400** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_despatch_send_post**
-> ApiV1NoteSendPost202Response api_v1_despatch_send_post(api_v1_despatch_send_post_request)
+# **send_despatch**
+> SendInvoice202Response send_despatch(send_despatch_request)
 
 Enviar guía de remisión (09) via API GRE REST
 
@@ -282,11 +248,12 @@ Genera XML UBL 2.1, firma y encola. El worker obtiene token OAuth2, envía a SUN
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_despatch_send_post_request import ApiV1DespatchSendPostRequest
-from intifact_sdk.models.api_v1_note_send_post202_response import ApiV1NoteSendPost202Response
+from intifact_sdk.models.send_despatch_request import SendDespatchRequest
+from intifact_sdk.models.send_invoice202_response import SendInvoice202Response
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -296,20 +263,29 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.DespatchApi(api_client)
-    api_v1_despatch_send_post_request = intifact_sdk.ApiV1DespatchSendPostRequest() # ApiV1DespatchSendPostRequest | 
+    send_despatch_request = intifact_sdk.SendDespatchRequest() # SendDespatchRequest | 
 
     try:
         # Enviar guía de remisión (09) via API GRE REST
-        api_response = api_instance.api_v1_despatch_send_post(api_v1_despatch_send_post_request)
-        print("The response of DespatchApi->api_v1_despatch_send_post:\n")
+        api_response = api_instance.send_despatch(send_despatch_request)
+        print("The response of DespatchApi->send_despatch:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DespatchApi->api_v1_despatch_send_post: %s\n" % e)
+        print("Exception when calling DespatchApi->send_despatch: %s\n" % e)
 ```
 
 
@@ -319,15 +295,15 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_v1_despatch_send_post_request** | [**ApiV1DespatchSendPostRequest**](ApiV1DespatchSendPostRequest.md)|  | 
+ **send_despatch_request** | [**SendDespatchRequest**](SendDespatchRequest.md)|  | 
 
 ### Return type
 
-[**ApiV1NoteSendPost202Response**](ApiV1NoteSendPost202Response.md)
+[**SendInvoice202Response**](SendInvoice202Response.md)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
@@ -340,12 +316,98 @@ No authorization required
 |-------------|-------------|------------------|
 **202** | Default Response |  -  |
 **400** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
 **409** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_despatch_transportista_send_post**
-> ApiV1NoteSendPost202Response api_v1_despatch_transportista_send_post(api_v1_despatch_transportista_send_post_request)
+# **send_despatch_multi**
+> SendDespatchMulti202Response send_despatch_multi(send_despatch_multi_request)
+
+Enviar múltiples guías de remisión por destino
+
+Recibe datos comunes de transporte + array de destinos. Genera una guía por cada destino con correlativo auto-asignado. Cada guía se encola independientemente para envío a SUNAT GRE.
+
+### Example
+
+* Bearer Authentication (apiKey):
+
+```python
+import intifact_sdk
+from intifact_sdk.models.send_despatch_multi202_response import SendDespatchMulti202Response
+from intifact_sdk.models.send_despatch_multi_request import SendDespatchMultiRequest
+from intifact_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:3000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = intifact_sdk.Configuration(
+    host = "http://localhost:3000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with intifact_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = intifact_sdk.DespatchApi(api_client)
+    send_despatch_multi_request = intifact_sdk.SendDespatchMultiRequest() # SendDespatchMultiRequest | 
+
+    try:
+        # Enviar múltiples guías de remisión por destino
+        api_response = api_instance.send_despatch_multi(send_despatch_multi_request)
+        print("The response of DespatchApi->send_despatch_multi:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DespatchApi->send_despatch_multi: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **send_despatch_multi_request** | [**SendDespatchMultiRequest**](SendDespatchMultiRequest.md)|  | 
+
+### Return type
+
+[**SendDespatchMulti202Response**](SendDespatchMulti202Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Default Response |  -  |
+**400** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **send_despatch_transportista**
+> SendInvoice202Response send_despatch_transportista(send_despatch_transportista_request)
 
 Enviar guía de remisión TRANSPORTISTA (31) via API GRE REST
 
@@ -353,11 +415,12 @@ Guía emitida por la empresa de transporte (emisor=transportista). Incluye remit
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_despatch_transportista_send_post_request import ApiV1DespatchTransportistaSendPostRequest
-from intifact_sdk.models.api_v1_note_send_post202_response import ApiV1NoteSendPost202Response
+from intifact_sdk.models.send_despatch_transportista_request import SendDespatchTransportistaRequest
+from intifact_sdk.models.send_invoice202_response import SendInvoice202Response
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -367,20 +430,29 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.DespatchApi(api_client)
-    api_v1_despatch_transportista_send_post_request = intifact_sdk.ApiV1DespatchTransportistaSendPostRequest() # ApiV1DespatchTransportistaSendPostRequest | 
+    send_despatch_transportista_request = intifact_sdk.SendDespatchTransportistaRequest() # SendDespatchTransportistaRequest | 
 
     try:
         # Enviar guía de remisión TRANSPORTISTA (31) via API GRE REST
-        api_response = api_instance.api_v1_despatch_transportista_send_post(api_v1_despatch_transportista_send_post_request)
-        print("The response of DespatchApi->api_v1_despatch_transportista_send_post:\n")
+        api_response = api_instance.send_despatch_transportista(send_despatch_transportista_request)
+        print("The response of DespatchApi->send_despatch_transportista:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DespatchApi->api_v1_despatch_transportista_send_post: %s\n" % e)
+        print("Exception when calling DespatchApi->send_despatch_transportista: %s\n" % e)
 ```
 
 
@@ -390,15 +462,15 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_v1_despatch_transportista_send_post_request** | [**ApiV1DespatchTransportistaSendPostRequest**](ApiV1DespatchTransportistaSendPostRequest.md)|  | 
+ **send_despatch_transportista_request** | [**SendDespatchTransportistaRequest**](SendDespatchTransportistaRequest.md)|  | 
 
 ### Return type
 
-[**ApiV1NoteSendPost202Response**](ApiV1NoteSendPost202Response.md)
+[**SendInvoice202Response**](SendInvoice202Response.md)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
@@ -411,7 +483,10 @@ No authorization required
 |-------------|-------------|------------------|
 **202** | Default Response |  -  |
 **400** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
 **409** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

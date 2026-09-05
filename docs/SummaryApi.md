@@ -4,25 +4,26 @@ All URIs are relative to *http://localhost:3000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api_v1_boleta_cancel_post**](SummaryApi.md#api_v1_boleta_cancel_post) | **POST** /api/v1/boleta/cancel | Anular boleta via resumen diario (estado&#x3D;3)
-[**api_v1_invoice_cancel_post**](SummaryApi.md#api_v1_invoice_cancel_post) | **POST** /api/v1/invoice/cancel | Anular factura via comunicación de baja
-[**api_v1_summary_send_post**](SummaryApi.md#api_v1_summary_send_post) | **POST** /api/v1/summary/send | Enviar resumen diario de boletas (RC)
-[**api_v1_ticket_ticket_status_get**](SummaryApi.md#api_v1_ticket_ticket_status_get) | **GET** /api/v1/ticket/{ticket}/status | Consultar estado de ticket asíncrono (SOAP o GRE)
-[**api_v1_voided_send_post**](SummaryApi.md#api_v1_voided_send_post) | **POST** /api/v1/voided/send | Enviar comunicación de baja (RA)
+[**cancel_boleta**](SummaryApi.md#cancel_boleta) | **POST** /api/v1/boleta/cancel | Anular boleta via resumen diario (estado&#x3D;3)
+[**cancel_invoice**](SummaryApi.md#cancel_invoice) | **POST** /api/v1/invoice/cancel | Anular factura via comunicación de baja
+[**get_ticket_status**](SummaryApi.md#get_ticket_status) | **GET** /api/v1/ticket/{ticket}/status | Consultar estado de ticket asíncrono (SOAP o GRE)
+[**send_summary**](SummaryApi.md#send_summary) | **POST** /api/v1/summary/send | Enviar resumen diario de boletas (RC)
+[**send_voided**](SummaryApi.md#send_voided) | **POST** /api/v1/voided/send | Enviar comunicación de baja (RA)
 
 
-# **api_v1_boleta_cancel_post**
-> ApiV1SummarySendPost202Response api_v1_boleta_cancel_post(api_v1_boleta_cancel_post_request)
+# **cancel_boleta**
+> SendSummary202Response cancel_boleta(cancel_boleta_request)
 
 Anular boleta via resumen diario (estado=3)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_boleta_cancel_post_request import ApiV1BoletaCancelPostRequest
-from intifact_sdk.models.api_v1_summary_send_post202_response import ApiV1SummarySendPost202Response
+from intifact_sdk.models.cancel_boleta_request import CancelBoletaRequest
+from intifact_sdk.models.send_summary202_response import SendSummary202Response
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -32,20 +33,29 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.SummaryApi(api_client)
-    api_v1_boleta_cancel_post_request = intifact_sdk.ApiV1BoletaCancelPostRequest() # ApiV1BoletaCancelPostRequest | 
+    cancel_boleta_request = intifact_sdk.CancelBoletaRequest() # CancelBoletaRequest | 
 
     try:
         # Anular boleta via resumen diario (estado=3)
-        api_response = api_instance.api_v1_boleta_cancel_post(api_v1_boleta_cancel_post_request)
-        print("The response of SummaryApi->api_v1_boleta_cancel_post:\n")
+        api_response = api_instance.cancel_boleta(cancel_boleta_request)
+        print("The response of SummaryApi->cancel_boleta:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SummaryApi->api_v1_boleta_cancel_post: %s\n" % e)
+        print("Exception when calling SummaryApi->cancel_boleta: %s\n" % e)
 ```
 
 
@@ -55,15 +65,15 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_v1_boleta_cancel_post_request** | [**ApiV1BoletaCancelPostRequest**](ApiV1BoletaCancelPostRequest.md)|  | 
+ **cancel_boleta_request** | [**CancelBoletaRequest**](CancelBoletaRequest.md)|  | 
 
 ### Return type
 
-[**ApiV1SummarySendPost202Response**](ApiV1SummarySendPost202Response.md)
+[**SendSummary202Response**](SendSummary202Response.md)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
@@ -76,21 +86,25 @@ No authorization required
 |-------------|-------------|------------------|
 **202** | Default Response |  -  |
 **400** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_invoice_cancel_post**
-> ApiV1SummarySendPost202Response api_v1_invoice_cancel_post(api_v1_invoice_cancel_post_request)
+# **cancel_invoice**
+> SendSummary202Response cancel_invoice(cancel_invoice_request)
 
 Anular factura via comunicación de baja
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_invoice_cancel_post_request import ApiV1InvoiceCancelPostRequest
-from intifact_sdk.models.api_v1_summary_send_post202_response import ApiV1SummarySendPost202Response
+from intifact_sdk.models.cancel_invoice_request import CancelInvoiceRequest
+from intifact_sdk.models.send_summary202_response import SendSummary202Response
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -100,20 +114,29 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.SummaryApi(api_client)
-    api_v1_invoice_cancel_post_request = intifact_sdk.ApiV1InvoiceCancelPostRequest() # ApiV1InvoiceCancelPostRequest | 
+    cancel_invoice_request = intifact_sdk.CancelInvoiceRequest() # CancelInvoiceRequest | 
 
     try:
         # Anular factura via comunicación de baja
-        api_response = api_instance.api_v1_invoice_cancel_post(api_v1_invoice_cancel_post_request)
-        print("The response of SummaryApi->api_v1_invoice_cancel_post:\n")
+        api_response = api_instance.cancel_invoice(cancel_invoice_request)
+        print("The response of SummaryApi->cancel_invoice:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SummaryApi->api_v1_invoice_cancel_post: %s\n" % e)
+        print("Exception when calling SummaryApi->cancel_invoice: %s\n" % e)
 ```
 
 
@@ -123,15 +146,15 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_v1_invoice_cancel_post_request** | [**ApiV1InvoiceCancelPostRequest**](ApiV1InvoiceCancelPostRequest.md)|  | 
+ **cancel_invoice_request** | [**CancelInvoiceRequest**](CancelInvoiceRequest.md)|  | 
 
 ### Return type
 
-[**ApiV1SummarySendPost202Response**](ApiV1SummarySendPost202Response.md)
+[**SendSummary202Response**](SendSummary202Response.md)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
@@ -144,88 +167,24 @@ No authorization required
 |-------------|-------------|------------------|
 **202** | Default Response |  -  |
 **400** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_summary_send_post**
-> ApiV1SummarySendPost202Response api_v1_summary_send_post(api_v1_summary_send_post_request)
-
-Enviar resumen diario de boletas (RC)
-
-### Example
-
-
-```python
-import intifact_sdk
-from intifact_sdk.models.api_v1_summary_send_post202_response import ApiV1SummarySendPost202Response
-from intifact_sdk.models.api_v1_summary_send_post_request import ApiV1SummarySendPostRequest
-from intifact_sdk.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:3000
-# See configuration.py for a list of all supported configuration parameters.
-configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
-)
-
-
-# Enter a context with an instance of the API client
-with intifact_sdk.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = intifact_sdk.SummaryApi(api_client)
-    api_v1_summary_send_post_request = intifact_sdk.ApiV1SummarySendPostRequest() # ApiV1SummarySendPostRequest | 
-
-    try:
-        # Enviar resumen diario de boletas (RC)
-        api_response = api_instance.api_v1_summary_send_post(api_v1_summary_send_post_request)
-        print("The response of SummaryApi->api_v1_summary_send_post:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SummaryApi->api_v1_summary_send_post: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **api_v1_summary_send_post_request** | [**ApiV1SummarySendPostRequest**](ApiV1SummarySendPostRequest.md)|  | 
-
-### Return type
-
-[**ApiV1SummarySendPost202Response**](ApiV1SummarySendPost202Response.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**202** | Default Response |  -  |
-**400** | Default Response |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **api_v1_ticket_ticket_status_get**
-> ApiV1TicketTicketStatusGet200Response api_v1_ticket_ticket_status_get(ruc, ticket)
+# **get_ticket_status**
+> GetTicketStatus200Response get_ticket_status(ruc, ticket)
 
 Consultar estado de ticket asíncrono (SOAP o GRE)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_ticket_ticket_status_get200_response import ApiV1TicketTicketStatusGet200Response
+from intifact_sdk.models.get_ticket_status200_response import GetTicketStatus200Response
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -235,6 +194,15 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
@@ -245,11 +213,11 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Consultar estado de ticket asíncrono (SOAP o GRE)
-        api_response = api_instance.api_v1_ticket_ticket_status_get(ruc, ticket)
-        print("The response of SummaryApi->api_v1_ticket_ticket_status_get:\n")
+        api_response = api_instance.get_ticket_status(ruc, ticket)
+        print("The response of SummaryApi->get_ticket_status:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SummaryApi->api_v1_ticket_ticket_status_get: %s\n" % e)
+        print("Exception when calling SummaryApi->get_ticket_status: %s\n" % e)
 ```
 
 
@@ -264,11 +232,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ApiV1TicketTicketStatusGet200Response**](ApiV1TicketTicketStatusGet200Response.md)
+[**GetTicketStatus200Response**](GetTicketStatus200Response.md)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
@@ -281,21 +249,25 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | Default Response |  -  |
 **202** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_voided_send_post**
-> ApiV1SummarySendPost202Response api_v1_voided_send_post(api_v1_voided_send_post_request)
+# **send_summary**
+> SendSummary202Response send_summary(send_summary_request)
 
-Enviar comunicación de baja (RA)
+Enviar resumen diario de boletas (RC)
 
 ### Example
 
+* Bearer Authentication (apiKey):
 
 ```python
 import intifact_sdk
-from intifact_sdk.models.api_v1_summary_send_post202_response import ApiV1SummarySendPost202Response
-from intifact_sdk.models.api_v1_voided_send_post_request import ApiV1VoidedSendPostRequest
+from intifact_sdk.models.send_summary202_response import SendSummary202Response
+from intifact_sdk.models.send_summary_request import SendSummaryRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
@@ -305,20 +277,29 @@ configuration = intifact_sdk.Configuration(
     host = "http://localhost:3000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.SummaryApi(api_client)
-    api_v1_voided_send_post_request = intifact_sdk.ApiV1VoidedSendPostRequest() # ApiV1VoidedSendPostRequest | 
+    send_summary_request = intifact_sdk.SendSummaryRequest() # SendSummaryRequest | 
 
     try:
-        # Enviar comunicación de baja (RA)
-        api_response = api_instance.api_v1_voided_send_post(api_v1_voided_send_post_request)
-        print("The response of SummaryApi->api_v1_voided_send_post:\n")
+        # Enviar resumen diario de boletas (RC)
+        api_response = api_instance.send_summary(send_summary_request)
+        print("The response of SummaryApi->send_summary:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SummaryApi->api_v1_voided_send_post: %s\n" % e)
+        print("Exception when calling SummaryApi->send_summary: %s\n" % e)
 ```
 
 
@@ -328,15 +309,15 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **api_v1_voided_send_post_request** | [**ApiV1VoidedSendPostRequest**](ApiV1VoidedSendPostRequest.md)|  | 
+ **send_summary_request** | [**SendSummaryRequest**](SendSummaryRequest.md)|  | 
 
 ### Return type
 
-[**ApiV1SummarySendPost202Response**](ApiV1SummarySendPost202Response.md)
+[**SendSummary202Response**](SendSummary202Response.md)
 
 ### Authorization
 
-No authorization required
+[apiKey](../README.md#apiKey)
 
 ### HTTP request headers
 
@@ -349,6 +330,90 @@ No authorization required
 |-------------|-------------|------------------|
 **202** | Default Response |  -  |
 **400** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **send_voided**
+> SendSummary202Response send_voided(send_voided_request)
+
+Enviar comunicación de baja (RA)
+
+### Example
+
+* Bearer Authentication (apiKey):
+
+```python
+import intifact_sdk
+from intifact_sdk.models.send_summary202_response import SendSummary202Response
+from intifact_sdk.models.send_voided_request import SendVoidedRequest
+from intifact_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:3000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = intifact_sdk.Configuration(
+    host = "http://localhost:3000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with intifact_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = intifact_sdk.SummaryApi(api_client)
+    send_voided_request = intifact_sdk.SendVoidedRequest() # SendVoidedRequest | 
+
+    try:
+        # Enviar comunicación de baja (RA)
+        api_response = api_instance.send_voided(send_voided_request)
+        print("The response of SummaryApi->send_voided:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SummaryApi->send_voided: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **send_voided_request** | [**SendVoidedRequest**](SendVoidedRequest.md)|  | 
+
+### Return type
+
+[**SendSummary202Response**](SendSummary202Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Default Response |  -  |
+**400** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**429** | Default Response |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

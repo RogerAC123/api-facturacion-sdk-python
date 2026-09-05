@@ -17,10 +17,10 @@ from typing_extensions import Annotated
 
 from pydantic import field_validator
 from uuid import UUID
-from intifact_sdk.models.api_v1_invoice_compute_post200_response import ApiV1InvoiceComputePost200Response
-from intifact_sdk.models.api_v1_note_compute_post_request import ApiV1NoteComputePostRequest
-from intifact_sdk.models.api_v1_note_send_post202_response import ApiV1NoteSendPost202Response
-from intifact_sdk.models.api_v1_note_send_post_request import ApiV1NoteSendPostRequest
+from intifact_sdk.models.compute_invoice200_response import ComputeInvoice200Response
+from intifact_sdk.models.compute_invoice_request import ComputeInvoiceRequest
+from intifact_sdk.models.send_invoice202_response import SendInvoice202Response
+from intifact_sdk.models.send_note_request import SendNoteRequest
 
 from intifact_sdk.api_client import ApiClient, RequestSerialized
 from intifact_sdk.api_response import ApiResponse
@@ -41,9 +41,9 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_compute_post(
+    def compute_note(
         self,
-        api_v1_note_compute_post_request: ApiV1NoteComputePostRequest,
+        compute_invoice_request: ComputeInvoiceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -56,13 +56,13 @@ class NoteApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1InvoiceComputePost200Response:
+    ) -> ComputeInvoice200Response:
         """Calcular importes (IGV, descuentos, totales) sin emitir
 
         Motor de cálculo para notas: recibe ítems crudos (cantidad, valorUnitario sin IGV, afectación, descuento) y un descuento global opcional, y devuelve TODOS los importes fiscales calculados. No emite ni persiste nada — úsalo para previsualizar o para alimentar POST /note/send (agrega tú el documento afectado y el motivo).
 
-        :param api_v1_note_compute_post_request: (required)
-        :type api_v1_note_compute_post_request: ApiV1NoteComputePostRequest
+        :param compute_invoice_request: (required)
+        :type compute_invoice_request: ComputeInvoiceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -85,8 +85,8 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_compute_post_serialize(
-            api_v1_note_compute_post_request=api_v1_note_compute_post_request,
+        _param = self._compute_note_serialize(
+            compute_invoice_request=compute_invoice_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -94,7 +94,10 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1InvoiceComputePost200Response",
+            '200': "ComputeInvoice200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -108,9 +111,9 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_compute_post_with_http_info(
+    def compute_note_with_http_info(
         self,
-        api_v1_note_compute_post_request: ApiV1NoteComputePostRequest,
+        compute_invoice_request: ComputeInvoiceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -123,13 +126,13 @@ class NoteApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1InvoiceComputePost200Response]:
+    ) -> ApiResponse[ComputeInvoice200Response]:
         """Calcular importes (IGV, descuentos, totales) sin emitir
 
         Motor de cálculo para notas: recibe ítems crudos (cantidad, valorUnitario sin IGV, afectación, descuento) y un descuento global opcional, y devuelve TODOS los importes fiscales calculados. No emite ni persiste nada — úsalo para previsualizar o para alimentar POST /note/send (agrega tú el documento afectado y el motivo).
 
-        :param api_v1_note_compute_post_request: (required)
-        :type api_v1_note_compute_post_request: ApiV1NoteComputePostRequest
+        :param compute_invoice_request: (required)
+        :type compute_invoice_request: ComputeInvoiceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -152,8 +155,8 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_compute_post_serialize(
-            api_v1_note_compute_post_request=api_v1_note_compute_post_request,
+        _param = self._compute_note_serialize(
+            compute_invoice_request=compute_invoice_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -161,7 +164,10 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1InvoiceComputePost200Response",
+            '200': "ComputeInvoice200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -175,9 +181,9 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_compute_post_without_preload_content(
+    def compute_note_without_preload_content(
         self,
-        api_v1_note_compute_post_request: ApiV1NoteComputePostRequest,
+        compute_invoice_request: ComputeInvoiceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -195,8 +201,8 @@ class NoteApi:
 
         Motor de cálculo para notas: recibe ítems crudos (cantidad, valorUnitario sin IGV, afectación, descuento) y un descuento global opcional, y devuelve TODOS los importes fiscales calculados. No emite ni persiste nada — úsalo para previsualizar o para alimentar POST /note/send (agrega tú el documento afectado y el motivo).
 
-        :param api_v1_note_compute_post_request: (required)
-        :type api_v1_note_compute_post_request: ApiV1NoteComputePostRequest
+        :param compute_invoice_request: (required)
+        :type compute_invoice_request: ComputeInvoiceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -219,8 +225,8 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_compute_post_serialize(
-            api_v1_note_compute_post_request=api_v1_note_compute_post_request,
+        _param = self._compute_note_serialize(
+            compute_invoice_request=compute_invoice_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -228,7 +234,10 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ApiV1InvoiceComputePost200Response",
+            '200': "ComputeInvoice200Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -237,9 +246,9 @@ class NoteApi:
         return response_data.response
 
 
-    def _api_v1_note_compute_post_serialize(
+    def _compute_note_serialize(
         self,
-        api_v1_note_compute_post_request,
+        compute_invoice_request,
         _request_auth,
         _content_type,
         _headers,
@@ -265,8 +274,8 @@ class NoteApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_note_compute_post_request is not None:
-            _body_params = api_v1_note_compute_post_request
+        if compute_invoice_request is not None:
+            _body_params = compute_invoice_request
 
 
         # set the HTTP header `Accept`
@@ -293,6 +302,7 @@ class NoteApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -314,7 +324,7 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_id_cdr_get(
+    def get_note_cdr(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -357,7 +367,7 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_id_cdr_get_serialize(
+        _param = self._get_note_cdr_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -366,7 +376,9 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -380,7 +392,7 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_id_cdr_get_with_http_info(
+    def get_note_cdr_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -423,7 +435,7 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_id_cdr_get_serialize(
+        _param = self._get_note_cdr_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -432,7 +444,9 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -446,7 +460,7 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_id_cdr_get_without_preload_content(
+    def get_note_cdr_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -489,7 +503,7 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_id_cdr_get_serialize(
+        _param = self._get_note_cdr_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -498,7 +512,9 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -507,7 +523,7 @@ class NoteApi:
         return response_data.response
 
 
-    def _api_v1_note_id_cdr_get_serialize(
+    def _get_note_cdr_serialize(
         self,
         id,
         _request_auth,
@@ -539,10 +555,18 @@ class NoteApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -564,7 +588,7 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_id_pdf_get(
+    def get_note_pdf(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -607,7 +631,7 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_id_pdf_get_serialize(
+        _param = self._get_note_pdf_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -616,7 +640,9 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -630,7 +656,7 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_id_pdf_get_with_http_info(
+    def get_note_pdf_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -673,7 +699,7 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_id_pdf_get_serialize(
+        _param = self._get_note_pdf_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -682,7 +708,9 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -696,7 +724,7 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_id_pdf_get_without_preload_content(
+    def get_note_pdf_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -739,7 +767,7 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_id_pdf_get_serialize(
+        _param = self._get_note_pdf_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -748,7 +776,9 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -757,7 +787,7 @@ class NoteApi:
         return response_data.response
 
 
-    def _api_v1_note_id_pdf_get_serialize(
+    def _get_note_pdf_serialize(
         self,
         id,
         _request_auth,
@@ -789,10 +819,18 @@ class NoteApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -814,7 +852,7 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_id_xml_get(
+    def get_note_xml(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -857,7 +895,7 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_id_xml_get_serialize(
+        _param = self._get_note_xml_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -866,7 +904,9 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -880,7 +920,7 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_id_xml_get_with_http_info(
+    def get_note_xml_with_http_info(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -923,7 +963,7 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_id_xml_get_serialize(
+        _param = self._get_note_xml_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -932,7 +972,9 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -946,7 +988,7 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_id_xml_get_without_preload_content(
+    def get_note_xml_without_preload_content(
         self,
         id: UUID,
         _request_timeout: Union[
@@ -989,7 +1031,7 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_id_xml_get_serialize(
+        _param = self._get_note_xml_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -998,7 +1040,9 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1007,7 +1051,7 @@ class NoteApi:
         return response_data.response
 
 
-    def _api_v1_note_id_xml_get_serialize(
+    def _get_note_xml_serialize(
         self,
         id,
         _request_auth,
@@ -1039,10 +1083,18 @@ class NoteApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(
@@ -1064,9 +1116,9 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_send_post(
+    def send_note(
         self,
-        api_v1_note_send_post_request: ApiV1NoteSendPostRequest,
+        send_note_request: SendNoteRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1079,13 +1131,13 @@ class NoteApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiV1NoteSendPost202Response:
+    ) -> SendInvoice202Response:
         """Enviar nota de crédito (07) o débito (08) a SUNAT
 
         Genera XML UBL 2.1, firma y encola. Responde 202. Consultar GET /documents/{id} para el resultado final. Idempotente por (RUC emisor, tipoDoc, serie, correlativo): reenviar el mismo comprobante NO lo duplica. Si ya fue aceptado devuelve el mismo id y hash sin reenviar nada a SUNAT; si sigue en proceso responde 409 (esperá el resultado, no cambies el correlativo). Solo un RECHAZADO exige un correlativo nuevo.
 
-        :param api_v1_note_send_post_request: (required)
-        :type api_v1_note_send_post_request: ApiV1NoteSendPostRequest
+        :param send_note_request: (required)
+        :type send_note_request: SendNoteRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1108,8 +1160,8 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_send_post_serialize(
-            api_v1_note_send_post_request=api_v1_note_send_post_request,
+        _param = self._send_note_serialize(
+            send_note_request=send_note_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1117,9 +1169,12 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1NoteSendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '409': "ApiV1InvoiceSendPost400Response",
+            '202': "SendInvoice202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '409': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1133,9 +1188,9 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_send_post_with_http_info(
+    def send_note_with_http_info(
         self,
-        api_v1_note_send_post_request: ApiV1NoteSendPostRequest,
+        send_note_request: SendNoteRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1148,13 +1203,13 @@ class NoteApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ApiV1NoteSendPost202Response]:
+    ) -> ApiResponse[SendInvoice202Response]:
         """Enviar nota de crédito (07) o débito (08) a SUNAT
 
         Genera XML UBL 2.1, firma y encola. Responde 202. Consultar GET /documents/{id} para el resultado final. Idempotente por (RUC emisor, tipoDoc, serie, correlativo): reenviar el mismo comprobante NO lo duplica. Si ya fue aceptado devuelve el mismo id y hash sin reenviar nada a SUNAT; si sigue en proceso responde 409 (esperá el resultado, no cambies el correlativo). Solo un RECHAZADO exige un correlativo nuevo.
 
-        :param api_v1_note_send_post_request: (required)
-        :type api_v1_note_send_post_request: ApiV1NoteSendPostRequest
+        :param send_note_request: (required)
+        :type send_note_request: SendNoteRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1177,8 +1232,8 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_send_post_serialize(
-            api_v1_note_send_post_request=api_v1_note_send_post_request,
+        _param = self._send_note_serialize(
+            send_note_request=send_note_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1186,9 +1241,12 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1NoteSendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '409': "ApiV1InvoiceSendPost400Response",
+            '202': "SendInvoice202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '409': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1202,9 +1260,9 @@ class NoteApi:
 
 
     @validate_call
-    def api_v1_note_send_post_without_preload_content(
+    def send_note_without_preload_content(
         self,
-        api_v1_note_send_post_request: ApiV1NoteSendPostRequest,
+        send_note_request: SendNoteRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1222,8 +1280,8 @@ class NoteApi:
 
         Genera XML UBL 2.1, firma y encola. Responde 202. Consultar GET /documents/{id} para el resultado final. Idempotente por (RUC emisor, tipoDoc, serie, correlativo): reenviar el mismo comprobante NO lo duplica. Si ya fue aceptado devuelve el mismo id y hash sin reenviar nada a SUNAT; si sigue en proceso responde 409 (esperá el resultado, no cambies el correlativo). Solo un RECHAZADO exige un correlativo nuevo.
 
-        :param api_v1_note_send_post_request: (required)
-        :type api_v1_note_send_post_request: ApiV1NoteSendPostRequest
+        :param send_note_request: (required)
+        :type send_note_request: SendNoteRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1246,8 +1304,8 @@ class NoteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._api_v1_note_send_post_serialize(
-            api_v1_note_send_post_request=api_v1_note_send_post_request,
+        _param = self._send_note_serialize(
+            send_note_request=send_note_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1255,9 +1313,12 @@ class NoteApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '202': "ApiV1NoteSendPost202Response",
-            '400': "ApiV1InvoiceSendPost400Response",
-            '409': "ApiV1InvoiceSendPost400Response",
+            '202': "SendInvoice202Response",
+            '400': "InternalCertificatesExpiringGet403Response",
+            '401': "InternalCertificatesExpiringGet403Response",
+            '403': "InternalCertificatesExpiringGet403Response",
+            '409': "InternalCertificatesExpiringGet403Response",
+            '429': "InternalCertificatesExpiringGet429Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1266,9 +1327,9 @@ class NoteApi:
         return response_data.response
 
 
-    def _api_v1_note_send_post_serialize(
+    def _send_note_serialize(
         self,
-        api_v1_note_send_post_request,
+        send_note_request,
         _request_auth,
         _content_type,
         _headers,
@@ -1294,8 +1355,8 @@ class NoteApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if api_v1_note_send_post_request is not None:
-            _body_params = api_v1_note_send_post_request
+        if send_note_request is not None:
+            _body_params = send_note_request
 
 
         # set the HTTP header `Accept`
@@ -1322,6 +1383,7 @@ class NoteApi:
 
         # authentication setting
         _auth_settings: List[str] = [
+            'apiKey'
         ]
 
         return self.api_client.param_serialize(

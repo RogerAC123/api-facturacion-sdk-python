@@ -4,13 +4,13 @@ All URIs are relative to *http://localhost:3000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**api_v1_public_consultar_ruc_tipo_doc_serie_numero_get**](PublicApi.md#api_v1_public_consultar_ruc_tipo_doc_serie_numero_get) | **GET** /api/v1/public/consultar/{ruc}/{tipoDoc}/{serie}/{numero} | Consultar un comprobante (público, sin auth)
-[**api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get**](PublicApi.md#api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get) | **GET** /api/v1/public/consultar/{ruc}/{tipoDoc}/{serie}/{numero}/pdf | Descargar PDF del comprobante (público)
-[**api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get**](PublicApi.md#api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get) | **GET** /api/v1/public/consultar/{ruc}/{tipoDoc}/{serie}/{numero}/xml | Descargar XML firmado (público)
+[**consultar_comprobante**](PublicApi.md#consultar_comprobante) | **GET** /api/v1/public/consultar/{ruc}/{tipoDoc}/{serie}/{numero} | Consultar un comprobante (público, sin auth)
+[**consultar_comprobante_pdf**](PublicApi.md#consultar_comprobante_pdf) | **GET** /api/v1/public/consultar/{ruc}/{tipoDoc}/{serie}/{numero}/pdf | Descargar PDF del comprobante (público)
+[**consultar_comprobante_xml**](PublicApi.md#consultar_comprobante_xml) | **GET** /api/v1/public/consultar/{ruc}/{tipoDoc}/{serie}/{numero}/xml | Descargar XML firmado (público)
 
 
-# **api_v1_public_consultar_ruc_tipo_doc_serie_numero_get**
-> api_v1_public_consultar_ruc_tipo_doc_serie_numero_get(ruc, tipo_doc, serie, numero, total=total, fecha=fecha, receptor=receptor)
+# **consultar_comprobante**
+> consultar_comprobante(ruc, tipo_doc, serie, numero, total=total, fecha=fecha, receptor=receptor)
 
 Consultar un comprobante (público, sin auth)
 
@@ -45,9 +45,9 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Consultar un comprobante (público, sin auth)
-        api_instance.api_v1_public_consultar_ruc_tipo_doc_serie_numero_get(ruc, tipo_doc, serie, numero, total=total, fecha=fecha, receptor=receptor)
+        api_instance.consultar_comprobante(ruc, tipo_doc, serie, numero, total=total, fecha=fecha, receptor=receptor)
     except Exception as e:
-        print("Exception when calling PublicApi->api_v1_public_consultar_ruc_tipo_doc_serie_numero_get: %s\n" % e)
+        print("Exception when calling PublicApi->consultar_comprobante: %s\n" % e)
 ```
 
 
@@ -86,8 +86,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get**
-> api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get(ruc, tipo_doc, serie, numero)
+# **consultar_comprobante_pdf**
+> consultar_comprobante_pdf(ruc, tipo_doc, serie, numero, total=total, fecha=fecha, receptor=receptor)
 
 Descargar PDF del comprobante (público)
 
@@ -114,12 +114,15 @@ with intifact_sdk.ApiClient(configuration) as api_client:
     tipo_doc = 'tipo_doc_example' # str | 
     serie = 'serie_example' # str | 
     numero = 'numero_example' # str | 
+    total = 3.4 # float |  (optional)
+    fecha = 'fecha_example' # str |  (optional)
+    receptor = 'receptor_example' # str |  (optional)
 
     try:
         # Descargar PDF del comprobante (público)
-        api_instance.api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get(ruc, tipo_doc, serie, numero)
+        api_instance.consultar_comprobante_pdf(ruc, tipo_doc, serie, numero, total=total, fecha=fecha, receptor=receptor)
     except Exception as e:
-        print("Exception when calling PublicApi->api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get: %s\n" % e)
+        print("Exception when calling PublicApi->consultar_comprobante_pdf: %s\n" % e)
 ```
 
 
@@ -133,6 +136,9 @@ Name | Type | Description  | Notes
  **tipo_doc** | **str**|  | 
  **serie** | **str**|  | 
  **numero** | **str**|  | 
+ **total** | **float**|  | [optional] 
+ **fecha** | **str**|  | [optional] 
+ **receptor** | **str**|  | [optional] 
 
 ### Return type
 
@@ -155,8 +161,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get**
-> api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get(ruc, tipo_doc, serie, numero)
+# **consultar_comprobante_xml**
+> consultar_comprobante_xml(ruc, tipo_doc, serie, numero, total=total, fecha=fecha, receptor=receptor)
 
 Descargar XML firmado (público)
 
@@ -183,12 +189,15 @@ with intifact_sdk.ApiClient(configuration) as api_client:
     tipo_doc = 'tipo_doc_example' # str | 
     serie = 'serie_example' # str | 
     numero = 'numero_example' # str | 
+    total = 3.4 # float |  (optional)
+    fecha = 'fecha_example' # str |  (optional)
+    receptor = 'receptor_example' # str |  (optional)
 
     try:
         # Descargar XML firmado (público)
-        api_instance.api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get(ruc, tipo_doc, serie, numero)
+        api_instance.consultar_comprobante_xml(ruc, tipo_doc, serie, numero, total=total, fecha=fecha, receptor=receptor)
     except Exception as e:
-        print("Exception when calling PublicApi->api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get: %s\n" % e)
+        print("Exception when calling PublicApi->consultar_comprobante_xml: %s\n" % e)
 ```
 
 
@@ -202,6 +211,9 @@ Name | Type | Description  | Notes
  **tipo_doc** | **str**|  | 
  **serie** | **str**|  | 
  **numero** | **str**|  | 
+ **total** | **float**|  | [optional] 
+ **fecha** | **str**|  | [optional] 
+ **receptor** | **str**|  | [optional] 
 
 ### Return type
 
