@@ -26,36 +26,36 @@ class TestNoteApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_note_compute_post(self) -> None:
-        """Test case for api_v1_note_compute_post
+    def test_compute_note(self) -> None:
+        """Test case for compute_note
 
         Calcular importes (IGV, descuentos, totales) sin emitir
         """
         pass
 
-    def test_api_v1_note_id_cdr_get(self) -> None:
-        """Test case for api_v1_note_id_cdr_get
+    def test_get_note_cdr(self) -> None:
+        """Test case for get_note_cdr
 
         Descargar CDR (constancia de SUNAT)
         """
         pass
 
-    def test_api_v1_note_id_pdf_get(self) -> None:
-        """Test case for api_v1_note_id_pdf_get
+    def test_get_note_pdf(self) -> None:
+        """Test case for get_note_pdf
 
         Obtener PDF de la nota
         """
         pass
 
-    def test_api_v1_note_id_xml_get(self) -> None:
-        """Test case for api_v1_note_id_xml_get
+    def test_get_note_xml(self) -> None:
+        """Test case for get_note_xml
 
         Descargar XML firmado
         """
         pass
 
-    def test_api_v1_note_send_post(self) -> None:
-        """Test case for api_v1_note_send_post
+    def test_send_note(self) -> None:
+        """Test case for send_note
 
         Enviar nota de crédito (07) o débito (08) a SUNAT
         """

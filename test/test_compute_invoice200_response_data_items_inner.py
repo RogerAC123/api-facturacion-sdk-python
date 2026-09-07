@@ -53,7 +53,7 @@ class TestComputeInvoice200ResponseDataItemsInner(unittest.TestCase):
                 total_impuestos = 1.337,
                 monto_precio_unitario = 1.337,
                 factor_icbper = 1.337,
-                cod_prod_sunat = ''
+                cod_prod_sunat = '04807288'
             )
         else:
             return ComputeInvoice200ResponseDataItemsInner(

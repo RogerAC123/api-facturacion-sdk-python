@@ -56,8 +56,12 @@ __all__ = [
     "CreateCompanyRequestCuentasBancariasInner",
     "CreatePlanRequest",
     "CreateWebhookRequest",
+    "ExportProductoSunat200Response",
+    "ExportProductoSunat200ResponseData",
+    "ExportProductoSunat200ResponseDataItemsInner",
     "GetNextCorrelativo200Response",
     "GetNextCorrelativo200ResponseData",
+    "GetProductoSunat200Response",
     "GetQueueStats200Response",
     "GetQueueStats200ResponseData",
     "GetTicketStatus200Response",
@@ -79,6 +83,8 @@ __all__ = [
     "LoginRequest",
     "ReconcileDocument200Response",
     "RetryDocument202Response",
+    "SearchProductoSunat200Response",
+    "SearchProductoSunat200ResponseData",
     "SendDespatchMulti202Response",
     "SendDespatchMulti202ResponseData",
     "SendDespatchMulti202ResponseDataGuiasInner",
@@ -161,8 +167,12 @@ from intifact_sdk.models.create_company_request import CreateCompanyRequest as C
 from intifact_sdk.models.create_company_request_cuentas_bancarias_inner import CreateCompanyRequestCuentasBancariasInner as CreateCompanyRequestCuentasBancariasInner
 from intifact_sdk.models.create_plan_request import CreatePlanRequest as CreatePlanRequest
 from intifact_sdk.models.create_webhook_request import CreateWebhookRequest as CreateWebhookRequest
+from intifact_sdk.models.export_producto_sunat200_response import ExportProductoSunat200Response as ExportProductoSunat200Response
+from intifact_sdk.models.export_producto_sunat200_response_data import ExportProductoSunat200ResponseData as ExportProductoSunat200ResponseData
+from intifact_sdk.models.export_producto_sunat200_response_data_items_inner import ExportProductoSunat200ResponseDataItemsInner as ExportProductoSunat200ResponseDataItemsInner
 from intifact_sdk.models.get_next_correlativo200_response import GetNextCorrelativo200Response as GetNextCorrelativo200Response
 from intifact_sdk.models.get_next_correlativo200_response_data import GetNextCorrelativo200ResponseData as GetNextCorrelativo200ResponseData
+from intifact_sdk.models.get_producto_sunat200_response import GetProductoSunat200Response as GetProductoSunat200Response
 from intifact_sdk.models.get_queue_stats200_response import GetQueueStats200Response as GetQueueStats200Response
 from intifact_sdk.models.get_queue_stats200_response_data import GetQueueStats200ResponseData as GetQueueStats200ResponseData
 from intifact_sdk.models.get_ticket_status200_response import GetTicketStatus200Response as GetTicketStatus200Response
@@ -184,6 +194,8 @@ from intifact_sdk.models.list_documents200_response_pagination import ListDocume
 from intifact_sdk.models.login_request import LoginRequest as LoginRequest
 from intifact_sdk.models.reconcile_document200_response import ReconcileDocument200Response as ReconcileDocument200Response
 from intifact_sdk.models.retry_document202_response import RetryDocument202Response as RetryDocument202Response
+from intifact_sdk.models.search_producto_sunat200_response import SearchProductoSunat200Response as SearchProductoSunat200Response
+from intifact_sdk.models.search_producto_sunat200_response_data import SearchProductoSunat200ResponseData as SearchProductoSunat200ResponseData
 from intifact_sdk.models.send_despatch_multi202_response import SendDespatchMulti202Response as SendDespatchMulti202Response
 from intifact_sdk.models.send_despatch_multi202_response_data import SendDespatchMulti202ResponseData as SendDespatchMulti202ResponseData
 from intifact_sdk.models.send_despatch_multi202_response_data_guias_inner import SendDespatchMulti202ResponseDataGuiasInner as SendDespatchMulti202ResponseDataGuiasInner

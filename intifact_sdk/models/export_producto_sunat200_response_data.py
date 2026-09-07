@@ -17,29 +17,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
+from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from intifact_sdk.models.export_producto_sunat200_response_data_items_inner import ExportProductoSunat200ResponseDataItemsInner
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
 
-class SendDespatchRequestVehiculosSecundariosInner(BaseModel):
+class ExportProductoSunat200ResponseData(BaseModel):
     """
-    SendDespatchRequestVehiculosSecundariosInner
+    ExportProductoSunat200ResponseData
     """ # noqa: E501
-    placa: Annotated[str, Field(min_length=1, strict=True, max_length=10)]
-    tuc: Optional[Annotated[str, Field(strict=True, max_length=15)]] = None
-    autorizacion: Optional[Annotated[str, Field(strict=True, max_length=50)]] = None
-    autorizacion_entidad: Optional[Annotated[str, Field(strict=True, max_length=2)]] = Field(default=None, alias="autorizacionEntidad")
-    __properties: ClassVar[List[str]] = ["placa", "tuc", "autorizacion", "autorizacionEntidad"]
-
-    @field_validator('placa', mode="before")
-    def placa_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if isinstance(value, str) and not re.match(r"^[A-Z0-9]+$", value):
-            raise ValueError(r"must validate the regular expression /^[A-Z0-9]+$/")
-        return value
+    version: Optional[StrictStr]
+    total: Union[StrictFloat, StrictInt]
+    items: List[ExportProductoSunat200ResponseDataItemsInner]
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = ["version", "total", "items"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -59,7 +52,7 @@ class SendDespatchRequestVehiculosSecundariosInner(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SendDespatchRequestVehiculosSecundariosInner from a JSON string"""
+        """Create an instance of ExportProductoSunat200ResponseData from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,8 +64,10 @@ class SendDespatchRequestVehiculosSecundariosInner(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -80,11 +75,27 @@ class SendDespatchRequestVehiculosSecundariosInner(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in items (list)
+        _items = []
+        if self.items:
+            for _item_items in self.items:
+                _items.append(_item_items.to_dict() if _item_items is not None else None)
+            _dict['items'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
+        # set to None if version (nullable) is None
+        # and model_fields_set contains the field
+        if self.version is None and "version" in self.model_fields_set:
+            _dict['version'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SendDespatchRequestVehiculosSecundariosInner from a dict"""
+        """Create an instance of ExportProductoSunat200ResponseData from a dict"""
         if obj is None:
             return None
 
@@ -92,11 +103,15 @@ class SendDespatchRequestVehiculosSecundariosInner(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "placa": obj.get("placa"),
-            "tuc": obj.get("tuc"),
-            "autorizacion": obj.get("autorizacion"),
-            "autorizacionEntidad": obj.get("autorizacionEntidad")
+            "version": obj.get("version"),
+            "total": obj.get("total"),
+            "items": [ExportProductoSunat200ResponseDataItemsInner.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

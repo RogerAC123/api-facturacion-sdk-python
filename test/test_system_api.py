@@ -26,17 +26,24 @@ class TestSystemApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_catalogs_get(self) -> None:
-        """Test case for api_v1_catalogs_get
+    def test_export_producto_sunat(self) -> None:
+        """Test case for export_producto_sunat
 
-        Listar catálogos SUNAT (código → descripción)
+        Descargar el Catálogo 25 completo (52.840 códigos)
         """
         pass
 
-    def test_api_v1_catalogs_key_get(self) -> None:
-        """Test case for api_v1_catalogs_key_get
+    def test_get_catalog(self) -> None:
+        """Test case for get_catalog
 
         Obtener un catálogo por clave
+        """
+        pass
+
+    def test_get_producto_sunat(self) -> None:
+        """Test case for get_producto_sunat
+
+        Obtener un Código de Producto SUNAT por código
         """
         pass
 
@@ -58,6 +65,20 @@ class TestSystemApi(unittest.TestCase):
         """Test case for internal_webhooks_stats_get
 
         Webhook delivery statistics (internal)
+        """
+        pass
+
+    def test_list_catalogs(self) -> None:
+        """Test case for list_catalogs
+
+        Listar catálogos SUNAT (código → descripción)
+        """
+        pass
+
+    def test_search_producto_sunat(self) -> None:
+        """Test case for search_producto_sunat
+
+        Buscar Código de Producto SUNAT (Catálogo 25 / UNSPSC)
         """
         pass
 

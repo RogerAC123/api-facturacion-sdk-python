@@ -26,66 +26,66 @@ class TestAuthApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_auth_login_post(self) -> None:
-        """Test case for api_v1_auth_login_post
-
-        Login email+password
-        """
-        pass
-
-    def test_api_v1_auth_logout_post(self) -> None:
-        """Test case for api_v1_auth_logout_post
-
-        Cerrar sesión actual (revoca refresh)
-        """
-        pass
-
-    def test_api_v1_auth_me_get(self) -> None:
-        """Test case for api_v1_auth_me_get
+    def test_get_current_user(self) -> None:
+        """Test case for get_current_user
 
         Datos del usuario actual
         """
         pass
 
-    def test_api_v1_auth_refresh_post(self) -> None:
-        """Test case for api_v1_auth_refresh_post
-
-        Renovar access token con refresh cookie
-        """
-        pass
-
-    def test_api_v1_auth_sessions_get(self) -> None:
-        """Test case for api_v1_auth_sessions_get
+    def test_list_sessions(self) -> None:
+        """Test case for list_sessions
 
         Lista de sesiones activas del usuario
         """
         pass
 
-    def test_api_v1_auth_sessions_id_delete(self) -> None:
-        """Test case for api_v1_auth_sessions_id_delete
+    def test_login(self) -> None:
+        """Test case for login
+
+        Login email+password
+        """
+        pass
+
+    def test_logout(self) -> None:
+        """Test case for logout
+
+        Cerrar sesión actual (revoca refresh)
+        """
+        pass
+
+    def test_refresh_token(self) -> None:
+        """Test case for refresh_token
+
+        Renovar access token con refresh cookie
+        """
+        pass
+
+    def test_resend_verification_email(self) -> None:
+        """Test case for resend_verification_email
+
+        Re-enviar email de verificación al usuario logueado
+        """
+        pass
+
+    def test_revoke_session(self) -> None:
+        """Test case for revoke_session
 
         Revocar una sesión activa por ID
         """
         pass
 
-    def test_api_v1_auth_signup_post(self) -> None:
-        """Test case for api_v1_auth_signup_post
+    def test_signup(self) -> None:
+        """Test case for signup
 
         Registro público: crea Tenant + User + sesión
         """
         pass
 
-    def test_api_v1_auth_verify_email_get(self) -> None:
-        """Test case for api_v1_auth_verify_email_get
+    def test_verify_email(self) -> None:
+        """Test case for verify_email
 
         Confirmar email con token (one-time, 24h)
-        """
-        pass
-
-    def test_api_v1_auth_verify_email_resend_post(self) -> None:
-        """Test case for api_v1_auth_verify_email_resend_post
-
-        Re-enviar email de verificación al usuario logueado
         """
         pass
 

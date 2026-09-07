@@ -64,7 +64,7 @@ class SendDespatchTransportistaRequest(BaseModel):
     guia_num_bultos: Optional[Annotated[int, Field(le=9007199254740991, strict=True, ge=0)]] = Field(default=None, alias="guiaNumBultos")
     guia_fec_traslado: Optional[StrictStr] = Field(alias="guiaFecTraslado")
     chofer: Annotated[List[SendDespatchRequestChoferInner], Field(min_length=1, max_length=10)]
-    guia_vehiculo_placa: Annotated[str, Field(min_length=1, strict=True, max_length=8)] = Field(alias="guiaVehiculoPlaca")
+    guia_vehiculo_placa: Annotated[str, Field(min_length=1, strict=True, max_length=10)] = Field(alias="guiaVehiculoPlaca")
     guia_vehiculo_tuc: Optional[Annotated[str, Field(strict=True, max_length=15)]] = Field(default=None, alias="guiaVehiculoTuc")
     vehiculos_secundarios: Optional[Annotated[List[SendDespatchTransportistaRequestVehiculosSecundariosInner], Field(max_length=2)]] = Field(default=None, alias="vehiculosSecundarios")
     guia_partida_ubigeo: Annotated[str, Field(min_length=6, strict=True, max_length=6)] = Field(alias="guiaPartidaUbigeo")
@@ -124,6 +124,13 @@ class SendDespatchTransportistaRequest(BaseModel):
 
         if value not in set(['DOMICILIO', 'AGENCIA']):
             raise ValueError("must be one of enum values ('DOMICILIO', 'AGENCIA')")
+        return value
+
+    @field_validator('guia_vehiculo_placa', mode="before")
+    def guia_vehiculo_placa_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if isinstance(value, str) and not re.match(r"^[A-Z0-9]+$", value):
+            raise ValueError(r"must validate the regular expression /^[A-Z0-9]+$/")
         return value
 
     model_config = ConfigDict(

@@ -35,13 +35,13 @@ class TestGetNextCorrelativo200Response(unittest.TestCase):
         model = GetNextCorrelativo200Response()
         if include_optional:
             return GetNextCorrelativo200Response(
-                success = true,
+                success = True,
                 data = intifact_sdk.models.get_next_correlativo_200_response_data.getNextCorrelativo_200_response_data(
                     next = '', )
             )
         else:
             return GetNextCorrelativo200Response(
-                success = true,
+                success = True,
                 data = intifact_sdk.models.get_next_correlativo_200_response_data.getNextCorrelativo_200_response_data(
                     next = '', ),
         )

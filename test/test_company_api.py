@@ -26,45 +26,45 @@ class TestCompanyApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_companies_claim_post(self) -> None:
-        """Test case for api_v1_companies_claim_post
+    def test_claim_company(self) -> None:
+        """Test case for claim_company
 
         Reclamar un RUC registrado por otra cuenta, con su certificado
         """
         pass
 
-    def test_api_v1_companies_get(self) -> None:
-        """Test case for api_v1_companies_get
+    def test_create_company(self) -> None:
+        """Test case for create_company
 
-        Listar empresas emisoras
+        Crear empresa emisora
         """
         pass
 
-    def test_api_v1_companies_id_get(self) -> None:
-        """Test case for api_v1_companies_id_get
+    def test_get_company(self) -> None:
+        """Test case for get_company
 
         Detalle de empresa
         """
         pass
 
-    def test_api_v1_companies_id_logo_get(self) -> None:
-        """Test case for api_v1_companies_id_logo_get
+    def test_get_company_logo(self) -> None:
+        """Test case for get_company_logo
 
         Obtener logo de la empresa (PNG/JPG)
         """
         pass
 
-    def test_api_v1_companies_id_put(self) -> None:
-        """Test case for api_v1_companies_id_put
+    def test_list_companies(self) -> None:
+        """Test case for list_companies
 
-        Actualizar empresa
+        Listar empresas emisoras
         """
         pass
 
-    def test_api_v1_companies_post(self) -> None:
-        """Test case for api_v1_companies_post
+    def test_update_company(self) -> None:
+        """Test case for update_company
 
-        Crear empresa emisora
+        Actualizar empresa
         """
         pass
 

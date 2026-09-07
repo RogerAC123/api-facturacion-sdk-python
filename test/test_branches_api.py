@@ -26,31 +26,31 @@ class TestBranchesApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_companies_id_branches_branch_id_delete(self) -> None:
-        """Test case for api_v1_companies_id_branches_branch_id_delete
+    def test_create_branch(self) -> None:
+        """Test case for create_branch
+
+        Crear establecimiento (sucursal)
+        """
+        pass
+
+    def test_deactivate_branch(self) -> None:
+        """Test case for deactivate_branch
 
         Desactivar establecimiento (soft-delete)
         """
         pass
 
-    def test_api_v1_companies_id_branches_branch_id_put(self) -> None:
-        """Test case for api_v1_companies_id_branches_branch_id_put
-
-        Actualizar establecimiento
-        """
-        pass
-
-    def test_api_v1_companies_id_branches_get(self) -> None:
-        """Test case for api_v1_companies_id_branches_get
+    def test_list_branches(self) -> None:
+        """Test case for list_branches
 
         Listar establecimientos (sucursales) de una empresa
         """
         pass
 
-    def test_api_v1_companies_id_branches_post(self) -> None:
-        """Test case for api_v1_companies_id_branches_post
+    def test_update_branch(self) -> None:
+        """Test case for update_branch
 
-        Crear establecimiento (sucursal)
+        Actualizar establecimiento
         """
         pass
 

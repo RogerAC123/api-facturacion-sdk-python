@@ -35,14 +35,14 @@ class TestSendDespatchRequestVehiculosSecundariosInner(unittest.TestCase):
         model = SendDespatchRequestVehiculosSecundariosInner()
         if include_optional:
             return SendDespatchRequestVehiculosSecundariosInner(
-                placa = '0',
+                placa = '80',
                 tuc = '',
                 autorizacion = '',
                 autorizacion_entidad = ''
             )
         else:
             return SendDespatchRequestVehiculosSecundariosInner(
-                placa = '0',
+                placa = '80',
         )
         """
 

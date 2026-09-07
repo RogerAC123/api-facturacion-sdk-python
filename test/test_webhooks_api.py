@@ -26,66 +26,66 @@ class TestWebhooksApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_webhooks_get(self) -> None:
-        """Test case for api_v1_webhooks_get
+    def test_create_webhook(self) -> None:
+        """Test case for create_webhook
 
-        Listar webhooks (filtra por RUC opcional)
+        Crear endpoint webhook
         """
         pass
 
-    def test_api_v1_webhooks_id_delete(self) -> None:
-        """Test case for api_v1_webhooks_id_delete
+    def test_delete_webhook(self) -> None:
+        """Test case for delete_webhook
 
         Eliminar webhook (también elimina su historial de deliveries)
         """
         pass
 
-    def test_api_v1_webhooks_id_deliveries_delivery_id_redeliver_post(self) -> None:
-        """Test case for api_v1_webhooks_id_deliveries_delivery_id_redeliver_post
-
-        Reintentar manualmente una entrega
-        """
-        pass
-
-    def test_api_v1_webhooks_id_deliveries_get(self) -> None:
-        """Test case for api_v1_webhooks_id_deliveries_get
-
-        Log de entregas del webhook
-        """
-        pass
-
-    def test_api_v1_webhooks_id_get(self) -> None:
-        """Test case for api_v1_webhooks_id_get
+    def test_get_webhook(self) -> None:
+        """Test case for get_webhook
 
         Detalle de webhook (sin secret)
         """
         pass
 
-    def test_api_v1_webhooks_id_put(self) -> None:
-        """Test case for api_v1_webhooks_id_put
+    def test_list_webhook_deliveries(self) -> None:
+        """Test case for list_webhook_deliveries
 
-        Actualizar webhook (url, eventos, activación)
+        Log de entregas del webhook
         """
         pass
 
-    def test_api_v1_webhooks_id_rotate_secret_post(self) -> None:
-        """Test case for api_v1_webhooks_id_rotate_secret_post
+    def test_list_webhooks(self) -> None:
+        """Test case for list_webhooks
+
+        Listar webhooks (filtra por RUC opcional)
+        """
+        pass
+
+    def test_redeliver_webhook_delivery(self) -> None:
+        """Test case for redeliver_webhook_delivery
+
+        Reintentar manualmente una entrega
+        """
+        pass
+
+    def test_rotate_webhook_secret(self) -> None:
+        """Test case for rotate_webhook_secret
 
         Rotar el secret de firma (devuelto UNA sola vez)
         """
         pass
 
-    def test_api_v1_webhooks_id_test_post(self) -> None:
-        """Test case for api_v1_webhooks_id_test_post
+    def test_test_webhook(self) -> None:
+        """Test case for test_webhook
 
         Enviar un evento de prueba (webhook.test)
         """
         pass
 
-    def test_api_v1_webhooks_post(self) -> None:
-        """Test case for api_v1_webhooks_post
+    def test_update_webhook(self) -> None:
+        """Test case for update_webhook
 
-        Crear endpoint webhook
+        Actualizar webhook (url, eventos, activación)
         """
         pass
 

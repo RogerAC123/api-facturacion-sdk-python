@@ -59,7 +59,7 @@ class TestComputeInvoice200Response(unittest.TestCase):
                             total_impuestos = 1.337, 
                             monto_precio_unitario = 1.337, 
                             factor_icbper = 1.337, 
-                            cod_prod_sunat = '', )
+                            cod_prod_sunat = '04807288', )
                         ], 
                     monto_oper_gravadas = 1.337, 
                     monto_oper_exoneradas = 1.337, 
@@ -103,7 +103,7 @@ class TestComputeInvoice200Response(unittest.TestCase):
                             total_impuestos = 1.337, 
                             monto_precio_unitario = 1.337, 
                             factor_icbper = 1.337, 
-                            cod_prod_sunat = '', )
+                            cod_prod_sunat = '04807288', )
                         ], 
                     monto_oper_gravadas = 1.337, 
                     monto_oper_exoneradas = 1.337, 

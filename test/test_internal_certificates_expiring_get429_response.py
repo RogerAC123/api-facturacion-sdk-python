@@ -35,7 +35,7 @@ class TestInternalCertificatesExpiringGet429Response(unittest.TestCase):
         model = InternalCertificatesExpiringGet429Response()
         if include_optional:
             return InternalCertificatesExpiringGet429Response(
-                success = false,
+                success = True,
                 message = '',
                 code = '',
                 errors = [
@@ -47,7 +47,7 @@ class TestInternalCertificatesExpiringGet429Response(unittest.TestCase):
             )
         else:
             return InternalCertificatesExpiringGet429Response(
-                success = false,
+                success = True,
                 message = '',
         )
         """

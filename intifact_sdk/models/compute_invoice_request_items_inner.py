@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from intifact_sdk.models.compute_invoice_request_items_inner_descuento import ComputeInvoiceRequestItemsInnerDescuento
@@ -39,8 +39,18 @@ class ComputeInvoiceRequestItemsInner(BaseModel):
     descuento: Optional[ComputeInvoiceRequestItemsInnerDescuento] = None
     factor_icbper: Optional[Union[Annotated[float, Field(strict=True, ge=0)], Annotated[int, Field(strict=True, ge=0)]]] = Field(default=0, alias="factorIcbper")
     marca: Optional[Annotated[str, Field(strict=True, max_length=100)]] = None
-    cod_prod_sunat: Optional[Annotated[str, Field(strict=True, max_length=20)]] = Field(default=None, alias="codProdSunat")
+    cod_prod_sunat: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, alias="codProdSunat")
     __properties: ClassVar[List[str]] = ["descripcion", "cantidad", "valorUnitario", "unidad", "codProducto", "afectacion", "igvPorcentaje", "descuento", "factorIcbper", "marca", "codProdSunat"]
+
+    @field_validator('cod_prod_sunat', mode="before")
+    def cod_prod_sunat_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if isinstance(value, str) and not re.match(r"^\d{8}$", value):
+            raise ValueError(r"must validate the regular expression /^\d{8}$/")
+        return value
 
     model_config = ConfigDict(
         validate_by_name=True,

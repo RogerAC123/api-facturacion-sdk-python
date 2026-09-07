@@ -62,7 +62,7 @@ class SendDespatchRequest(BaseModel):
     guia_peso_total: Union[Annotated[float, Field(strict=True, gt=0)], Annotated[int, Field(strict=True, gt=0)]] = Field(alias="guiaPesoTotal")
     guia_und_peso_total: Optional[StrictStr] = Field(default='KGM', alias="guiaUndPesoTotal")
     guia_fec_traslado: Optional[StrictStr] = Field(alias="guiaFecTraslado")
-    guia_vehiculo_placa: Optional[Annotated[str, Field(strict=True, max_length=10)]] = Field(default=None, alias="guiaVehiculoPlaca")
+    guia_vehiculo_placa: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=10)]] = Field(default=None, alias="guiaVehiculoPlaca")
     transportista_tipo_doc: Optional[StrictStr] = Field(default=None, alias="transportistaTipoDoc")
     transportista_num_doc: Optional[StrictStr] = Field(default=None, alias="transportistaNumDoc")
     transportista_razon_social: Optional[StrictStr] = Field(default=None, alias="transportistaRazonSocial")
@@ -154,6 +154,16 @@ class SendDespatchRequest(BaseModel):
         """Validates the enum"""
         if value not in set(['01', '02']):
             raise ValueError("must be one of enum values ('01', '02')")
+        return value
+
+    @field_validator('guia_vehiculo_placa', mode="before")
+    def guia_vehiculo_placa_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if isinstance(value, str) and not re.match(r"^[A-Z0-9]+$", value):
+            raise ValueError(r"must validate the regular expression /^[A-Z0-9]+$/")
         return value
 
     @field_validator('transportista_nro_mtc', mode="before")

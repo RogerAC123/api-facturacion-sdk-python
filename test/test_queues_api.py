@@ -26,8 +26,8 @@ class TestQueuesApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_queues_stats_get(self) -> None:
-        """Test case for api_v1_queues_stats_get
+    def test_get_queue_stats(self) -> None:
+        """Test case for get_queue_stats
 
         Estado de las colas BullMQ
         """

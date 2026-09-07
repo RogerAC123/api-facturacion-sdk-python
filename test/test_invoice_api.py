@@ -26,36 +26,36 @@ class TestInvoiceApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_invoice_compute_post(self) -> None:
-        """Test case for api_v1_invoice_compute_post
+    def test_compute_invoice(self) -> None:
+        """Test case for compute_invoice
 
         Calcular importes (IGV, descuentos, totales) sin emitir
         """
         pass
 
-    def test_api_v1_invoice_id_cdr_get(self) -> None:
-        """Test case for api_v1_invoice_id_cdr_get
+    def test_get_invoice_cdr(self) -> None:
+        """Test case for get_invoice_cdr
 
         Descargar CDR (constancia de SUNAT)
         """
         pass
 
-    def test_api_v1_invoice_id_pdf_get(self) -> None:
-        """Test case for api_v1_invoice_id_pdf_get
+    def test_get_invoice_pdf(self) -> None:
+        """Test case for get_invoice_pdf
 
         Obtener PDF (A4 oficina, ticket 80mm o ticket 58mm POS)
         """
         pass
 
-    def test_api_v1_invoice_id_xml_get(self) -> None:
-        """Test case for api_v1_invoice_id_xml_get
+    def test_get_invoice_xml(self) -> None:
+        """Test case for get_invoice_xml
 
         Descargar XML firmado
         """
         pass
 
-    def test_api_v1_invoice_send_post(self) -> None:
-        """Test case for api_v1_invoice_send_post
+    def test_send_invoice(self) -> None:
+        """Test case for send_invoice
 
         Enviar factura (01) o boleta (03) a SUNAT
         """

@@ -26,22 +26,22 @@ class TestPublicApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_public_consultar_ruc_tipo_doc_serie_numero_get(self) -> None:
-        """Test case for api_v1_public_consultar_ruc_tipo_doc_serie_numero_get
+    def test_consultar_comprobante(self) -> None:
+        """Test case for consultar_comprobante
 
         Consultar un comprobante (público, sin auth)
         """
         pass
 
-    def test_api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get(self) -> None:
-        """Test case for api_v1_public_consultar_ruc_tipo_doc_serie_numero_pdf_get
+    def test_consultar_comprobante_pdf(self) -> None:
+        """Test case for consultar_comprobante_pdf
 
         Descargar PDF del comprobante (público)
         """
         pass
 
-    def test_api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get(self) -> None:
-        """Test case for api_v1_public_consultar_ruc_tipo_doc_serie_numero_xml_get
+    def test_consultar_comprobante_xml(self) -> None:
+        """Test case for consultar_comprobante_xml
 
         Descargar XML firmado (público)
         """

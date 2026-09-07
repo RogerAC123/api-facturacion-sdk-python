@@ -61,7 +61,7 @@ class TestSendDespatchRequest(unittest.TestCase):
                 guia_peso_total = 0,
                 guia_und_peso_total = 'KGM',
                 guia_fec_traslado = '',
-                guia_vehiculo_placa = '',
+                guia_vehiculo_placa = '80',
                 transportista_tipo_doc = '',
                 transportista_num_doc = '',
                 transportista_razon_social = '',
@@ -104,7 +104,7 @@ class TestSendDespatchRequest(unittest.TestCase):
                 guia_vehiculo_autorizacion_entidad = '',
                 vehiculos_secundarios = [
                     intifact_sdk.models.send_despatch_request_vehiculos_secundarios_inner.sendDespatch_request_vehiculosSecundarios_inner(
-                        placa = '0', 
+                        placa = '80', 
                         tuc = '', 
                         autorizacion = '', 
                         autorizacion_entidad = '', )

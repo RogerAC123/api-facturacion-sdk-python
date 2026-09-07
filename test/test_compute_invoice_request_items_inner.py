@@ -47,7 +47,7 @@ class TestComputeInvoiceRequestItemsInner(unittest.TestCase):
                     monto = 0, ),
                 factor_icbper = 0,
                 marca = '',
-                cod_prod_sunat = ''
+                cod_prod_sunat = '04807288'
             )
         else:
             return ComputeInvoiceRequestItemsInner(

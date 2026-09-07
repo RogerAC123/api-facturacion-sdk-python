@@ -26,31 +26,31 @@ class TestPlansApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_plans_get(self) -> None:
-        """Test case for api_v1_plans_get
+    def test_create_plan(self) -> None:
+        """Test case for create_plan
 
-        Listar planes (solo master)
+        Crear plan
         """
         pass
 
-    def test_api_v1_plans_id_delete(self) -> None:
-        """Test case for api_v1_plans_id_delete
+    def test_deactivate_plan(self) -> None:
+        """Test case for deactivate_plan
 
         Desactivar plan (soft-delete)
         """
         pass
 
-    def test_api_v1_plans_id_put(self) -> None:
-        """Test case for api_v1_plans_id_put
+    def test_list_plans(self) -> None:
+        """Test case for list_plans
 
-        Actualizar plan (precio, docs, nombre, estado)
+        Listar planes (solo master)
         """
         pass
 
-    def test_api_v1_plans_post(self) -> None:
-        """Test case for api_v1_plans_post
+    def test_update_plan(self) -> None:
+        """Test case for update_plan
 
-        Crear plan
+        Actualizar plan (precio, docs, nombre, estado)
         """
         pass
 

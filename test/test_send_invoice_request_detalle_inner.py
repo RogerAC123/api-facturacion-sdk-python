@@ -51,7 +51,7 @@ class TestSendInvoiceRequestDetalleInner(unittest.TestCase):
                 descuento = 0,
                 descuento_item = 0,
                 factor_icbper = 0,
-                cod_prod_sunat = ''
+                cod_prod_sunat = '04807288'
             )
         else:
             return SendInvoiceRequestDetalleInner(

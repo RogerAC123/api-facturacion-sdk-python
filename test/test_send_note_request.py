@@ -82,7 +82,7 @@ class TestSendNoteRequest(unittest.TestCase):
                         descuento = 0, 
                         descuento_item = 0, 
                         factor_icbper = 0, 
-                        cod_prod_sunat = '', )
+                        cod_prod_sunat = '04807288', )
                     ],
                 leyendas = [
                     intifact_sdk.models.send_invoice_request_leyendas_inner.sendInvoice_request_leyendas_inner(
@@ -128,7 +128,7 @@ class TestSendNoteRequest(unittest.TestCase):
                         descuento = 0, 
                         descuento_item = 0, 
                         factor_icbper = 0, 
-                        cod_prod_sunat = '', )
+                        cod_prod_sunat = '04807288', )
                     ],
                 leyendas = [
                     intifact_sdk.models.send_invoice_request_leyendas_inner.sendInvoice_request_leyendas_inner(

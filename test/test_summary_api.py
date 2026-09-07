@@ -26,36 +26,36 @@ class TestSummaryApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_boleta_cancel_post(self) -> None:
-        """Test case for api_v1_boleta_cancel_post
+    def test_cancel_boleta(self) -> None:
+        """Test case for cancel_boleta
 
         Anular boleta via resumen diario (estado=3)
         """
         pass
 
-    def test_api_v1_invoice_cancel_post(self) -> None:
-        """Test case for api_v1_invoice_cancel_post
+    def test_cancel_invoice(self) -> None:
+        """Test case for cancel_invoice
 
         Anular factura via comunicación de baja
         """
         pass
 
-    def test_api_v1_summary_send_post(self) -> None:
-        """Test case for api_v1_summary_send_post
-
-        Enviar resumen diario de boletas (RC)
-        """
-        pass
-
-    def test_api_v1_ticket_ticket_status_get(self) -> None:
-        """Test case for api_v1_ticket_ticket_status_get
+    def test_get_ticket_status(self) -> None:
+        """Test case for get_ticket_status
 
         Consultar estado de ticket asíncrono (SOAP o GRE)
         """
         pass
 
-    def test_api_v1_voided_send_post(self) -> None:
-        """Test case for api_v1_voided_send_post
+    def test_send_summary(self) -> None:
+        """Test case for send_summary
+
+        Enviar resumen diario de boletas (RC)
+        """
+        pass
+
+    def test_send_voided(self) -> None:
+        """Test case for send_voided
 
         Enviar comunicación de baja (RA)
         """

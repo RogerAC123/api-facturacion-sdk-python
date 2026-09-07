@@ -26,43 +26,43 @@ class TestDespatchApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_despatch_id_cdr_get(self) -> None:
-        """Test case for api_v1_despatch_id_cdr_get
+    def test_get_despatch_cdr(self) -> None:
+        """Test case for get_despatch_cdr
 
         Descargar CDR (constancia de SUNAT)
         """
         pass
 
-    def test_api_v1_despatch_id_pdf_get(self) -> None:
-        """Test case for api_v1_despatch_id_pdf_get
+    def test_get_despatch_pdf(self) -> None:
+        """Test case for get_despatch_pdf
 
         Obtener PDF de la guía (A4 oficina, ticket 80mm o 58mm POS)
         """
         pass
 
-    def test_api_v1_despatch_id_xml_get(self) -> None:
-        """Test case for api_v1_despatch_id_xml_get
+    def test_get_despatch_xml(self) -> None:
+        """Test case for get_despatch_xml
 
         Descargar XML firmado de la guía
         """
         pass
 
-    def test_api_v1_despatch_send_multi_post(self) -> None:
-        """Test case for api_v1_despatch_send_multi_post
-
-        Enviar múltiples guías de remisión por destino
-        """
-        pass
-
-    def test_api_v1_despatch_send_post(self) -> None:
-        """Test case for api_v1_despatch_send_post
+    def test_send_despatch(self) -> None:
+        """Test case for send_despatch
 
         Enviar guía de remisión (09) via API GRE REST
         """
         pass
 
-    def test_api_v1_despatch_transportista_send_post(self) -> None:
-        """Test case for api_v1_despatch_transportista_send_post
+    def test_send_despatch_multi(self) -> None:
+        """Test case for send_despatch_multi
+
+        Enviar múltiples guías de remisión por destino
+        """
+        pass
+
+    def test_send_despatch_transportista(self) -> None:
+        """Test case for send_despatch_transportista
 
         Enviar guía de remisión TRANSPORTISTA (31) via API GRE REST
         """

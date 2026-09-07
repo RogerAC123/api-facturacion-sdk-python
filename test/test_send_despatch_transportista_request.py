@@ -75,11 +75,11 @@ class TestSendDespatchTransportistaRequest(unittest.TestCase):
                         nombres = '0', 
                         apellidos = '0', )
                     ],
-                guia_vehiculo_placa = '0',
+                guia_vehiculo_placa = '80',
                 guia_vehiculo_tuc = '',
                 vehiculos_secundarios = [
                     intifact_sdk.models.send_despatch_transportista_request_vehiculos_secundarios_inner.sendDespatchTransportista_request_vehiculosSecundarios_inner(
-                        placa = '0', 
+                        placa = '80', 
                         tuc = '', )
                     ],
                 guia_partida_ubigeo = '012345',
@@ -126,7 +126,7 @@ class TestSendDespatchTransportistaRequest(unittest.TestCase):
                         nombres = '0', 
                         apellidos = '0', )
                     ],
-                guia_vehiculo_placa = '0',
+                guia_vehiculo_placa = '80',
                 guia_partida_ubigeo = '012345',
                 guia_partida_direccion = '0',
                 guia_llegada_ubigeo = '012345',

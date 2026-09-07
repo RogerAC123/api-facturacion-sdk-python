@@ -26,45 +26,45 @@ class TestDocumentsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_api_v1_cdr_consultar_post(self) -> None:
-        """Test case for api_v1_cdr_consultar_post
+    def test_consultar_cdr(self) -> None:
+        """Test case for consultar_cdr
 
         Consultar el CDR de un comprobante en SUNAT por referencia
         """
         pass
 
-    def test_api_v1_documents_get(self) -> None:
-        """Test case for api_v1_documents_get
-
-        Listar documentos con filtros y paginación
-        """
-        pass
-
-    def test_api_v1_documents_id_get(self) -> None:
-        """Test case for api_v1_documents_id_get
+    def test_get_document(self) -> None:
+        """Test case for get_document
 
         Detalle completo de un documento
         """
         pass
 
-    def test_api_v1_documents_id_recover_post(self) -> None:
-        """Test case for api_v1_documents_id_recover_post
+    def test_get_next_correlativo(self) -> None:
+        """Test case for get_next_correlativo
+
+        Obtener el siguiente correlativo disponible para una serie
+        """
+        pass
+
+    def test_list_documents(self) -> None:
+        """Test case for list_documents
+
+        Listar documentos con filtros y paginación
+        """
+        pass
+
+    def test_reconcile_document(self) -> None:
+        """Test case for reconcile_document
 
         Reconciliar un documento con SUNAT (consulta de CDR, solo master)
         """
         pass
 
-    def test_api_v1_documents_id_retry_post(self) -> None:
-        """Test case for api_v1_documents_id_retry_post
+    def test_retry_document(self) -> None:
+        """Test case for retry_document
 
         Re-encolar un documento fallido
-        """
-        pass
-
-    def test_api_v1_documents_next_correlativo_get(self) -> None:
-        """Test case for api_v1_documents_next_correlativo_get
-
-        Obtener el siguiente correlativo disponible para una serie
         """
         pass
 

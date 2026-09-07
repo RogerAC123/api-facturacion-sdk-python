@@ -44,7 +44,7 @@ class TestSendDespatchMultiRequest(unittest.TestCase):
                 guia_cod_traslado = '0',
                 guia_mod_traslado = '01',
                 guia_fec_traslado = '',
-                guia_vehiculo_placa = '',
+                guia_vehiculo_placa = '80',
                 transportista_tipo_doc = '',
                 transportista_num_doc = '',
                 transportista_razon_social = '',
@@ -83,7 +83,7 @@ class TestSendDespatchMultiRequest(unittest.TestCase):
                 guia_vehiculo_autorizacion_entidad = '',
                 vehiculos_secundarios = [
                     intifact_sdk.models.send_despatch_request_vehiculos_secundarios_inner.sendDespatch_request_vehiculosSecundarios_inner(
-                        placa = '0', 
+                        placa = '80', 
                         tuc = '', 
                         autorizacion = '', 
                         autorizacion_entidad = '', )

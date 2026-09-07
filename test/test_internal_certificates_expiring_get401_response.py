@@ -35,7 +35,7 @@ class TestInternalCertificatesExpiringGet401Response(unittest.TestCase):
         model = InternalCertificatesExpiringGet401Response()
         if include_optional:
             return InternalCertificatesExpiringGet401Response(
-                success = false,
+                success = True,
                 message = '',
                 code = '',
                 errors = [
@@ -46,7 +46,7 @@ class TestInternalCertificatesExpiringGet401Response(unittest.TestCase):
             )
         else:
             return InternalCertificatesExpiringGet401Response(
-                success = false,
+                success = True,
                 message = '',
         )
         """

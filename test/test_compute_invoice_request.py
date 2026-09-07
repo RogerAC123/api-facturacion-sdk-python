@@ -50,7 +50,7 @@ class TestComputeInvoiceRequest(unittest.TestCase):
                             monto = 0, ), 
                         factor_icbper = 0, 
                         marca = '', 
-                        cod_prod_sunat = '', )
+                        cod_prod_sunat = '04807288', )
                     ],
                 descuento_global = intifact_sdk.models.compute_invoice_request_items_inner_descuento.computeInvoice_request_items_inner_descuento(
                     porcentaje = 0, 
@@ -73,7 +73,7 @@ class TestComputeInvoiceRequest(unittest.TestCase):
                             monto = 0, ), 
                         factor_icbper = 0, 
                         marca = '', 
-                        cod_prod_sunat = '', )
+                        cod_prod_sunat = '04807288', )
                     ],
         )
         """

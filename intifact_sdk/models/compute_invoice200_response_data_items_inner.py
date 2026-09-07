@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -45,9 +46,19 @@ class ComputeInvoice200ResponseDataItemsInner(BaseModel):
     total_impuestos: Union[StrictFloat, StrictInt] = Field(alias="totalImpuestos")
     monto_precio_unitario: Union[StrictFloat, StrictInt] = Field(alias="montoPrecioUnitario")
     factor_icbper: Union[StrictFloat, StrictInt] = Field(alias="factorIcbper")
-    cod_prod_sunat: Optional[StrictStr] = Field(default=None, alias="codProdSunat")
+    cod_prod_sunat: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, alias="codProdSunat")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["unidad", "cantidad", "codProducto", "descripcion", "marca", "tipAfeIgv", "porcentajeIgv", "montoValorUnitario", "descuento", "descuentoItem", "descuentoGlobalLinea", "montoBruto", "montoValorVenta", "montoBaseIgv", "igv", "totalImpuestos", "montoPrecioUnitario", "factorIcbper", "codProdSunat"]
+
+    @field_validator('cod_prod_sunat', mode="before")
+    def cod_prod_sunat_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if value is None:
+            return value
+
+        if isinstance(value, str) and not re.match(r"^\d{8}$", value):
+            raise ValueError(r"must validate the regular expression /^\d{8}$/")
+        return value
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -119,11 +130,6 @@ class ComputeInvoice200ResponseDataItemsInner(BaseModel):
         # and model_fields_set contains the field
         if self.tip_afe_igv is None and "tip_afe_igv" in self.model_fields_set:
             _dict['tipAfeIgv'] = None
-
-        # set to None if cod_prod_sunat (nullable) is None
-        # and model_fields_set contains the field
-        if self.cod_prod_sunat is None and "cod_prod_sunat" in self.model_fields_set:
-            _dict['codProdSunat'] = None
 
         return _dict
 

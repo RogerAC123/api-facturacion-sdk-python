@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -28,9 +28,16 @@ class SendDespatchTransportistaRequestVehiculosSecundariosInner(BaseModel):
     """
     SendDespatchTransportistaRequestVehiculosSecundariosInner
     """ # noqa: E501
-    placa: Annotated[str, Field(min_length=1, strict=True, max_length=8)]
+    placa: Annotated[str, Field(min_length=1, strict=True, max_length=10)]
     tuc: Optional[Annotated[str, Field(strict=True, max_length=15)]] = None
     __properties: ClassVar[List[str]] = ["placa", "tuc"]
+
+    @field_validator('placa', mode="before")
+    def placa_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if isinstance(value, str) and not re.match(r"^[A-Z0-9]+$", value):
+            raise ValueError(r"must validate the regular expression /^[A-Z0-9]+$/")
+        return value
 
     model_config = ConfigDict(
         validate_by_name=True,

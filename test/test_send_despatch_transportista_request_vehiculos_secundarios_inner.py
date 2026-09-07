@@ -35,12 +35,12 @@ class TestSendDespatchTransportistaRequestVehiculosSecundariosInner(unittest.Tes
         model = SendDespatchTransportistaRequestVehiculosSecundariosInner()
         if include_optional:
             return SendDespatchTransportistaRequestVehiculosSecundariosInner(
-                placa = '0',
+                placa = '80',
                 tuc = ''
             )
         else:
             return SendDespatchTransportistaRequestVehiculosSecundariosInner(
-                placa = '0',
+                placa = '80',
         )
         """
 
