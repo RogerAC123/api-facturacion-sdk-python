@@ -1,6 +1,6 @@
 [project]
 name = "intifact"
-version = "2.0.0"
+version = "2.1.0"
 description = "SDK Python para la API de Facturacion Electronica SUNAT de Intifact (Peru)"
 authors = [
   {name = "Roger", email = "huallanca.roger@gmail.com"},
