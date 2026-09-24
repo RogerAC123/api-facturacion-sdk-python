@@ -29,8 +29,9 @@ class ListDocuments200ResponseDataInnerCompany(BaseModel):
     """ # noqa: E501
     ruc: Optional[StrictStr]
     razon_social: Optional[StrictStr] = Field(alias="razonSocial")
+    tenant_id: Optional[StrictStr] = Field(default=None, alias="tenantId")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["ruc", "razonSocial"]
+    __properties: ClassVar[List[str]] = ["ruc", "razonSocial", "tenantId"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,6 +89,11 @@ class ListDocuments200ResponseDataInnerCompany(BaseModel):
         if self.razon_social is None and "razon_social" in self.model_fields_set:
             _dict['razonSocial'] = None
 
+        # set to None if tenant_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.tenant_id is None and "tenant_id" in self.model_fields_set:
+            _dict['tenantId'] = None
+
         return _dict
 
     @classmethod
@@ -101,7 +107,8 @@ class ListDocuments200ResponseDataInnerCompany(BaseModel):
 
         _obj = cls.model_validate({
             "ruc": obj.get("ruc"),
-            "razonSocial": obj.get("razonSocial")
+            "razonSocial": obj.get("razonSocial"),
+            "tenantId": obj.get("tenantId")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "2.1.0"
+__version__ = "3.0.0"
 
 # Define package exports
 __all__ = [
@@ -30,7 +30,6 @@ __all__ = [
     "QueuesApi",
     "SummaryApi",
     "SystemApi",
-    "WebhooksApi",
     "ApiResponse",
     "ApiClient",
     "Configuration",
@@ -42,7 +41,6 @@ __all__ = [
     "ApiException",
     "CancelBoletaRequest",
     "CancelInvoiceRequest",
-    "ClaimCompanyRequest",
     "ComputeInvoice200Response",
     "ComputeInvoice200ResponseData",
     "ComputeInvoice200ResponseDataItemsInner",
@@ -51,11 +49,7 @@ __all__ = [
     "ComputeInvoiceRequestItemsInnerDescuento",
     "ConsultarCdr200Response",
     "ConsultarCdrRequest",
-    "CreateBranchRequest",
-    "CreateCompanyRequest",
-    "CreateCompanyRequestCuentasBancariasInner",
     "CreatePlanRequest",
-    "CreateWebhookRequest",
     "ExportProductoSunat200Response",
     "ExportProductoSunat200ResponseData",
     "ExportProductoSunat200ResponseDataItemsInner",
@@ -118,10 +112,7 @@ __all__ = [
     "SendVoidedRequest",
     "SendVoidedRequestItemsInner",
     "SignupRequest",
-    "UpdateBranchRequest",
-    "UpdateCompanyRequest",
     "UpdatePlanRequest",
-    "UpdateWebhookRequest",
 ]
 
 # import apis into sdk package
@@ -137,7 +128,6 @@ from intifact_sdk.api.public_api import PublicApi as PublicApi
 from intifact_sdk.api.queues_api import QueuesApi as QueuesApi
 from intifact_sdk.api.summary_api import SummaryApi as SummaryApi
 from intifact_sdk.api.system_api import SystemApi as SystemApi
-from intifact_sdk.api.webhooks_api import WebhooksApi as WebhooksApi
 
 # import ApiClient
 from intifact_sdk.api_response import ApiResponse as ApiResponse
@@ -153,7 +143,6 @@ from intifact_sdk.exceptions import ApiException as ApiException
 # import models into sdk package
 from intifact_sdk.models.cancel_boleta_request import CancelBoletaRequest as CancelBoletaRequest
 from intifact_sdk.models.cancel_invoice_request import CancelInvoiceRequest as CancelInvoiceRequest
-from intifact_sdk.models.claim_company_request import ClaimCompanyRequest as ClaimCompanyRequest
 from intifact_sdk.models.compute_invoice200_response import ComputeInvoice200Response as ComputeInvoice200Response
 from intifact_sdk.models.compute_invoice200_response_data import ComputeInvoice200ResponseData as ComputeInvoice200ResponseData
 from intifact_sdk.models.compute_invoice200_response_data_items_inner import ComputeInvoice200ResponseDataItemsInner as ComputeInvoice200ResponseDataItemsInner
@@ -162,11 +151,7 @@ from intifact_sdk.models.compute_invoice_request_items_inner import ComputeInvoi
 from intifact_sdk.models.compute_invoice_request_items_inner_descuento import ComputeInvoiceRequestItemsInnerDescuento as ComputeInvoiceRequestItemsInnerDescuento
 from intifact_sdk.models.consultar_cdr200_response import ConsultarCdr200Response as ConsultarCdr200Response
 from intifact_sdk.models.consultar_cdr_request import ConsultarCdrRequest as ConsultarCdrRequest
-from intifact_sdk.models.create_branch_request import CreateBranchRequest as CreateBranchRequest
-from intifact_sdk.models.create_company_request import CreateCompanyRequest as CreateCompanyRequest
-from intifact_sdk.models.create_company_request_cuentas_bancarias_inner import CreateCompanyRequestCuentasBancariasInner as CreateCompanyRequestCuentasBancariasInner
 from intifact_sdk.models.create_plan_request import CreatePlanRequest as CreatePlanRequest
-from intifact_sdk.models.create_webhook_request import CreateWebhookRequest as CreateWebhookRequest
 from intifact_sdk.models.export_producto_sunat200_response import ExportProductoSunat200Response as ExportProductoSunat200Response
 from intifact_sdk.models.export_producto_sunat200_response_data import ExportProductoSunat200ResponseData as ExportProductoSunat200ResponseData
 from intifact_sdk.models.export_producto_sunat200_response_data_items_inner import ExportProductoSunat200ResponseDataItemsInner as ExportProductoSunat200ResponseDataItemsInner
@@ -229,8 +214,5 @@ from intifact_sdk.models.send_summary_request_items_inner import SendSummaryRequ
 from intifact_sdk.models.send_voided_request import SendVoidedRequest as SendVoidedRequest
 from intifact_sdk.models.send_voided_request_items_inner import SendVoidedRequestItemsInner as SendVoidedRequestItemsInner
 from intifact_sdk.models.signup_request import SignupRequest as SignupRequest
-from intifact_sdk.models.update_branch_request import UpdateBranchRequest as UpdateBranchRequest
-from intifact_sdk.models.update_company_request import UpdateCompanyRequest as UpdateCompanyRequest
 from intifact_sdk.models.update_plan_request import UpdatePlanRequest as UpdatePlanRequest
-from intifact_sdk.models.update_webhook_request import UpdateWebhookRequest as UpdateWebhookRequest
 

@@ -1,6 +1,6 @@
 # intifact_sdk.DocumentsApi
 
-All URIs are relative to *http://localhost:3000*
+All URIs are relative to *http://localhost:3099*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -30,10 +30,10 @@ from intifact_sdk.models.consultar_cdr_request import ConsultarCdrRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -110,10 +110,10 @@ import intifact_sdk
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -188,10 +188,10 @@ from intifact_sdk.models.get_next_correlativo200_response import GetNextCorrelat
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -258,7 +258,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_documents**
-> ListDocuments200Response list_documents(ruc=ruc, tipo_doc=tipo_doc, serie=serie, estado=estado, env=env, fecha_desde=fecha_desde, fecha_hasta=fecha_hasta, cliente_num_doc=cliente_num_doc, page=page, limit=limit)
+> ListDocuments200Response list_documents(ruc=ruc, tenant_id=tenant_id, tipo_doc=tipo_doc, serie=serie, correlativo=correlativo, estado=estado, env=env, fecha_desde=fecha_desde, fecha_hasta=fecha_hasta, cliente_num_doc=cliente_num_doc, page=page, limit=limit)
 
 Listar documentos con filtros y paginación
 
@@ -272,10 +272,10 @@ from intifact_sdk.models.list_documents200_response import ListDocuments200Respo
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -293,8 +293,10 @@ with intifact_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = intifact_sdk.DocumentsApi(api_client)
     ruc = 'ruc_example' # str |  (optional)
+    tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
     tipo_doc = 'tipo_doc_example' # str |  (optional)
     serie = 'serie_example' # str |  (optional)
+    correlativo = 'correlativo_example' # str |  (optional)
     estado = 'estado_example' # str |  (optional)
     env = 'env_example' # str |  (optional)
     fecha_desde = 'fecha_desde_example' # str |  (optional)
@@ -305,7 +307,7 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 
     try:
         # Listar documentos con filtros y paginación
-        api_response = api_instance.list_documents(ruc=ruc, tipo_doc=tipo_doc, serie=serie, estado=estado, env=env, fecha_desde=fecha_desde, fecha_hasta=fecha_hasta, cliente_num_doc=cliente_num_doc, page=page, limit=limit)
+        api_response = api_instance.list_documents(ruc=ruc, tenant_id=tenant_id, tipo_doc=tipo_doc, serie=serie, correlativo=correlativo, estado=estado, env=env, fecha_desde=fecha_desde, fecha_hasta=fecha_hasta, cliente_num_doc=cliente_num_doc, page=page, limit=limit)
         print("The response of DocumentsApi->list_documents:\n")
         pprint(api_response)
     except Exception as e:
@@ -320,8 +322,10 @@ with intifact_sdk.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ruc** | **str**|  | [optional] 
+ **tenant_id** | **UUID**|  | [optional] 
  **tipo_doc** | **str**|  | [optional] 
  **serie** | **str**|  | [optional] 
+ **correlativo** | **str**|  | [optional] 
  **estado** | **str**|  | [optional] 
  **env** | **str**|  | [optional] 
  **fecha_desde** | **str**|  | [optional] 
@@ -371,10 +375,10 @@ from intifact_sdk.models.reconcile_document200_response import ReconcileDocument
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -454,10 +458,10 @@ from intifact_sdk.models.retry_document202_response import RetryDocument202Respo
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 # The client must configure the authentication and authorization parameters

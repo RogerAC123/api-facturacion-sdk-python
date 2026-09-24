@@ -1,6 +1,6 @@
 # intifact_sdk.PublicApi
 
-All URIs are relative to *http://localhost:3000*
+All URIs are relative to *http://localhost:3099*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -24,10 +24,10 @@ import intifact_sdk
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 
@@ -99,10 +99,10 @@ import intifact_sdk
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 
@@ -174,10 +174,10 @@ import intifact_sdk
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 

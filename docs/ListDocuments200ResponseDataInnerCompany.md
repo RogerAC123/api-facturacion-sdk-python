@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ruc** | **str** |  | 
 **razon_social** | **str** |  | 
+**tenant_id** | **str** |  | [optional] 
 
 ## Example
 

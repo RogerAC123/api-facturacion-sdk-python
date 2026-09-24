@@ -8,7 +8,6 @@ docs/AuthApi.md
 docs/BranchesApi.md
 docs/CancelBoletaRequest.md
 docs/CancelInvoiceRequest.md
-docs/ClaimCompanyRequest.md
 docs/CompanyApi.md
 docs/ComputeInvoice200Response.md
 docs/ComputeInvoice200ResponseData.md
@@ -18,11 +17,7 @@ docs/ComputeInvoiceRequestItemsInner.md
 docs/ComputeInvoiceRequestItemsInnerDescuento.md
 docs/ConsultarCdr200Response.md
 docs/ConsultarCdrRequest.md
-docs/CreateBranchRequest.md
-docs/CreateCompanyRequest.md
-docs/CreateCompanyRequestCuentasBancariasInner.md
 docs/CreatePlanRequest.md
-docs/CreateWebhookRequest.md
 docs/DespatchApi.md
 docs/DocumentsApi.md
 docs/ExportProductoSunat200Response.md
@@ -94,11 +89,7 @@ docs/SendVoidedRequestItemsInner.md
 docs/SignupRequest.md
 docs/SummaryApi.md
 docs/SystemApi.md
-docs/UpdateBranchRequest.md
-docs/UpdateCompanyRequest.md
 docs/UpdatePlanRequest.md
-docs/UpdateWebhookRequest.md
-docs/WebhooksApi.md
 git_push.sh
 intifact_sdk/__init__.py
 intifact_sdk/api/__init__.py
@@ -114,7 +105,6 @@ intifact_sdk/api/public_api.py
 intifact_sdk/api/queues_api.py
 intifact_sdk/api/summary_api.py
 intifact_sdk/api/system_api.py
-intifact_sdk/api/webhooks_api.py
 intifact_sdk/api_client.py
 intifact_sdk/api_response.py
 intifact_sdk/configuration.py
@@ -122,7 +112,6 @@ intifact_sdk/exceptions.py
 intifact_sdk/models/__init__.py
 intifact_sdk/models/cancel_boleta_request.py
 intifact_sdk/models/cancel_invoice_request.py
-intifact_sdk/models/claim_company_request.py
 intifact_sdk/models/compute_invoice200_response.py
 intifact_sdk/models/compute_invoice200_response_data.py
 intifact_sdk/models/compute_invoice200_response_data_items_inner.py
@@ -131,11 +120,7 @@ intifact_sdk/models/compute_invoice_request_items_inner.py
 intifact_sdk/models/compute_invoice_request_items_inner_descuento.py
 intifact_sdk/models/consultar_cdr200_response.py
 intifact_sdk/models/consultar_cdr_request.py
-intifact_sdk/models/create_branch_request.py
-intifact_sdk/models/create_company_request.py
-intifact_sdk/models/create_company_request_cuentas_bancarias_inner.py
 intifact_sdk/models/create_plan_request.py
-intifact_sdk/models/create_webhook_request.py
 intifact_sdk/models/export_producto_sunat200_response.py
 intifact_sdk/models/export_producto_sunat200_response_data.py
 intifact_sdk/models/export_producto_sunat200_response_data_items_inner.py
@@ -198,10 +183,7 @@ intifact_sdk/models/send_summary_request_items_inner.py
 intifact_sdk/models/send_voided_request.py
 intifact_sdk/models/send_voided_request_items_inner.py
 intifact_sdk/models/signup_request.py
-intifact_sdk/models/update_branch_request.py
-intifact_sdk/models/update_company_request.py
 intifact_sdk/models/update_plan_request.py
-intifact_sdk/models/update_webhook_request.py
 intifact_sdk/py.typed
 intifact_sdk/rest.py
 pyproject.toml
@@ -214,7 +196,6 @@ test/test_auth_api.py
 test/test_branches_api.py
 test/test_cancel_boleta_request.py
 test/test_cancel_invoice_request.py
-test/test_claim_company_request.py
 test/test_company_api.py
 test/test_compute_invoice200_response.py
 test/test_compute_invoice200_response_data.py
@@ -224,11 +205,7 @@ test/test_compute_invoice_request_items_inner.py
 test/test_compute_invoice_request_items_inner_descuento.py
 test/test_consultar_cdr200_response.py
 test/test_consultar_cdr_request.py
-test/test_create_branch_request.py
-test/test_create_company_request.py
-test/test_create_company_request_cuentas_bancarias_inner.py
 test/test_create_plan_request.py
-test/test_create_webhook_request.py
 test/test_despatch_api.py
 test/test_documents_api.py
 test/test_export_producto_sunat200_response.py
@@ -300,9 +277,5 @@ test/test_send_voided_request_items_inner.py
 test/test_signup_request.py
 test/test_summary_api.py
 test/test_system_api.py
-test/test_update_branch_request.py
-test/test_update_company_request.py
 test/test_update_plan_request.py
-test/test_update_webhook_request.py
-test/test_webhooks_api.py
 tox.ini

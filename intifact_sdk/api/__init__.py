@@ -13,5 +13,4 @@ from intifact_sdk.api.public_api import PublicApi
 from intifact_sdk.api.queues_api import QueuesApi
 from intifact_sdk.api.summary_api import SummaryApi
 from intifact_sdk.api.system_api import SystemApi
-from intifact_sdk.api.webhooks_api import WebhooksApi
 

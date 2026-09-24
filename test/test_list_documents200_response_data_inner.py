@@ -53,7 +53,8 @@ class TestListDocuments200ResponseDataInner(unittest.TestCase):
                 created_at = '',
                 company = intifact_sdk.models.list_documents_200_response_data_inner_company.listDocuments_200_response_data_inner_company(
                     ruc = '', 
-                    razon_social = '', )
+                    razon_social = '', 
+                    tenant_id = '', )
             )
         else:
             return ListDocuments200ResponseDataInner(
@@ -73,7 +74,8 @@ class TestListDocuments200ResponseDataInner(unittest.TestCase):
                 created_at = '',
                 company = intifact_sdk.models.list_documents_200_response_data_inner_company.listDocuments_200_response_data_inner_company(
                     ruc = '', 
-                    razon_social = '', ),
+                    razon_social = '', 
+                    tenant_id = '', ),
         )
         """
 

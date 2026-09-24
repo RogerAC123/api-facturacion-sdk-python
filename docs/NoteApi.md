@@ -1,6 +1,6 @@
 # intifact_sdk.NoteApi
 
-All URIs are relative to *http://localhost:3000*
+All URIs are relative to *http://localhost:3099*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -29,10 +29,10 @@ from intifact_sdk.models.compute_invoice_request import ComputeInvoiceRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -107,10 +107,10 @@ import intifact_sdk
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -182,10 +182,10 @@ import intifact_sdk
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -257,10 +257,10 @@ import intifact_sdk
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -336,10 +336,10 @@ from intifact_sdk.models.send_note_request import SendNoteRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3000
+# Defining the host is optional and defaults to http://localhost:3099
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3000"
+    host = "http://localhost:3099"
 )
 
 # The client must configure the authentication and authorization parameters

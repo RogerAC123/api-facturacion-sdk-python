@@ -105,11 +105,6 @@ class SendDespatchMultiRequestDestinosInner(BaseModel):
             for _item_detalle in self.detalle:
                 _items.append(_item_detalle.to_dict() if _item_detalle is not None else None)
             _dict['detalle'] = _items
-        # set to None if destinatario_email (nullable) is None
-        # and model_fields_set contains the field
-        if self.destinatario_email is None and "destinatario_email" in self.model_fields_set:
-            _dict['destinatarioEmail'] = None
-
         return _dict
 
     @classmethod

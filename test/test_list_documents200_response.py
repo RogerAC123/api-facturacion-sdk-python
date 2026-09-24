@@ -56,7 +56,8 @@ class TestListDocuments200Response(unittest.TestCase):
                         created_at = '', 
                         company = intifact_sdk.models.list_documents_200_response_data_inner_company.listDocuments_200_response_data_inner_company(
                             ruc = '', 
-                            razon_social = '', ), )
+                            razon_social = '', 
+                            tenant_id = '', ), )
                     ],
                 pagination = intifact_sdk.models.list_documents_200_response_pagination.listDocuments_200_response_pagination(
                     page = 1.337, 
@@ -87,7 +88,8 @@ class TestListDocuments200Response(unittest.TestCase):
                         created_at = '', 
                         company = intifact_sdk.models.list_documents_200_response_data_inner_company.listDocuments_200_response_data_inner_company(
                             ruc = '', 
-                            razon_social = '', ), )
+                            razon_social = '', 
+                            tenant_id = '', ), )
                     ],
                 pagination = intifact_sdk.models.list_documents_200_response_pagination.listDocuments_200_response_pagination(
                     page = 1.337, 

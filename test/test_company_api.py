@@ -26,20 +26,6 @@ class TestCompanyApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_claim_company(self) -> None:
-        """Test case for claim_company
-
-        Reclamar un RUC registrado por otra cuenta, con su certificado
-        """
-        pass
-
-    def test_create_company(self) -> None:
-        """Test case for create_company
-
-        Crear empresa emisora
-        """
-        pass
-
     def test_get_company(self) -> None:
         """Test case for get_company
 
@@ -58,13 +44,6 @@ class TestCompanyApi(unittest.TestCase):
         """Test case for list_companies
 
         Listar empresas emisoras
-        """
-        pass
-
-    def test_update_company(self) -> None:
-        """Test case for update_company
-
-        Actualizar empresa
         """
         pass
 

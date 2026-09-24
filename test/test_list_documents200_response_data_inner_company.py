@@ -36,7 +36,8 @@ class TestListDocuments200ResponseDataInnerCompany(unittest.TestCase):
         if include_optional:
             return ListDocuments200ResponseDataInnerCompany(
                 ruc = '',
-                razon_social = ''
+                razon_social = '',
+                tenant_id = ''
             )
         else:
             return ListDocuments200ResponseDataInnerCompany(

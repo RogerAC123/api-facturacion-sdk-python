@@ -910,8 +910,10 @@ class DocumentsApi:
     def list_documents(
         self,
         ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
+        tenant_id: Optional[UUID] = None,
         tipo_doc: Optional[StrictStr] = None,
         serie: Optional[StrictStr] = None,
+        correlativo: Optional[Annotated[str, Field(strict=True)]] = None,
         estado: Optional[StrictStr] = None,
         env: Optional[StrictStr] = None,
         fecha_desde: Optional[StrictStr] = None,
@@ -937,10 +939,14 @@ class DocumentsApi:
 
         :param ruc:
         :type ruc: str
+        :param tenant_id:
+        :type tenant_id: UUID
         :param tipo_doc:
         :type tipo_doc: str
         :param serie:
         :type serie: str
+        :param correlativo:
+        :type correlativo: str
         :param estado:
         :type estado: str
         :param env:
@@ -979,8 +985,10 @@ class DocumentsApi:
 
         _param = self._list_documents_serialize(
             ruc=ruc,
+            tenant_id=tenant_id,
             tipo_doc=tipo_doc,
             serie=serie,
+            correlativo=correlativo,
             estado=estado,
             env=env,
             fecha_desde=fecha_desde,
@@ -1015,8 +1023,10 @@ class DocumentsApi:
     def list_documents_with_http_info(
         self,
         ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
+        tenant_id: Optional[UUID] = None,
         tipo_doc: Optional[StrictStr] = None,
         serie: Optional[StrictStr] = None,
+        correlativo: Optional[Annotated[str, Field(strict=True)]] = None,
         estado: Optional[StrictStr] = None,
         env: Optional[StrictStr] = None,
         fecha_desde: Optional[StrictStr] = None,
@@ -1042,10 +1052,14 @@ class DocumentsApi:
 
         :param ruc:
         :type ruc: str
+        :param tenant_id:
+        :type tenant_id: UUID
         :param tipo_doc:
         :type tipo_doc: str
         :param serie:
         :type serie: str
+        :param correlativo:
+        :type correlativo: str
         :param estado:
         :type estado: str
         :param env:
@@ -1084,8 +1098,10 @@ class DocumentsApi:
 
         _param = self._list_documents_serialize(
             ruc=ruc,
+            tenant_id=tenant_id,
             tipo_doc=tipo_doc,
             serie=serie,
+            correlativo=correlativo,
             estado=estado,
             env=env,
             fecha_desde=fecha_desde,
@@ -1120,8 +1136,10 @@ class DocumentsApi:
     def list_documents_without_preload_content(
         self,
         ruc: Optional[Annotated[str, Field(min_length=11, strict=True, max_length=11)]] = None,
+        tenant_id: Optional[UUID] = None,
         tipo_doc: Optional[StrictStr] = None,
         serie: Optional[StrictStr] = None,
+        correlativo: Optional[Annotated[str, Field(strict=True)]] = None,
         estado: Optional[StrictStr] = None,
         env: Optional[StrictStr] = None,
         fecha_desde: Optional[StrictStr] = None,
@@ -1147,10 +1165,14 @@ class DocumentsApi:
 
         :param ruc:
         :type ruc: str
+        :param tenant_id:
+        :type tenant_id: UUID
         :param tipo_doc:
         :type tipo_doc: str
         :param serie:
         :type serie: str
+        :param correlativo:
+        :type correlativo: str
         :param estado:
         :type estado: str
         :param env:
@@ -1189,8 +1211,10 @@ class DocumentsApi:
 
         _param = self._list_documents_serialize(
             ruc=ruc,
+            tenant_id=tenant_id,
             tipo_doc=tipo_doc,
             serie=serie,
+            correlativo=correlativo,
             estado=estado,
             env=env,
             fecha_desde=fecha_desde,
@@ -1220,8 +1244,10 @@ class DocumentsApi:
     def _list_documents_serialize(
         self,
         ruc,
+        tenant_id,
         tipo_doc,
         serie,
+        correlativo,
         estado,
         env,
         fecha_desde,
@@ -1255,6 +1281,10 @@ class DocumentsApi:
             
             _query_params.append(('ruc', ruc))
             
+        if tenant_id is not None:
+            
+            _query_params.append(('tenantId', tenant_id))
+            
         if tipo_doc is not None:
             
             _query_params.append(('tipoDoc', tipo_doc))
@@ -1262,6 +1292,10 @@ class DocumentsApi:
         if serie is not None:
             
             _query_params.append(('serie', serie))
+            
+        if correlativo is not None:
+            
+            _query_params.append(('correlativo', correlativo))
             
         if estado is not None:
             

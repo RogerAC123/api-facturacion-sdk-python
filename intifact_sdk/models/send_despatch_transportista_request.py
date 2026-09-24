@@ -201,11 +201,6 @@ class SendDespatchTransportistaRequest(BaseModel):
         if self.fecha_emision is None and "fecha_emision" in self.model_fields_set:
             _dict['fechaEmision'] = None
 
-        # set to None if destinatario_email (nullable) is None
-        # and model_fields_set contains the field
-        if self.destinatario_email is None and "destinatario_email" in self.model_fields_set:
-            _dict['destinatarioEmail'] = None
-
         # set to None if guia_fec_traslado (nullable) is None
         # and model_fields_set contains the field
         if self.guia_fec_traslado is None and "guia_fec_traslado" in self.model_fields_set:
