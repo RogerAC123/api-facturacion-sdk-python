@@ -1,6 +1,6 @@
 # intifact_sdk.PlansApi
 
-All URIs are relative to *http://localhost:3099*
+All URIs are relative to *https://api-facturacion.intifact.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -25,10 +25,10 @@ from intifact_sdk.models.create_plan_request import CreatePlanRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -100,10 +100,10 @@ import intifact_sdk
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -175,10 +175,10 @@ import intifact_sdk
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -247,10 +247,10 @@ from intifact_sdk.models.update_plan_request import UpdatePlanRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters

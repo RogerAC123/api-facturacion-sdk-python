@@ -58,6 +58,9 @@ __all__ = [
     "GetProductoSunat200Response",
     "GetQueueStats200Response",
     "GetQueueStats200ResponseData",
+    "GetSummary200Response",
+    "GetSummary200ResponseData",
+    "GetSummary200ResponseDataItemsInner",
     "GetTicketStatus200Response",
     "GetTicketStatus200ResponseCdrResponse",
     "GetTicketStatus202Response",
@@ -160,6 +163,9 @@ from intifact_sdk.models.get_next_correlativo200_response_data import GetNextCor
 from intifact_sdk.models.get_producto_sunat200_response import GetProductoSunat200Response as GetProductoSunat200Response
 from intifact_sdk.models.get_queue_stats200_response import GetQueueStats200Response as GetQueueStats200Response
 from intifact_sdk.models.get_queue_stats200_response_data import GetQueueStats200ResponseData as GetQueueStats200ResponseData
+from intifact_sdk.models.get_summary200_response import GetSummary200Response as GetSummary200Response
+from intifact_sdk.models.get_summary200_response_data import GetSummary200ResponseData as GetSummary200ResponseData
+from intifact_sdk.models.get_summary200_response_data_items_inner import GetSummary200ResponseDataItemsInner as GetSummary200ResponseDataItemsInner
 from intifact_sdk.models.get_ticket_status200_response import GetTicketStatus200Response as GetTicketStatus200Response
 from intifact_sdk.models.get_ticket_status200_response_cdr_response import GetTicketStatus200ResponseCdrResponse as GetTicketStatus200ResponseCdrResponse
 from intifact_sdk.models.get_ticket_status202_response import GetTicketStatus202Response as GetTicketStatus202Response

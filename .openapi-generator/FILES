@@ -28,6 +28,9 @@ docs/GetNextCorrelativo200ResponseData.md
 docs/GetProductoSunat200Response.md
 docs/GetQueueStats200Response.md
 docs/GetQueueStats200ResponseData.md
+docs/GetSummary200Response.md
+docs/GetSummary200ResponseData.md
+docs/GetSummary200ResponseDataItemsInner.md
 docs/GetTicketStatus200Response.md
 docs/GetTicketStatus200ResponseCdrResponse.md
 docs/GetTicketStatus202Response.md
@@ -129,6 +132,9 @@ intifact_sdk/models/get_next_correlativo200_response_data.py
 intifact_sdk/models/get_producto_sunat200_response.py
 intifact_sdk/models/get_queue_stats200_response.py
 intifact_sdk/models/get_queue_stats200_response_data.py
+intifact_sdk/models/get_summary200_response.py
+intifact_sdk/models/get_summary200_response_data.py
+intifact_sdk/models/get_summary200_response_data_items_inner.py
 intifact_sdk/models/get_ticket_status200_response.py
 intifact_sdk/models/get_ticket_status200_response_cdr_response.py
 intifact_sdk/models/get_ticket_status202_response.py
@@ -216,6 +222,9 @@ test/test_get_next_correlativo200_response_data.py
 test/test_get_producto_sunat200_response.py
 test/test_get_queue_stats200_response.py
 test/test_get_queue_stats200_response_data.py
+test/test_get_summary200_response.py
+test/test_get_summary200_response_data.py
+test/test_get_summary200_response_data_items_inner.py
 test/test_get_ticket_status200_response.py
 test/test_get_ticket_status200_response_cdr_response.py
 test/test_get_ticket_status202_response.py

@@ -1,11 +1,12 @@
 # intifact_sdk.SummaryApi
 
-All URIs are relative to *http://localhost:3099*
+All URIs are relative to *https://api-facturacion.intifact.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**cancel_boleta**](SummaryApi.md#cancel_boleta) | **POST** /api/v1/boleta/cancel | Anular boleta via resumen diario (estado&#x3D;3)
 [**cancel_invoice**](SummaryApi.md#cancel_invoice) | **POST** /api/v1/invoice/cancel | Anular factura via comunicación de baja
+[**get_summary**](SummaryApi.md#get_summary) | **GET** /api/v1/summaries/{id} | Estado de un Resumen Diario (RC) o Comunicación de Baja (RA)
 [**get_ticket_status**](SummaryApi.md#get_ticket_status) | **GET** /api/v1/ticket/{ticket}/status | Consultar estado de ticket asíncrono (SOAP o GRE)
 [**send_summary**](SummaryApi.md#send_summary) | **POST** /api/v1/summary/send | Enviar resumen diario de boletas (RC)
 [**send_voided**](SummaryApi.md#send_voided) | **POST** /api/v1/voided/send | Enviar comunicación de baja (RA)
@@ -27,10 +28,10 @@ from intifact_sdk.models.send_summary202_response import SendSummary202Response
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -108,10 +109,10 @@ from intifact_sdk.models.send_summary202_response import SendSummary202Response
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -173,6 +174,86 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_summary**
+> GetSummary200Response get_summary(id)
+
+Estado de un Resumen Diario (RC) o Comunicación de Baja (RA)
+
+### Example
+
+* Bearer Authentication (apiKey):
+
+```python
+import intifact_sdk
+from intifact_sdk.models.get_summary200_response import GetSummary200Response
+from intifact_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = intifact_sdk.Configuration(
+    host = "https://api-facturacion.intifact.com"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization: apiKey
+configuration = intifact_sdk.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with intifact_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = intifact_sdk.SummaryApi(api_client)
+    id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+
+    try:
+        # Estado de un Resumen Diario (RC) o Comunicación de Baja (RA)
+        api_response = api_instance.get_summary(id)
+        print("The response of SummaryApi->get_summary:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SummaryApi->get_summary: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **UUID**|  | 
+
+### Return type
+
+[**GetSummary200Response**](GetSummary200Response.md)
+
+### Authorization
+
+[apiKey](../README.md#apiKey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Default Response |  -  |
+**401** | Default Response |  -  |
+**403** | Default Response |  -  |
+**404** | Default Response |  -  |
+**429** | Default Response |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_ticket_status**
 > GetTicketStatus200Response get_ticket_status(ruc, ticket)
 
@@ -188,10 +269,10 @@ from intifact_sdk.models.get_ticket_status200_response import GetTicketStatus200
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -271,10 +352,10 @@ from intifact_sdk.models.send_summary_request import SendSummaryRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -352,10 +433,10 @@ from intifact_sdk.models.send_voided_request import SendVoidedRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters

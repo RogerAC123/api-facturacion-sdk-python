@@ -1,6 +1,6 @@
 # intifact_sdk.DocumentsApi
 
-All URIs are relative to *http://localhost:3099*
+All URIs are relative to *https://api-facturacion.intifact.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -30,10 +30,10 @@ from intifact_sdk.models.consultar_cdr_request import ConsultarCdrRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -110,10 +110,10 @@ import intifact_sdk
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -188,10 +188,10 @@ from intifact_sdk.models.get_next_correlativo200_response import GetNextCorrelat
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -272,10 +272,10 @@ from intifact_sdk.models.list_documents200_response import ListDocuments200Respo
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -375,10 +375,10 @@ from intifact_sdk.models.reconcile_document200_response import ReconcileDocument
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -458,10 +458,10 @@ from intifact_sdk.models.retry_document202_response import RetryDocument202Respo
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to http://localhost:3099
+# Defining the host is optional and defaults to https://api-facturacion.intifact.com
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "http://localhost:3099"
+    host = "https://api-facturacion.intifact.com"
 )
 
 # The client must configure the authentication and authorization parameters
