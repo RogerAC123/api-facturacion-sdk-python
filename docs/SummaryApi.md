@@ -1,6 +1,6 @@
 # intifact_sdk.SummaryApi
 
-All URIs are relative to *https://api-facturacion.intifact.com*
+All URIs are relative to *http://localhost:3000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -28,10 +28,10 @@ from intifact_sdk.models.send_summary202_response import SendSummary202Response
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-facturacion.intifact.com
+# Defining the host is optional and defaults to http://localhost:3000
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "https://api-facturacion.intifact.com"
+    host = "http://localhost:3000"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -109,10 +109,10 @@ from intifact_sdk.models.send_summary202_response import SendSummary202Response
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-facturacion.intifact.com
+# Defining the host is optional and defaults to http://localhost:3000
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "https://api-facturacion.intifact.com"
+    host = "http://localhost:3000"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -189,10 +189,10 @@ from intifact_sdk.models.get_summary200_response import GetSummary200Response
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-facturacion.intifact.com
+# Defining the host is optional and defaults to http://localhost:3000
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "https://api-facturacion.intifact.com"
+    host = "http://localhost:3000"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -269,10 +269,10 @@ from intifact_sdk.models.get_ticket_status200_response import GetTicketStatus200
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-facturacion.intifact.com
+# Defining the host is optional and defaults to http://localhost:3000
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "https://api-facturacion.intifact.com"
+    host = "http://localhost:3000"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -352,10 +352,10 @@ from intifact_sdk.models.send_summary_request import SendSummaryRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-facturacion.intifact.com
+# Defining the host is optional and defaults to http://localhost:3000
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "https://api-facturacion.intifact.com"
+    host = "http://localhost:3000"
 )
 
 # The client must configure the authentication and authorization parameters
@@ -433,10 +433,10 @@ from intifact_sdk.models.send_voided_request import SendVoidedRequest
 from intifact_sdk.rest import ApiException
 from pprint import pprint
 
-# Defining the host is optional and defaults to https://api-facturacion.intifact.com
+# Defining the host is optional and defaults to http://localhost:3000
 # See configuration.py for a list of all supported configuration parameters.
 configuration = intifact_sdk.Configuration(
-    host = "https://api-facturacion.intifact.com"
+    host = "http://localhost:3000"
 )
 
 # The client must configure the authentication and authorization parameters

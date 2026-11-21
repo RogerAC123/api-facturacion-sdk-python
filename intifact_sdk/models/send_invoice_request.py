@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
+from intifact_sdk.models.send_invoice_request_anticipos_inner import SendInvoiceRequestAnticiposInner
 from intifact_sdk.models.send_invoice_request_detalle_inner import SendInvoiceRequestDetalleInner
 from intifact_sdk.models.send_invoice_request_detraccion import SendInvoiceRequestDetraccion
 from intifact_sdk.models.send_invoice_request_forma_pago_inner import SendInvoiceRequestFormaPagoInner
@@ -39,6 +40,7 @@ class SendInvoiceRequest(BaseModel):
     serie: Annotated[str, Field(strict=True)]
     correlativo: Annotated[str, Field(strict=True)]
     tipo_moneda: Optional[Annotated[str, Field(min_length=3, strict=True, max_length=3)]] = Field(default='PEN', alias="tipoMoneda")
+    tipo_cambio: Optional[Union[Annotated[float, Field(le=100, strict=True, gt=0)], Annotated[int, Field(le=100, strict=True, gt=0)]]] = Field(default=None, alias="tipoCambio")
     fecha_emision: Optional[StrictStr] = Field(alias="fechaEmision")
     empresa_ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)] = Field(alias="empresaRuc")
     establecimiento_codigo: Optional[Annotated[str, Field(strict=True)]] = Field(default='0000', alias="establecimientoCodigo")
@@ -68,7 +70,8 @@ class SendInvoiceRequest(BaseModel):
     pagos: Optional[Annotated[List[SendInvoiceRequestPagosInner], Field(max_length=20)]] = None
     detraccion: Optional[SendInvoiceRequestDetraccion] = None
     guia_remision: Optional[Annotated[List[SendInvoiceRequestGuiaRemisionInner], Field(max_length=20)]] = Field(default=None, alias="guiaRemision")
-    __properties: ClassVar[List[str]] = ["tipoOperacion", "tipoDoc", "serie", "correlativo", "tipoMoneda", "fechaEmision", "empresaRuc", "establecimientoCodigo", "clienteTipoDoc", "clienteNumDoc", "clienteRazonSocial", "clienteDireccion", "clienteDistrito", "clienteProvincia", "clienteDepartamento", "montoOperGravadas", "montoOperExoneradas", "montoOperInafectas", "montoOperGratuitas", "montoIgv", "totalImpuestos", "valorVenta", "subTotal", "montoImpVenta", "descuentoGlobal", "descuentoGlobalBase", "detalle", "formaPago", "leyendas", "observacion", "vendedor", "pagos", "detraccion", "guiaRemision"]
+    anticipos: Optional[Annotated[List[SendInvoiceRequestAnticiposInner], Field(max_length=20)]] = None
+    __properties: ClassVar[List[str]] = ["tipoOperacion", "tipoDoc", "serie", "correlativo", "tipoMoneda", "tipoCambio", "fechaEmision", "empresaRuc", "establecimientoCodigo", "clienteTipoDoc", "clienteNumDoc", "clienteRazonSocial", "clienteDireccion", "clienteDistrito", "clienteProvincia", "clienteDepartamento", "montoOperGravadas", "montoOperExoneradas", "montoOperInafectas", "montoOperGratuitas", "montoIgv", "totalImpuestos", "valorVenta", "subTotal", "montoImpVenta", "descuentoGlobal", "descuentoGlobalBase", "detalle", "formaPago", "leyendas", "observacion", "vendedor", "pagos", "detraccion", "guiaRemision", "anticipos"]
 
     @field_validator('tipo_doc')
     def tipo_doc_validate_enum(cls, value):
@@ -173,6 +176,12 @@ class SendInvoiceRequest(BaseModel):
             for _item_guia_remision in self.guia_remision:
                 _items.append(_item_guia_remision.to_dict() if _item_guia_remision is not None else None)
             _dict['guiaRemision'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in anticipos (list)
+        _items = []
+        if self.anticipos:
+            for _item_anticipos in self.anticipos:
+                _items.append(_item_anticipos.to_dict() if _item_anticipos is not None else None)
+            _dict['anticipos'] = _items
         # set to None if fecha_emision (nullable) is None
         # and model_fields_set contains the field
         if self.fecha_emision is None and "fecha_emision" in self.model_fields_set:
@@ -195,6 +204,7 @@ class SendInvoiceRequest(BaseModel):
             "serie": obj.get("serie"),
             "correlativo": obj.get("correlativo"),
             "tipoMoneda": obj.get("tipoMoneda") if obj.get("tipoMoneda") is not None else 'PEN',
+            "tipoCambio": obj.get("tipoCambio"),
             "fechaEmision": obj.get("fechaEmision"),
             "empresaRuc": obj.get("empresaRuc"),
             "establecimientoCodigo": obj.get("establecimientoCodigo") if obj.get("establecimientoCodigo") is not None else '0000',
@@ -223,7 +233,8 @@ class SendInvoiceRequest(BaseModel):
             "vendedor": obj.get("vendedor"),
             "pagos": [SendInvoiceRequestPagosInner.from_dict(_item) for _item in obj["pagos"]] if obj.get("pagos") is not None else None,
             "detraccion": SendInvoiceRequestDetraccion.from_dict(obj["detraccion"]) if obj.get("detraccion") is not None else None,
-            "guiaRemision": [SendInvoiceRequestGuiaRemisionInner.from_dict(_item) for _item in obj["guiaRemision"]] if obj.get("guiaRemision") is not None else None
+            "guiaRemision": [SendInvoiceRequestGuiaRemisionInner.from_dict(_item) for _item in obj["guiaRemision"]] if obj.get("guiaRemision") is not None else None,
+            "anticipos": [SendInvoiceRequestAnticiposInner.from_dict(_item) for _item in obj["anticipos"]] if obj.get("anticipos") is not None else None
         })
         return _obj
 

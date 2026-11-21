@@ -35,6 +35,7 @@ class SendNoteRequest(BaseModel):
     serie: Annotated[str, Field(strict=True)]
     correlativo: Annotated[str, Field(strict=True)]
     tipo_moneda: Optional[Annotated[str, Field(min_length=3, strict=True, max_length=3)]] = Field(default='PEN', alias="tipoMoneda")
+    tipo_cambio: Optional[Union[Annotated[float, Field(le=100, strict=True, gt=0)], Annotated[int, Field(le=100, strict=True, gt=0)]]] = Field(default=None, alias="tipoCambio")
     fecha_emision: Optional[StrictStr] = Field(alias="fechaEmision")
     empresa_ruc: Annotated[str, Field(min_length=11, strict=True, max_length=11)] = Field(alias="empresaRuc")
     establecimiento_codigo: Optional[Annotated[str, Field(strict=True)]] = Field(default='0000', alias="establecimientoCodigo")
@@ -62,7 +63,7 @@ class SendNoteRequest(BaseModel):
     detalle: Annotated[List[SendInvoiceRequestDetalleInner], Field(min_length=1, max_length=1000)]
     leyendas: Annotated[List[SendInvoiceRequestLeyendasInner], Field(min_length=1, max_length=50)]
     observacion: Optional[Annotated[str, Field(strict=True, max_length=500)]] = None
-    __properties: ClassVar[List[str]] = ["tipoOperacion", "tipoDoc", "serie", "correlativo", "tipoMoneda", "fechaEmision", "empresaRuc", "establecimientoCodigo", "clienteTipoDoc", "clienteNumDoc", "clienteRazonSocial", "clienteDireccion", "clienteDistrito", "clienteProvincia", "clienteDepartamento", "afectadoTipoDoc", "afectadoNumDoc", "motivoCod", "motivoDes", "montoOperGravadas", "montoOperExoneradas", "montoOperInafectas", "montoIgv", "totalImpuestos", "valorVenta", "subTotal", "montoImpVenta", "descuentoGlobal", "descuentoGlobalBase", "detalle", "leyendas", "observacion"]
+    __properties: ClassVar[List[str]] = ["tipoOperacion", "tipoDoc", "serie", "correlativo", "tipoMoneda", "tipoCambio", "fechaEmision", "empresaRuc", "establecimientoCodigo", "clienteTipoDoc", "clienteNumDoc", "clienteRazonSocial", "clienteDireccion", "clienteDistrito", "clienteProvincia", "clienteDepartamento", "afectadoTipoDoc", "afectadoNumDoc", "motivoCod", "motivoDes", "montoOperGravadas", "montoOperExoneradas", "montoOperInafectas", "montoIgv", "totalImpuestos", "valorVenta", "subTotal", "montoImpVenta", "descuentoGlobal", "descuentoGlobalBase", "detalle", "leyendas", "observacion"]
 
     @field_validator('tipo_doc')
     def tipo_doc_validate_enum(cls, value):
@@ -182,6 +183,7 @@ class SendNoteRequest(BaseModel):
             "serie": obj.get("serie"),
             "correlativo": obj.get("correlativo"),
             "tipoMoneda": obj.get("tipoMoneda") if obj.get("tipoMoneda") is not None else 'PEN',
+            "tipoCambio": obj.get("tipoCambio"),
             "fechaEmision": obj.get("fechaEmision"),
             "empresaRuc": obj.get("empresaRuc"),
             "establecimientoCodigo": obj.get("establecimientoCodigo") if obj.get("establecimientoCodigo") is not None else '0000',

@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 
 # Define package exports
 __all__ = [
@@ -30,6 +30,7 @@ __all__ = [
     "QueuesApi",
     "SummaryApi",
     "SystemApi",
+    "UsageApi",
     "ApiResponse",
     "ApiClient",
     "Configuration",
@@ -49,6 +50,7 @@ __all__ = [
     "ComputeInvoiceRequestItemsInnerDescuento",
     "ConsultarCdr200Response",
     "ConsultarCdrRequest",
+    "CreateBranchRequest",
     "CreatePlanRequest",
     "ExportProductoSunat200Response",
     "ExportProductoSunat200ResponseData",
@@ -79,6 +81,8 @@ __all__ = [
     "ListDocuments200ResponsePagination",
     "LoginRequest",
     "ReconcileDocument200Response",
+    "RegisterCompanyRequest",
+    "RegisterCompanyRequestCertificado",
     "RetryDocument202Response",
     "SearchProductoSunat200Response",
     "SearchProductoSunat200ResponseData",
@@ -101,6 +105,7 @@ __all__ = [
     "SendInvoice202Response",
     "SendInvoice202ResponseData",
     "SendInvoiceRequest",
+    "SendInvoiceRequestAnticiposInner",
     "SendInvoiceRequestDetalleInner",
     "SendInvoiceRequestDetraccion",
     "SendInvoiceRequestFormaPagoInner",
@@ -115,7 +120,11 @@ __all__ = [
     "SendVoidedRequest",
     "SendVoidedRequestItemsInner",
     "SignupRequest",
+    "UpdateBranchRequest",
+    "UpdateCompanyRequest",
+    "UpdateCompanyRequestCuentasBancariasInner",
     "UpdatePlanRequest",
+    "UploadCompanyCertificateRequest",
 ]
 
 # import apis into sdk package
@@ -131,6 +140,7 @@ from intifact_sdk.api.public_api import PublicApi as PublicApi
 from intifact_sdk.api.queues_api import QueuesApi as QueuesApi
 from intifact_sdk.api.summary_api import SummaryApi as SummaryApi
 from intifact_sdk.api.system_api import SystemApi as SystemApi
+from intifact_sdk.api.usage_api import UsageApi as UsageApi
 
 # import ApiClient
 from intifact_sdk.api_response import ApiResponse as ApiResponse
@@ -154,6 +164,7 @@ from intifact_sdk.models.compute_invoice_request_items_inner import ComputeInvoi
 from intifact_sdk.models.compute_invoice_request_items_inner_descuento import ComputeInvoiceRequestItemsInnerDescuento as ComputeInvoiceRequestItemsInnerDescuento
 from intifact_sdk.models.consultar_cdr200_response import ConsultarCdr200Response as ConsultarCdr200Response
 from intifact_sdk.models.consultar_cdr_request import ConsultarCdrRequest as ConsultarCdrRequest
+from intifact_sdk.models.create_branch_request import CreateBranchRequest as CreateBranchRequest
 from intifact_sdk.models.create_plan_request import CreatePlanRequest as CreatePlanRequest
 from intifact_sdk.models.export_producto_sunat200_response import ExportProductoSunat200Response as ExportProductoSunat200Response
 from intifact_sdk.models.export_producto_sunat200_response_data import ExportProductoSunat200ResponseData as ExportProductoSunat200ResponseData
@@ -184,6 +195,8 @@ from intifact_sdk.models.list_documents200_response_data_inner_company import Li
 from intifact_sdk.models.list_documents200_response_pagination import ListDocuments200ResponsePagination as ListDocuments200ResponsePagination
 from intifact_sdk.models.login_request import LoginRequest as LoginRequest
 from intifact_sdk.models.reconcile_document200_response import ReconcileDocument200Response as ReconcileDocument200Response
+from intifact_sdk.models.register_company_request import RegisterCompanyRequest as RegisterCompanyRequest
+from intifact_sdk.models.register_company_request_certificado import RegisterCompanyRequestCertificado as RegisterCompanyRequestCertificado
 from intifact_sdk.models.retry_document202_response import RetryDocument202Response as RetryDocument202Response
 from intifact_sdk.models.search_producto_sunat200_response import SearchProductoSunat200Response as SearchProductoSunat200Response
 from intifact_sdk.models.search_producto_sunat200_response_data import SearchProductoSunat200ResponseData as SearchProductoSunat200ResponseData
@@ -206,6 +219,7 @@ from intifact_sdk.models.send_despatch_transportista_request_vehiculos_secundari
 from intifact_sdk.models.send_invoice202_response import SendInvoice202Response as SendInvoice202Response
 from intifact_sdk.models.send_invoice202_response_data import SendInvoice202ResponseData as SendInvoice202ResponseData
 from intifact_sdk.models.send_invoice_request import SendInvoiceRequest as SendInvoiceRequest
+from intifact_sdk.models.send_invoice_request_anticipos_inner import SendInvoiceRequestAnticiposInner as SendInvoiceRequestAnticiposInner
 from intifact_sdk.models.send_invoice_request_detalle_inner import SendInvoiceRequestDetalleInner as SendInvoiceRequestDetalleInner
 from intifact_sdk.models.send_invoice_request_detraccion import SendInvoiceRequestDetraccion as SendInvoiceRequestDetraccion
 from intifact_sdk.models.send_invoice_request_forma_pago_inner import SendInvoiceRequestFormaPagoInner as SendInvoiceRequestFormaPagoInner
@@ -220,5 +234,9 @@ from intifact_sdk.models.send_summary_request_items_inner import SendSummaryRequ
 from intifact_sdk.models.send_voided_request import SendVoidedRequest as SendVoidedRequest
 from intifact_sdk.models.send_voided_request_items_inner import SendVoidedRequestItemsInner as SendVoidedRequestItemsInner
 from intifact_sdk.models.signup_request import SignupRequest as SignupRequest
+from intifact_sdk.models.update_branch_request import UpdateBranchRequest as UpdateBranchRequest
+from intifact_sdk.models.update_company_request import UpdateCompanyRequest as UpdateCompanyRequest
+from intifact_sdk.models.update_company_request_cuentas_bancarias_inner import UpdateCompanyRequestCuentasBancariasInner as UpdateCompanyRequestCuentasBancariasInner
 from intifact_sdk.models.update_plan_request import UpdatePlanRequest as UpdatePlanRequest
+from intifact_sdk.models.upload_company_certificate_request import UploadCompanyCertificateRequest as UploadCompanyCertificateRequest
 
