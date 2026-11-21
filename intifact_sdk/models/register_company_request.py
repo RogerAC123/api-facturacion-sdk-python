@@ -43,8 +43,10 @@ class RegisterCompanyRequest(BaseModel):
     web: Optional[Annotated[str, Field(strict=True, max_length=120)]] = None
     sol_user: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(default=None, alias="solUser")
     sol_password: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(default=None, alias="solPassword")
+    gre_client_id: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(default=None, alias="greClientId")
+    gre_client_secret: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=255)]] = Field(default=None, alias="greClientSecret")
     certificado: RegisterCompanyRequestCertificado
-    __properties: ClassVar[List[str]] = ["ruc", "razonSocial", "nombreComercial", "ubigeo", "direccion", "departamento", "provincia", "distrito", "urbanizacion", "telefono", "email", "web", "solUser", "solPassword", "certificado"]
+    __properties: ClassVar[List[str]] = ["ruc", "razonSocial", "nombreComercial", "ubigeo", "direccion", "departamento", "provincia", "distrito", "urbanizacion", "telefono", "email", "web", "solUser", "solPassword", "greClientId", "greClientSecret", "certificado"]
 
     @field_validator('ruc', mode="before")
     def ruc_validate_regular_expression(cls, value):
@@ -146,6 +148,8 @@ class RegisterCompanyRequest(BaseModel):
             "web": obj.get("web"),
             "solUser": obj.get("solUser"),
             "solPassword": obj.get("solPassword"),
+            "greClientId": obj.get("greClientId"),
+            "greClientSecret": obj.get("greClientSecret"),
             "certificado": RegisterCompanyRequestCertificado.from_dict(obj["certificado"]) if obj.get("certificado") is not None else None
         })
         return _obj

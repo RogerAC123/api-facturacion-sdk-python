@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **web** | **str** |  | [optional] 
 **sol_user** | **str** |  | [optional] 
 **sol_password** | **str** |  | [optional] 
+**gre_client_id** | **str** |  | [optional] 
+**gre_client_secret** | **str** |  | [optional] 
 **certificado** | [**RegisterCompanyRequestCertificado**](RegisterCompanyRequestCertificado.md) |  | 
 
 ## Example
